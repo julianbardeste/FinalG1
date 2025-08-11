@@ -17,13 +17,26 @@
 </head>
 
 <body>
-  <main class="mt-5">
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+  <main class="d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4" style="width: 300px; border-radius: 10px;">
+    
+    <form action="Login">
+      <div class="mb-3 text-center">
+        <label for="username" class="form-label fw-bold">USUARIO</label>
+        <input type="text" id="username" name="username" class="form-control text-center" placeholder="Ingrese su usuario" required>
       </div>
-    </div>
-  </main>
+
+      <div class="mb-3 text-center">
+        <label for="password" class="form-label fw-bold">CONTRASEÑA</label>
+        <input type="password" id="password" name="password" class="form-control text-center" placeholder="Ingrese su contraseña" required>
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-secondary">INGRESAR</button>
+      </div>
+    </form>
+  </div>
+</main>
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
