@@ -38,14 +38,48 @@
   </nav>
   <main class="pb-5 container">
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
+     <!--<div class="alert alert-danger text-center" role="alert">
         <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+      </div>-->
     </div>
+    <table border="0" align="center" cellpadding="10" id="productos"></table>
+    <!--<main class="pb-5 container">
+      <div class="container">
+        <h2 class="text-center my-4">Listado de Productos</h2>
+        <div class="row" id="productos"></div>
+      </div>
+    </main>-->
+    <script>
+      fetch('https://japceibal.github.io/emercado-api/cats_products/101.json')
+        .then(response => response.json())
+        .then(data => {
+          let productos = data.products;
+          let tabla = document.getElementById('productos');
+          let fila = document.createElement("tr");
+          productos.forEach(prod => {
+            let celda = document.createElement("td"); 
+            celda.innerHTML = `
+              <div class="card" style="width: 18rem; margin: 10px;">
+                <img src="${prod.image}" class="card-img-top" alt="${prod.name}">
+                <div class="card-body">
+                  <h5 class="card-title">${prod.name}</h5>
+                  <p class="card-text">${prod.description}</p>
+                  <p class="card-text"><strong>Precio:</strong> ${prod.currency} ${prod.cost}</p>
+                  <p class="card-text"><strong>Vendidos:</strong> ${prod.soldCount}</p>
+                  <a href="#" class="btn btn-primary">Ver más</a>
+                </div>
+              </div>
+            `;
+            fila.appendChild(celda);
+          });
+          tabla.appendChild(fila);
+        })
+        .catch(error => console.error('Error al cargar los productos:', error));
+    </script>
   </main>
   <footer class="text-muted">
     <div class="container">
-      <p class="float-end">
+      <p class="float-end">      
         <a href="#">Volver arriba</a>
       </p>
       <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
@@ -63,5 +97,4 @@
   <script src="js/init.js"></script>
   <script src="js/products.js"></script>
 </body>
-
 </html>
