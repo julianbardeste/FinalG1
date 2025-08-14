@@ -12,3 +12,8 @@ document.addEventListener("DOMContentLoaded", function(){
         window.location = "products.html"
     });
 });
+
+if (sessionStorage.getItem("logueado") !== "true") {
+  // Si no está logueado, redirige al login
+  window.location.href = "login.html";
+}
