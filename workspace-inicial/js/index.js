@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 if (sessionStorage.getItem("logueado") !== "true") {
-  // Si no está logueado, redirige al login
+  // Si no está logueado, redirige al login y no al index
+  alert("Debes iniciar sesión para acceder a esta página."); // Muestra un mensaje de alerta
   window.location.href = "login.html";
 }

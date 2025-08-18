@@ -1,13 +1,13 @@
-document.getElementById("ingresarform").addEventListener("submit", function(e) {
+document.getElementById("ingresarform").addEventListener("submit", function(e) { // Agregamos un evento al formulario con el id "ingresarform"
   e.preventDefault(); // evita que se envíe el formulario
-  window.location.href = "pagina_destino.html"; // redirecciona
 
 
-    const usuario = document.getElementById("username").value;
-    const clave = document.getElementById("password").value;
+    const usuario = document.getElementById("username").value; // obtenemos el valor del campo de usuario
+    const clave = document.getElementById("password").value; // obtenemos el valor del campo de clave
 
-    sessionStorage.setItem("logueado", "true");
-    // Redirigimos a la portada
-    window.location.href = "index.html";
+    //en el almacenamiento del navegador se guardan los valores con el nombre "logueado" y el valor "true"
+    sessionStorage.setItem("logueado", "true"); 
+    // Si "logueado" = "true", Redirigimos a la portada
+    window.location.href = "index.html"; 
 
 });
