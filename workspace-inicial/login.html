@@ -13,25 +13,30 @@
 
 <body id="login-page">
   <main class="login-main">
-  <div class="p-4">
-    
-    <form action="Login" id="ingresarform">
-      <div class="mb-3 text-center">
-        <label for="username" class="form-label fw-bold">USUARIO</label>
-        <input type="text" id="username" name="username" class="form-control text-center" placeholder="Ingrese su usuario" required>
-      </div>
+    <div class="p-4">
+      
+      <!-- Formulario de inicio de sesión -->
 
-      <div class="mb-3 text-center">
-        <label for="password" class="form-label fw-bold" >CONTRASEÑA</label>
-        <input type="password" id="password" name="password" class="form-control text-center" placeholder="Ingrese su contraseña" required>
-      </div>
+      <form action="Login" id="ingresarform"> <!-- Formulario de inicio de sesión con id -->
+        <div class="mb-3 text-center"> <!-- Título del formulario -->
+          <label for="username" class="form-label fw-bold">USUARIO</label> <!-- Etiqueta para el campo de usuario -->
+          <input type="text" id="username" name="username" class="form-control text-center" placeholder="Ingrese su usuario" required> <!-- Campo de entrada para el usuario -->
+        </div>
 
-      <div class="d-grid">
-        <button type="submit" class="btn btn-secondary">INGRESAR</button>
-      </div>
-    </form>
-  </div>
-</main>
+        <div class="mb-3 text-center"> <!-- Campo para la contraseña -->
+          <label for="password" class="form-label fw-bold" >CONTRASEÑA</label> <!-- Etiqueta para el campo de contraseña -->
+          <input type="password" id="password" name="password" class="form-control text-center" placeholder="Ingrese su contraseña" required> <!-- Campo de entrada para la contraseña -->
+        </div>
+
+        <div class="d-grid"> <!-- Botón de envío del formulario -->
+          <button type="submit" class="btn btn-secondary">INGRESAR</button> <!-- Botón para enviar el formulario -->
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer -->
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">

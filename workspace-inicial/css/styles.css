@@ -192,17 +192,6 @@ a.custom-card:hover {
 
 /* Estilos exclusivos para login.html */
 
-/* Fondo exclusivo para login.html */
-#login-page {
-  margin: 0;
-  padding: 0;
-  height: 100vh; /* toda la altura de la ventana */
-  background-size: cover;      /* cubre todo el fondo */
-  background-position: center; /* centra la imagen */
-  background-repeat: no-repeat;
-  font-family: Arial, sans-serif;
-}
-
 /* Contenedor principal exclusivo de login.html */
 #login-page .login-main {
   min-height: 100vh; /* toda la altura de la ventana */
@@ -222,14 +211,13 @@ a.custom-card:hover {
   margin: auto;
 }
 
-
 /* Estilos exclusivos para products.html */
 
 /* Fondo exclusivo para products.html */
 #products-page {
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   font-family: Arial, sans-serif;
   background: linear-gradient(to bottom, #feac4f, #ffed4b);
 }
@@ -246,13 +234,14 @@ a.custom-card:hover {
 /* Cards SOLO para products.html */
 #products-page .card {
   width: 250px;          /* más angosto para que entren más */
-  height: 400px;         /* misma altura */
+  height: 550px;         /* misma altura */
   margin: 10px;          /* menos espacio entre cards */
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.85);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
+  min-height: max-content; /* para que no se estire demasiado */
 }
 
 /* Título de la card */
@@ -278,3 +267,4 @@ a.custom-card:hover {
   text-align: center;
   margin-top: auto; /* empuja al fondo */
 }
+
