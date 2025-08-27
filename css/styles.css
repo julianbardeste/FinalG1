@@ -207,10 +207,9 @@ a.custom-card:hover {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
-  max-width: 400px;
+  max-width: 100% /*400px*/;
   margin: auto;
 }
-
 /* Estilos exclusivos para products.html */
 
 /* Fondo exclusivo para products.html */
