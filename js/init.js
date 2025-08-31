@@ -39,3 +39,39 @@ let getJSONData = function(url){
         return result;
     });
 }
+document.addEventListener("DOMContentLoaded", function(){
+  if (sessionStorage.getItem("logueado") !== "true") {
+    if (!window.location.pathname.includes("login.html")) {
+      alert("Debes iniciar sesión para acceder a esta página.");
+      window.location.href = "login.html";
+      return;
+    }
+  }
+});
+
+     let usuario = sessionStorage.getItem("usuario");
+  let userNavbar = document.getElementById("userNavbar");
+
+  if (usuario && userNavbar) {
+    userNavbar.innerHTML = `
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          👤 ${usuario}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="cart.html">🛒 Mi carrito</a></li>
+          <li><a class="dropdown-item" href="my-profile.html">👤 Mi perfil</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item text-danger" id="logoutBtn" href="#">🚪 Cerrar sesión</a></li>
+        </ul>
+      </div>
+    `;
+  }
+
+  let logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", function () {
+      sessionStorage.clear();
+      window.location.href = "login.html";
+    });
+  };
