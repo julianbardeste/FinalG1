@@ -5,9 +5,10 @@ document.getElementById("ingresarform").addEventListener("submit", function(e) {
     const usuario = document.getElementById("username").value; // obtenemos el valor del campo de usuario
     const clave = document.getElementById("password").value; // obtenemos el valor del campo de clave
 
-    //en el almacenamiento del navegador se guardan los valores con el nombre "logueado" y el valor "true"
-    sessionStorage.setItem("logueado", "true"); 
-    // Si "logueado" = "true", Redirigimos a la portada
-    window.location.href = "index.html"; 
+  if (usuario && clave) {
+    sessionStorage.setItem("logueado", "true");
+    sessionStorage.setItem("usuario", usuario); //se guarda el nombre de usuario
+    window.location.href = "index.html";
+  }
 
 });
