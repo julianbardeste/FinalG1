@@ -207,10 +207,9 @@ a.custom-card:hover {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
-  max-width: 400px;
+  max-width: 100% /*400px*/;
   margin: auto;
 }
-
 /* Estilos exclusivos para products.html */
 
 /* Fondo exclusivo para products.html */
@@ -268,3 +267,39 @@ a.custom-card:hover {
   margin-top: auto; /* empuja al fondo */
 }
 
+@media (max-width: 748px) {
+  table, tr, td {
+    display: block; 
+  }
+  .card-body{
+    height: auto;
+  }
+
+  #products-page .card {
+    width: 90%; /* ocupa casi todo el ancho */
+    height: auto; /* altura automática */
+  }
+}
+
+@media (min-width: 748px) and (max-width: 1200px) {
+  table, tr {
+    display: grid;
+    grid-template-columns:1fr 1fr; 
+  }
+
+  
+  .card-body{
+    height: auto;
+    width: 100%;
+  }
+
+  #products-page .card {
+    width: 100%; /* ocupa casi todo el ancho */
+    height: 100%; /* altura automática */
+  }
+
+  td{
+    margin: 20px;
+  }
+
+}
