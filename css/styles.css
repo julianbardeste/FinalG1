@@ -2,7 +2,7 @@
 .card-body,
 .container,
 .site-header {
-  font-family: 'Verdana', serif !important;
+  font-family: "Verdana", serif !important;
 }
 
 .jumbotron .display-4 {
@@ -32,8 +32,8 @@ nav a {
   height: 50vh;
   padding: 5em inherit;
   margin-bottom: 0;
-  background-color: #53C0FB;
-  background: url('../img/cover_back.png');
+  background-color: #53c0fb;
+  background: url("../img/cover_back.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -73,12 +73,12 @@ footer {
 }
 
 footer p {
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .site-header a {
   color: white;
-  transition: ease-in-out color .15s;
+  transition: ease-in-out color 0.15s;
 }
 
 .site-header .dropdown-menu a {
@@ -86,7 +86,7 @@ footer p {
 }
 
 .dropzone {
-  border: 2px dashed #0087F7;
+  border: 2px dashed #0087f7;
   border-radius: 5px;
   background: white;
 }
@@ -189,7 +189,6 @@ a.custom-card:hover {
   color: orange;
 }
 
-
 /* Estilos exclusivos para login.html */
 
 /* Contenedor principal exclusivo de login.html */
@@ -216,7 +215,7 @@ a.custom-card:hover {
 #products-page {
   min-height: 100vh;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   font-family: Arial, sans-serif;
   background: linear-gradient(to bottom, #feac4f, #ffed4b);
 }
@@ -232,9 +231,9 @@ a.custom-card:hover {
 
 /* Cards SOLO para products.html */
 #products-page .card {
-  width: 250px;          /* más angosto para que entren más */
-  height: 550px;         /* misma altura */
-  margin: 10px;          /* menos espacio entre cards */
+  width: 250px; /* más angosto para que entren más */
+  height: 550px; /* misma altura */
+  margin: 10px; /* menos espacio entre cards */
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.85);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -245,7 +244,7 @@ a.custom-card:hover {
 
 /* Título de la card */
 #products-page .card-body {
-  flex: 1;                       /* ocupa todo el espacio disponible */
+  flex: 1; /* ocupa todo el espacio disponible */
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* mantiene botón abajo */
@@ -260,7 +259,7 @@ a.custom-card:hover {
 
 /* Footer exclusivo de products.html */
 #products-page footer {
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.7);
   color: white;
   padding: 20px;
   text-align: center;
@@ -268,10 +267,12 @@ a.custom-card:hover {
 }
 
 @media (max-width: 748px) {
-  table, tr, td {
-    display: block; 
+  table,
+  tr,
+  td {
+    display: block;
   }
-  .card-body{
+  .card-body {
     height: auto;
   }
 
@@ -282,13 +283,13 @@ a.custom-card:hover {
 }
 
 @media (min-width: 748px) and (max-width: 1200px) {
-  table, tr {
+  table,
+  tr {
     display: grid;
-    grid-template-columns:1fr 1fr; 
+    grid-template-columns: 1fr 1fr;
   }
 
-  
-  .card-body{
+  .card-body {
     height: auto;
     width: 100%;
   }
@@ -298,8 +299,7 @@ a.custom-card:hover {
     height: 100%; /* altura automática */
   }
 
-  td{
+  td {
     margin: 20px;
   }
-
 }

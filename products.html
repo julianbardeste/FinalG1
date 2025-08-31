@@ -1,61 +1,82 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>eMercado - Todo lo que busques está aquí</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
+    <!-- Fuentes y estilos -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:300,400,700,900&display=swap"
+      rel="stylesheet"
+    />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
 
-  <!-- Fuentes y estilos -->
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700,900&display=swap" rel="stylesheet">
-  <link href="css/font-awesome.min.css" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-</head>
+  <body id="products-page">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">eMercado</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Abrir menú"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-<body id="products-page">
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">eMercado</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="categories.html">Categorías</a></li>
-          <li class="nav-item"><a class="nav-link" href="sell.html">Vender</a></li>
-          <li>
-            <span id="userNavbar"></span>
-          </li>
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="categories.html">Categorías</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="sell.html">Vender</a>
+            </li>
+            <li>
+              <span id="userNavbar"></span>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Contenido principal -->
-  <main class="products-main pb-5 container">
-    <div class="row" id="productos">
-      <!-- Aquí JS insertará las cards -->
-    </div>
-  </main>
+    <!-- Contenido principal -->
+    <main class="products-main pb-5 container">
+      <div class="row" id="productos">
+        <!-- Aquí JS insertará las cards -->
+      </div>
+    </main>
 
-  <!-- Footer -->
-  <footer class="text-muted">
-    <div class="container">
-      <p class="mb-1">Este sitio forma parte de 
-        <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jóvenes a Programar</a>
-      </p>
-      <p><a href="#">Volver arriba</a></p>
-    </div>
-  </footer>
+    <!-- Footer -->
+    <footer class="text-muted">
+      <div class="container">
+        <p class="mb-1">
+          Este sitio forma parte de
+          <a href="https://jovenesaprogramar.edu.uy/" target="_blank"
+            >Jóvenes a Programar</a
+          >
+        </p>
+        <p><a href="#">Volver arriba</a></p>
+      </div>
+    </footer>
 
-  <!-- Scripts -->
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/products.js"></script>
-</body>
+    <!-- Scripts -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/products.js"></script>
+  </body>
 </html>
