@@ -6,13 +6,13 @@ let url = `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`
 
 // Hago la solicitud a la API
 fetch(url)
-  .then(response => response.json()) // Convierto la respuesta a JSON
-  .then(data => {
+  .then((response) => response.json()) // Convierto la respuesta a JSON
+  .then((data) => {
     // Obtengo el array de productos desde la respuesta
     let productos = data.products;
 
     // Selecciono el elemento de la tabla en el HTML
-    let tabla = document.getElementById('productos');
+    let tabla = document.getElementById("productos");
 
     // Limpio cualquier contenido previo en la tabla
     tabla.innerHTML = "";
@@ -36,7 +36,7 @@ fetch(url)
     let fila = document.createElement("tr");
 
     // Recorro cada producto dentro del array
-    productos.forEach(prod => {
+    productos.forEach((prod) => {
       // Creo una celda (columna) para cada producto
       let celda = document.createElement("td");
 
@@ -61,4 +61,4 @@ fetch(url)
     // Finalmente, agrego la fila completa a la tabla
     tabla.appendChild(fila);
   })
-  .catch(error => console.error('Error al cargar los productos:', error)); // Manejo de errores
+  .catch((error) => console.error("Error al cargar los productos:", error)); // Manejo de errores

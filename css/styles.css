@@ -193,10 +193,13 @@ a.custom-card:hover {
 
 /* Contenedor principal exclusivo de login.html */
 #login-page .login-main {
-  min-height: 100vh; /* toda la altura de la ventana */
+  min-height: 100vh;
+  /* toda la altura de la ventana */
   display: flex;
-  align-items: center; /* centra verticalmente */
-  justify-content: center; /* centra horizontalmente */
+  align-items: center;
+  /* centra verticalmente */
+  justify-content: center;
+  /* centra horizontalmente */
   background: linear-gradient(to bottom, #feac4f, #ffed4b);
 }
 
@@ -206,9 +209,12 @@ a.custom-card:hover {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
-  max-width: 100% /*400px*/;
+  max-width: 100%
+    /*400px*/
+  ;
   margin: auto;
 }
+
 /* Estilos exclusivos para products.html */
 
 /* Fondo exclusivo para products.html */
@@ -231,23 +237,29 @@ a.custom-card:hover {
 
 /* Cards SOLO para products.html */
 #products-page .card {
-  width: 250px; /* más angosto para que entren más */
-  height: 550px; /* misma altura */
-  margin: 10px; /* menos espacio entre cards */
+  width: 250px;
+  /* más angosto para que entren más */
+  height: 550px;
+  /* misma altura */
+  margin: 10px;
+  /* menos espacio entre cards */
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.85);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  min-height: max-content; /* para que no se estire demasiado */
+  min-height: max-content;
+  /* para que no se estire demasiado */
 }
 
 /* Título de la card */
 #products-page .card-body {
-  flex: 1; /* ocupa todo el espacio disponible */
+  flex: 1;
+  /* ocupa todo el espacio disponible */
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* mantiene botón abajo */
+  justify-content: space-between;
+  /* mantiene botón abajo */
 }
 
 /* Imagen dentro de la card */
@@ -263,26 +275,32 @@ a.custom-card:hover {
   color: white;
   padding: 20px;
   text-align: center;
-  margin-top: auto; /* empuja al fondo */
+  margin-top: auto;
+  /* empuja al fondo */
 }
 
 @media (max-width: 748px) {
+
   table,
   tr,
   td {
     display: block;
   }
+
   .card-body {
     height: auto;
   }
 
   #products-page .card {
-    width: 90%; /* ocupa casi todo el ancho */
-    height: auto; /* altura automática */
+    width: 90%;
+    /* ocupa casi todo el ancho */
+    height: auto;
+    /* altura automática */
   }
 }
 
 @media (min-width: 748px) and (max-width: 1200px) {
+
   table,
   tr {
     display: grid;
@@ -295,8 +313,10 @@ a.custom-card:hover {
   }
 
   #products-page .card {
-    width: 100%; /* ocupa casi todo el ancho */
-    height: 100%; /* altura automática */
+    width: 100%;
+    /* ocupa casi todo el ancho */
+    height: 100%;
+    /* altura automática */
   }
 
   td {
