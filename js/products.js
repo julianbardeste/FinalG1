@@ -4,61 +4,106 @@ let catID = localStorage.getItem("catID");
 // Construyo la URL dinámica con el catID guardado
 let url = `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`;
 
-// Hago la solicitud a la API
-fetch(url)
-  .then((response) => response.json()) // Convierto la respuesta a JSON
-  .then((data) => {
-    // Obtengo el array de productos desde la respuesta
-    let productos = data.products;
+let productos = [];
+let productosFiltrados = [];
 
-    // Selecciono el elemento de la tabla en el HTML
-    let tabla = document.getElementById("productos");
+// Referencias a elementos del DOM
+const tabla = document.getElementById("productos");
 
-    // Limpio cualquier contenido previo en la tabla
-    tabla.innerHTML = "";
+const sortAsc = document.getElementById("sortAsc");
+const sortDesc = document.getElementById("sortDesc");
+const sortByCount = document.getElementById("sortByCount");
 
-    // Verifico si la categoría está vacía (sin productos)
-    if (productos.length === 0) {
-      // Muestro un mensaje amigable al usuario
-      tabla.innerHTML = `
-        <tr>
-          <td>
-            <div class="alert alert-warning text-center" role="alert">
-              No hay productos disponibles en esta categoría.
-            </div>
-          </td>
-        </tr>
-      `;
-      return; // Salgo de la función para no intentar recorrer un array vacío
-    }
+const minInput = document.getElementById("rangeFilterCountMin");
+const maxInput = document.getElementById("rangeFilterCountMax");
+const filterBtn = document.getElementById("rangeFilterCount");
+const clearBtn = document.getElementById("clearRangeFilter");
 
-    // Creo una fila para insertar los productos
-    let fila = document.createElement("tr");
+// Mostrar productos en tarjetas Bootstrap
+function showProducts(list) {
+  tabla.innerHTML = "";
 
-    // Recorro cada producto dentro del array
-    productos.forEach((prod) => {
-      // Creo una celda (columna) para cada producto
-      let celda = document.createElement("td");
-
-      // Defino el contenido de la celda con una tarjeta Bootstrap
-      celda.innerHTML = ` 
-        <div class="card">
-          <img src="${prod.image}" class="card-img-top" alt="${prod.name}">
-          <div class="card-body">
-            <h5 class="card-title">${prod.name}</h5>
-            <p class="card-text">${prod.description}</p>
-            <p class="card-text"><strong>Precio:</strong> ${prod.currency} ${prod.cost}</p>
-            <p class="card-text"><strong>Vendidos:</strong> ${prod.soldCount}</p>
-            <a href="#" class="btn btn-primary">Ver más</a>
+  if (list.length === 0) {
+    tabla.innerHTML = `
+      <tr>
+        <td>
+          <div class="alert alert-warning text-center" role="alert">
+            No hay productos disponibles en esta categoría.
           </div>
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  let fila = document.createElement("tr");
+
+  list.forEach(prod => {
+    let celda = document.createElement("td");
+    celda.innerHTML = `
+      <div class="card">
+        <img src="${prod.image}" class="card-img-top" alt="${prod.name}">
+        <div class="card-body">
+          <h5 class="card-title">${prod.name}</h5>
+          <p class="card-text">${prod.description}</p>
+          <p class="card-text"><strong>Precio:</strong> ${prod.currency} ${prod.cost}</p>
+          <p class="card-text"><strong>Vendidos:</strong> ${prod.soldCount}</p>
+          <a href="#" class="btn btn-primary">Ver más</a>
         </div>
-      `;
+      </div>
+    `;
+    fila.appendChild(celda);
+  });
 
-      // Agrego la celda (con su producto) a la fila
-      fila.appendChild(celda);
-    });
+  tabla.appendChild(fila);
+}
 
-    // Finalmente, agrego la fila completa a la tabla
-    tabla.appendChild(fila);
+// Ordenar productos
+function sortProducts() {
+  if (sortAsc.checked) {
+    productosFiltrados.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (sortDesc.checked) {
+    productosFiltrados.sort((a, b) => b.name.localeCompare(a.name));
+  } else if (sortByCount.checked) {
+    productosFiltrados.sort((a, b) => b.soldCount - a.soldCount);
+  }
+  showProducts(productosFiltrados);
+}
+
+// Filtrar por rango de vendidos
+function filterByRange() {
+  let min = parseInt(minInput.value) || 0;
+  let max = parseInt(maxInput.value) || Infinity;
+
+  productosFiltrados = productos.filter(p =>
+    p.soldCount >= min && p.soldCount <= max
+  );
+
+  sortProducts();
+}
+
+// Limpiar filtro
+function clearFilter() {
+  minInput.value = "";
+  maxInput.value = "";
+  productosFiltrados = [...productos];
+  sortProducts();
+}
+
+// Eventos
+sortAsc.addEventListener("change", sortProducts);
+sortDesc.addEventListener("change", sortProducts);
+sortByCount.addEventListener("change", sortProducts);
+
+filterBtn.addEventListener("click", filterByRange);
+clearBtn.addEventListener("click", clearFilter);
+
+// Traer productos desde la API
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    productos = data.products;
+    productosFiltrados = [...productos];
+    sortProducts(); // mostrar inicial
   })
-  .catch((error) => console.error("Error al cargar los productos:", error)); // Manejo de errores
+  .catch(error => console.error("Error al cargar los productos:", error));
