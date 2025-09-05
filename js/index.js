@@ -18,3 +18,4 @@ if (sessionStorage.getItem("logueado") !== "true") {
   alert("Debes iniciar sesión para acceder a esta página."); // Muestra un mensaje de alerta
   window.location.href = "login.html";
 }
+
