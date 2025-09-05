@@ -92,3 +92,70 @@ document.addEventListener("click", (e) => {
     suggestions.style.display = "none";
     }
 });
+
+// =====================
+// DETALLE DEL PRODUCTO
+// =====================
+
+const productContainer = document.getElementById("product-container");
+
+// Obtener el ID guardado en localStorage
+const productID = localStorage.getItem("productID");
+
+// Si no hay ID, mostrar error
+if (!productID) {
+  productContainer.innerHTML = `
+    <div class="alert alert-danger text-center">
+      No se encontró el producto seleccionado.
+    </div>
+  `;
+} else {
+  // Construir la URL de la API
+  const url = `https://japceibal.github.io/emercado-api/products/${productID}.json`;
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      renderProduct(data);
+    })
+    .catch(err => {
+      console.error("Error cargando producto:", err);
+      productContainer.innerHTML = `
+        <div class="alert alert-danger text-center">
+          Ocurrió un error al cargar el producto.
+        </div>
+      `;
+    });
+}
+
+// Renderizar la información
+function renderProduct(prod) {
+  productContainer.innerHTML = `
+    <div class="col-md-6">
+      <!-- Carrusel de imágenes -->
+      <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          ${prod.images.map((img, i) => `
+            <div class="carousel-item ${i === 0 ? "active" : ""}">
+              <img src="${img}" class="d-block w-100 rounded" alt="${prod.name}">
+            </div>
+          `).join("")}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <h2>${prod.name}</h2>
+      <p class="text-muted">Categoría: <strong>${prod.category}</strong></p>
+      <p>${prod.description}</p>
+      <p><strong>Precio:</strong> ${prod.currency} ${prod.cost}</p>
+      <p><strong>Vendidos:</strong> ${prod.soldCount}</p>
+    </div>
+  `;
+}

@@ -20,7 +20,7 @@ const filterBtn = document.getElementById("rangeFilterCount");
 const clearBtn = document.getElementById("clearRangeFilter");
 
 // Mostrar productos en tarjetas Bootstrap
-function showProducts(list) {
+/*function showProducts(list) {
   tabla.innerHTML = "";
 
   if (list.length === 0) {
@@ -56,6 +56,38 @@ function showProducts(list) {
   });
 
   tabla.appendChild(fila);
+}*/
+
+function showProducts(list) {
+  tabla.innerHTML = "";
+
+  if (list.length === 0) {
+    tabla.innerHTML = `
+      <div class="alert alert-warning text-center w-100" role="alert">
+        No hay productos disponibles en esta categoría.
+      </div>`;
+    return;
+  }
+
+  list.forEach(prod => {
+    let col = document.createElement("div");
+    col.className = "col-md-4 mb-4";
+
+    col.innerHTML = `
+      <div class="card h-100">
+        <img src="${prod.image}" class="card-img-top" alt="${prod.name}">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">${prod.name}</h5>
+          <p class="card-text">${prod.description}</p>
+          <p class="card-text"><strong>Precio:</strong> ${prod.currency} ${prod.cost}</p>
+          <p class="card-text"><strong>Vendidos:</strong> ${prod.soldCount}</p>
+          <a href="#" class="btn btn-primary mt-auto ver-mas" data-id="${prod.id}">Ver más</a>
+        </div>
+      </div>
+    `;
+
+    tabla.appendChild(col);
+  });
 }
 
 // Ordenar productos
@@ -200,5 +232,15 @@ navInput && navInput.addEventListener("input", async () => {
 document.addEventListener("click", (e) => {
   if (!navInput.contains(e.target) && !suggestions.contains(e.target)) {
     suggestions.style.display = "none";
+  }
+});
+
+// Delegación de eventos para los botones "Ver más"
+tabla.addEventListener("click", (e) => {
+  if (e.target.classList.contains("ver-mas")) {
+    e.preventDefault();
+    const id = e.target.getAttribute("data-id");
+    localStorage.setItem("productID", id);
+    window.location.href = "product-info.html";
   }
 });
