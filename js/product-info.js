@@ -131,7 +131,7 @@ if (!productID) {
 // Renderizar la información
 function renderProduct(prod) {
   productContainer.innerHTML = `
-    <div class="col-md-6">
+    <div class="col-md-6 product-data contenedor-imagen">
       <!-- Carrusel de imágenes -->
       <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -150,12 +150,17 @@ function renderProduct(prod) {
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 product-data">
       <h2>${prod.name}</h2>
       <p class="text-muted">Categoría: <strong>${prod.category}</strong></p>
       <p>${prod.description}</p>
       <p><strong>Precio:</strong> ${prod.currency} ${prod.cost}</p>
       <p><strong>Vendidos:</strong> ${prod.soldCount}</p>
+      <div id ="buttons-container" class="row my-4">
+        <button id="agregarCarrito" class="btn btn-primary col mx-2">Agregar al carrito</button>
+        <button id="comprar" class="btn btn-success col mx-2">Comprar</button>
+      </div>
     </div>
+    
   `;
 }
