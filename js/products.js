@@ -12,11 +12,13 @@ const tabla = document.getElementById("productos");
 
 const sortAsc = document.getElementById("sortAsc");
 const sortDesc = document.getElementById("sortDesc");
+const sortPriceAsc = document.getElementById("sortPriceAsc");
+const sortPriceDesc = document.getElementById("sortPriceDesc");
 const sortByCount = document.getElementById("sortByCount");
 
-const minInput = document.getElementById("rangeFilterCountMin");
-const maxInput = document.getElementById("rangeFilterCountMax");
-const filterBtn = document.getElementById("rangeFilterCount");
+const minInput = document.getElementById("rangeFilterPriceMin");
+const maxInput = document.getElementById("rangeFilterPriceMax");
+const filterBtn = document.getElementById("rangeFilterPrice");
 const clearBtn = document.getElementById("clearRangeFilter");
 
 // Mostrar productos en tarjetas Bootstrap
@@ -96,19 +98,23 @@ function sortProducts() {
     productosFiltrados.sort((a, b) => a.name.localeCompare(b.name));
   } else if (sortDesc.checked) {
     productosFiltrados.sort((a, b) => b.name.localeCompare(a.name));
+  } else if (sortPriceAsc.checked) {
+    productosFiltrados.sort((a, b) => a.cost - b.cost);
+  } else if (sortPriceDesc.checked) {
+    productosFiltrados.sort((a, b) => b.cost - a.cost);
   } else if (sortByCount.checked) {
     productosFiltrados.sort((a, b) => b.soldCount - a.soldCount);
   }
   showProducts(productosFiltrados);
 }
 
-// Filtrar por rango de vendidos
+// Filtrar por rango de precio
 function filterByRange() {
-  let min = parseInt(minInput.value) || 0;
-  let max = parseInt(maxInput.value) || Infinity;
+  let min = parseFloat(minInput.value) || 0;
+  let max = parseFloat(maxInput.value) || Infinity;
 
   productosFiltrados = productos.filter(p =>
-    p.soldCount >= min && p.soldCount <= max
+    p.cost >= min && p.cost <= max
   );
 
   sortProducts();
@@ -125,6 +131,8 @@ function clearFilter() {
 // Eventos
 sortAsc.addEventListener("change", sortProducts);
 sortDesc.addEventListener("change", sortProducts);
+sortPriceAsc.addEventListener("change", sortProducts);
+sortPriceDesc.addEventListener("change", sortProducts);
 sortByCount.addEventListener("change", sortProducts);
 
 filterBtn.addEventListener("click", filterByRange);
