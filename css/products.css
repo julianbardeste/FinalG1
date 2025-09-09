@@ -16,16 +16,15 @@
   flex-wrap: wrap;
   justify-content: center;
   padding: 20px;
+  align-items: center;
 }
 
 /* Cards SOLO para products.html */
 #products-page .card {
-  width: 250px;
+  width: 350px;
   /* más angosto para que entren más */
   height: 550px;
   /* misma altura */
-  margin: 50px;
-  /* menos espacio entre cards */
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.85);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -33,6 +32,7 @@
   flex-direction: column;
   min-height: max-content;
   /* para que no se estire demasiado */
+  align-items: center;
 }
 
 /* Título de la card */
@@ -106,3 +106,4 @@
     margin: 20px;
   }
 }
+
