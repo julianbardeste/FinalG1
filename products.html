@@ -16,13 +16,13 @@
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
-  </head>
-
-  <body id="products-page">
-    <!-- Navbar -->
+    <link href="css/products.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
       <div class="container">
-        <a class="navbar-brand" href="index.html">eMercado</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -30,13 +30,12 @@
           data-bs-target="#navbarNav"
           aria-controls="navbarNav"
           aria-expanded="false"
-          aria-label="Abrir menú"
+          aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
+          <ul class="navbar-nav w-100 justify-content-between">
             <li class="nav-item">
               <a class="nav-link" href="index.html">Inicio</a>
             </li>
@@ -46,97 +45,108 @@
             <li class="nav-item">
               <a class="nav-link" href="sell.html">Vender</a>
             </li>
-            <li>
+            <li class="nav-item flex-grow-1 mx-3">
               <div class="position-relative w-100">
-                <input id="navSearchInput" class="form-control" type="search" placeholder="Buscar productos..." autocomplete="off" />
-                <ul id="searchSuggestions" class="list-group position-absolute w-100" style="z-index:2000; display:none; max-height:300px; overflow:auto;"></ul>
+                <input id="navSearchInputNav" class="form-control" type="search" placeholder="Buscar productos..." autocomplete="off" />
+                <ul id="searchSuggestionsNav" class="list-group position-absolute w-100" style="z-index:2000; display:none; max-height:300px; overflow:auto;"></ul>
               </div>
             </li>
-            <li>
-              <span id="userNavbar"></span>
-            </li>
+            <li class="nav-item"></li>
           </ul>
         </div>
       </div>
     </nav>
+    <div class="container-fluid px-4">
+        <!-- Sección de búsqueda -->
+        <div class="search-section">
+            <div class="search-input">
+                <i class="fas fa-search"></i>
+                <input type="text" class="form-control" id="navSearchInput" placeholder="Buscar productos...">
+                <div id="searchSuggestions" style="display: none;"></div>
+            </div>
+        </div>
 
-          <div class="container">
-        <div class="row">
-          <div class="col text-end">
-            <div
-              class="btn-group btn-group-toggle mb-4"
-              data-bs-toggle="buttons"
-            >
-              <input
-                type="radio"
-                class="btn-check"
-                name="options"
-                id="sortAsc"
-              />
-              <label class="btn btn-light" for="sortAsc">A-Z</label>
-              <input
-                type="radio"
-                class="btn-check"
-                name="options"
-                id="sortDesc"
-              />
-              <label class="btn btn-light" for="sortDesc">Z-A</label>
-              <input
-                type="radio"
-                class="btn-check"
-                name="options"
-                id="sortByCount"
-                checked
-              />
-              <label class="btn btn-light" for="sortByCount"
-                ><i class="fas fa-sort-amount-down mr-1"></i
-              ></label>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
-            <div class="row container p-0 m-0">
-              <div class="col">
-                <p class="font-weight-normal text-end my-2">Cant.</p>
-              </div>
-              <div class="col">
-                <input
-                  class="form-control"
-                  type="number"
-                  placeholder="min."
-                  id="rangeFilterCountMin"
-                />
-              </div>
-              <div class="col">
-                <input
-                  class="form-control"
-                  type="number"
-                  placeholder="máx."
-                  id="rangeFilterCountMax"
-                />
-              </div>
-              <div class="col-3 p-0">
-                <div class="btn-group" role="group">
-                  <button class="btn btn-light btn-block" id="rangeFilterCount">
-                    Filtrar
-                  </button>
-                  <button class="btn btn-link btn-sm" id="clearRangeFilter">
-                    Limpiar
-                  </button>
+        <!-- Título principal -->
+        <h1 class="section-title">Catálogo de Productos</h1>
+
+        <!-- Sección de filtros -->
+        <div class="filters-section">
+            <div class="row">
+                <!-- Ordenamiento -->
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <div class="filter-group">
+                        <h6><i class="fas fa-sort me-2"></i>Ordenar por</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sort" id="sortAsc">
+                            <label class="form-check-label" for="sortAsc">
+                                A-Z (Nombre)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sort" id="sortDesc">
+                            <label class="form-check-label" for="sortDesc">
+                                Z-A (Nombre)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sort" id="sortPriceAsc">
+                            <label class="form-check-label" for="sortPriceAsc">
+                                Precio: Menor a Mayor
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sort" id="sortPriceDesc">
+                            <label class="form-check-label" for="sortPriceDesc">
+                                Precio: Mayor a Menor
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sort" id="sortByCount">
+                            <label class="form-check-label" for="sortByCount">
+                                Más Vendidos
+                            </label>
+                        </div>
+                    </div>
                 </div>
-              </div>
+
+                <!-- Filtro por precio -->
+                <div class="col-lg-8 col-md-6 mb-3">
+                    <div class="filter-group">
+                        <h6><i class="fas fa-filter me-2"></i>Filtrar por Precio</h6>
+                        <div class="range-inputs">
+                            <div class="flex-grow-1">
+                                <label for="rangeFilterPriceMin" class="form-label">Precio Mínimo</label>
+                                <input type="number" class="form-control" id="rangeFilterPriceMin" placeholder="Min">
+                            </div>
+                            <div class="flex-grow-1">
+                                <label for="rangeFilterPriceMax" class="form-label">Precio Máximo</label>
+                                <input type="number" class="form-control" id="rangeFilterPriceMax" placeholder="Max">
+                            </div>
+                            <div class="d-flex gap-2 align-self-end">
+                                <button class="btn btn-modern" id="rangeFilterPrice">
+                                    <i class="fas fa-search me-2"></i>Filtrar
+                                </button>
+                                <button class="btn btn-outline-modern" id="clearRangeFilter">
+                                    <i class="fas fa-times me-2"></i>Limpiar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="row">
-          <div class="list-group" id="cat-list-container"></div>
+
+        <!-- Grid de productos -->
+        <div class="products-grid" id="productos">
+            <!-- Los productos se insertan aquí dinámicamente -->
         </div>
-      </div>
+    </div>
+
+
 
     <!-- Contenido principal -->
     <main class="products-main pb-5 container">
-      <div class="row" id="productos">
+      <div class="row" id="productos-old">
         <!-- Aquí JS insertará las cards -->
       </div>
     </main>
@@ -155,6 +165,8 @@
     </footer>
 
     <!-- Scripts -->
+         <!-- JavaScript mejorado para la interfaz -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/products.js"></script>

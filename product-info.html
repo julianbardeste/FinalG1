@@ -15,6 +15,10 @@
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/products.css" rel="stylesheet" />
+    <link href="css/product-info.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   </head>
 
   <body>
@@ -53,13 +57,17 @@
         </div>
       </div>
     </nav>
-    <main>
-      <div class="container">
-        <div class="alert alert-danger text-center" role="alert">
-          <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <div class="container-fluid px-4">
+      <!-- Título principal -->
+      <h1 class="section-title">Detalles del Producto</h1>
+      
+      <!-- Contenedor del producto -->
+      <div class="product-detail-container">
+        <div id="product-container">
+          <!-- JS inyectará aquí la información -->
         </div>
       </div>
-    </main>
+    </div>
     <footer class="text-muted">
       <div class="container">
         <p class="float-end">
@@ -81,6 +89,7 @@
         <div></div>
       </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/product-info.js"></script>
