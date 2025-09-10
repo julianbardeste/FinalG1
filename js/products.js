@@ -102,7 +102,7 @@ const clearBtn = document.getElementById("clearRangeFilter");
             sortProducts();
         }
 
-        // Función para limpiar filtros (mantiene tu lógica original)
+        // Función para limpiar filtros
         function clearFilter() {
             minInput.value = "";
             maxInput.value = "";
@@ -110,7 +110,7 @@ const clearBtn = document.getElementById("clearRangeFilter");
             sortProducts();
         }
 
-        // Event listeners (mantiene tu lógica original)
+        // Event listeners
         sortAsc.addEventListener("change", sortProducts);
         sortDesc.addEventListener("change", sortProducts);
         sortPriceAsc.addEventListener("change", sortProducts);
@@ -120,7 +120,7 @@ const clearBtn = document.getElementById("clearRangeFilter");
         filterBtn.addEventListener("click", filterByRange);
         clearBtn.addEventListener("click", clearFilter);
 
-        // Delegación de eventos para los botones "Ver más" (mantiene tu lógica original)
+        // Delegación de eventos para los botones "Ver más" 
         tabla.addEventListener("click", (e) => {
             if (e.target.classList.contains("ver-mas") || e.target.closest(".ver-mas")) {
                 e.preventDefault();
@@ -138,7 +138,7 @@ const clearBtn = document.getElementById("clearRangeFilter");
             }
         });
 
-        // Búsqueda simple (demo)
+        // Búsqueda simple 
         const navInput = document.getElementById("navSearchInput");
         const suggestions = document.getElementById("searchSuggestions");
 
