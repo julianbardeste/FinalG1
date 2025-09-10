@@ -5,6 +5,10 @@ let allProducts = null;
 
 // Carga simple y cache en sessionStorage (se hace solo una vez)
 async function loadAllProducts() {
+  const CATEGORIES_URL = "https://japceibal.github.io/emercado-api/cats/cat.json";
+  const PRODUCTS_URL = "https://japceibal.github.io/emercado-api/cats_products/";
+  const EXT_TYPE = ".json";
+  
   const cached = sessionStorage.getItem("allProductsCache");
   if (cached) { allProducts = JSON.parse(cached); return; }
   try {
@@ -98,69 +102,171 @@ document.addEventListener("click", (e) => {
 // =====================
 
 const productContainer = document.getElementById("product-container");
+console.log("Elemento productContainer encontrado:", productContainer);
 
 // Obtener el ID guardado en localStorage
-const productID = localStorage.getItem("productID");
+let productID = localStorage.getItem("productID");
+console.log("ProductID obtenido:", productID);
 
-// Si no hay ID, mostrar error
+// Si no hay ID, usar uno por defecto para testing
 if (!productID) {
+  productID = "50921";
+  console.log("No se encontró productID, usando 50921 por defecto");
+}
+
+// Si aún no hay ID válido, mostrar error
+if (!productID || productID === "null") {
   productContainer.innerHTML = `
-    <div class="alert alert-danger text-center">
-      No se encontró el producto seleccionado.
+    <div class="error-state">
+      <i class="fas fa-exclamation-triangle"></i>
+      <h3>Producto no encontrado</h3>
+      <p>No se encontró el producto seleccionado. Por favor, regresa a la página de productos.</p>
+      <a href="products.html" class="product-btn product-btn-primary">
+        <i class="fas fa-arrow-left me-2"></i>Volver a productos
+      </a>
     </div>
   `;
 } else {
   // Construir la URL de la API
   const url = `https://japceibal.github.io/emercado-api/products/${productID}.json`;
+  console.log("URL a cargar:", url);
 
   fetch(url)
-    .then(res => res.json())
+    .then(res => {
+      console.log("Respuesta del fetch:", res);
+      return res.json();
+    })
     .then(data => {
+      console.log("Datos del producto:", data);
       renderProduct(data);
     })
     .catch(err => {
       console.error("Error cargando producto:", err);
       productContainer.innerHTML = `
-        <div class="alert alert-danger text-center">
-          Ocurrió un error al cargar el producto.
+        <div class="error-state">
+          <i class="fas fa-exclamation-circle"></i>
+          <h3>Error al cargar el producto</h3>
+          <p>Ocurrió un error al cargar la información del producto. Por favor, intenta nuevamente.</p>
+          <button onclick="location.reload()" class="product-btn product-btn-outline">
+            <i class="fas fa-redo me-2"></i>Reintentar
+          </button>
         </div>
       `;
     });
 }
 
-// Renderizar la información
+// Renderizar la información con el estilo moderno
 function renderProduct(prod) {
+  console.log("Renderizando producto:", prod);
   productContainer.innerHTML = `
-    <div class="col-md-6 product-data contenedor-imagen">
-      <!-- Carrusel de imágenes -->
-      <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          ${prod.images.map((img, i) => `
-            <div class="carousel-item ${i === 0 ? "active" : ""}">
-              <img src="${img}" class="d-block w-100 rounded" alt="${prod.name}">
-            </div>
-          `).join("")}
+    <div class="product-detail-card">
+      <div class="product-image-container">
+        <!-- Carrusel de imágenes principal -->
+        <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            ${prod.images.map((img, i) => `
+              <div class="carousel-item ${i === 0 ? "active" : ""}">
+                <img src="${img}" class="d-block w-100" alt="${prod.name}">
+              </div>
+            `).join("")}
+          </div>
+          ${prod.images.length > 1 ? `
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          ` : ''}
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
-          <span class="carousel-control-next-icon"></span>
-        </button>
+        
+        <!-- Miniaturas de imágenes -->
+        ${prod.images.length > 1 ? `
+          <div class="image-thumbnails">
+            ${prod.images.map((img, i) => `
+              <div class="thumbnail-item ${i === 0 ? "active" : ""}" data-slide-to="${i}">
+                <img src="${img}" alt="${prod.name} - imagen ${i + 1}">
+              </div>
+            `).join("")}
+          </div>
+        ` : ''}
       </div>
-    </div>
 
-    <div class="col-md-6 product-data">
-      <h2>${prod.name}</h2>
-      <p class="text-muted">Categoría: <strong>${prod.category}</strong></p>
-      <p>${prod.description}</p>
-      <p><strong>Precio:</strong> ${prod.currency} ${prod.cost}</p>
-      <p><strong>Vendidos:</strong> ${prod.soldCount}</p>
-      <div id ="buttons-container" class="row my-4">
-        <button id="agregarCarrito" class="btn btn-primary col mx-2">Agregar al carrito</button>
-        <button id="comprar" class="btn btn-success col mx-2">Comprar</button>
+      <div class="product-info">
+        <h1 class="product-title">${prod.name}</h1>
+        <p class="product-category">
+          <i class="fas fa-tag me-2"></i>Categoría: ${prod.category}
+        </p>
+        <p class="product-description">${prod.description}</p>
+        
+        <div class="product-meta">
+          <div class="product-price">
+            <i class="fas fa-dollar-sign"></i>
+            ${prod.currency} ${prod.cost.toLocaleString()}
+          </div>
+          <div class="product-sold">
+            <i class="fas fa-chart-line"></i>
+            ${prod.soldCount.toLocaleString()} vendidos
+          </div>
+        </div>
+
+        <div class="buttons-container">
+          <button id="agregarCarrito" class="product-btn product-btn-primary">
+            <i class="fas fa-shopping-cart"></i>
+            Agregar al carrito
+          </button>
+          <button id="comprar" class="product-btn product-btn-success">
+            <i class="fas fa-credit-card"></i>
+            Comprar ahora
+          </button>
+        </div>
       </div>
     </div>
-    
   `;
+  
+  // Configurar funcionalidad de las miniaturas después de renderizar
+  setupThumbnailsCarousel();
+}
+
+// Función para configurar la sincronización entre miniaturas y carrusel
+function setupThumbnailsCarousel() {
+  const carousel = document.getElementById('carouselImages');
+  const thumbnails = document.querySelectorAll('.thumbnail-item');
+  
+  if (!carousel || thumbnails.length === 0) return;
+  
+  // Crear instancia del carrusel de Bootstrap
+  const bootstrapCarousel = new bootstrap.Carousel(carousel, {
+    interval: 5000, // Auto slide cada 5 segundos
+    wrap: true
+  });
+  
+  // Agregar event listeners a las miniaturas
+  thumbnails.forEach((thumbnail, index) => {
+    thumbnail.addEventListener('click', () => {
+      // Cambiar al slide correspondiente
+      bootstrapCarousel.to(index);
+      
+      // Actualizar clase active en miniaturas
+      updateActiveThumbnail(index);
+    });
+  });
+  
+  // Escuchar eventos del carrusel para sincronizar miniaturas
+  carousel.addEventListener('slide.bs.carousel', (event) => {
+    updateActiveThumbnail(event.to);
+  });
+}
+
+// Función para actualizar la miniatura activa
+function updateActiveThumbnail(activeIndex) {
+  const thumbnails = document.querySelectorAll('.thumbnail-item');
+  
+  thumbnails.forEach((thumbnail, index) => {
+    if (index === activeIndex) {
+      thumbnail.classList.add('active');
+    } else {
+      thumbnail.classList.remove('active');
+    }
+  });
 }
