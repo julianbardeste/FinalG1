@@ -139,6 +139,8 @@ if (!productID || productID === "null") {
     .then(data => {
       console.log("Datos del producto:", data);
       renderProduct(data);
+      // Cargar comentarios del producto
+      loadComments(productID);
     })
     .catch(err => {
       console.error("Error cargando producto:", err);
@@ -261,7 +263,7 @@ function setupThumbnailsCarousel() {
 // Función para actualizar la miniatura activa
 function updateActiveThumbnail(activeIndex) {
   const thumbnails = document.querySelectorAll('.thumbnail-item');
-  
+
   thumbnails.forEach((thumbnail, index) => {
     if (index === activeIndex) {
       thumbnail.classList.add('active');
@@ -270,3 +272,236 @@ function updateActiveThumbnail(activeIndex) {
     }
   });
 }
+
+// =====================
+// COMENTARIOS Y CALIFICACIONES
+// =====================
+
+// Función para cargar y mostrar comentarios
+function loadComments(productId) {
+  const commentsUrl = `https://japceibal.github.io/emercado-api/products_comments/${productId}.json`;
+
+  fetch(commentsUrl)
+    .then(res => res.json())
+    .then(comments => {
+      displayComments(comments);
+    })
+    .catch(err => {
+      console.error('Error cargando comentarios:', err);
+      // En caso de error, mostrar el formulario sin comentarios existentes
+      displayComments([]);
+    });
+}
+
+// Función para mostrar comentarios
+function displayComments(comments) {
+  const commentsContainer = document.getElementById('comments-container');
+
+  if (!comments || comments.length === 0) {
+    commentsContainer.innerHTML = `
+      <div class="no-comments">
+        <i class="far fa-comment"></i>
+        <p>Aún no hay comentarios para este producto. ¡Sé el primero en comentar!</p>
+      </div>
+    `;
+    return;
+  }
+
+  const commentsHTML = comments.map(comment => {
+    const stars = generateStars(comment.score);
+    // Handle both date formats from API (YYYY-MM-DD HH:MM:SS and ISO)
+    let commentDate;
+    if (comment.dateTime.includes(' ')) {
+      // Format: "YYYY-MM-DD HH:MM:SS"
+      commentDate = new Date(comment.dateTime.replace(' ', 'T'));
+    } else {
+      commentDate = new Date(comment.dateTime);
+    }
+
+    const date = commentDate.toLocaleDateString('es-ES', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+
+    return `
+      <div class="comment-card">
+        <div class="comment-header">
+          <div class="comment-user">
+            <i class="fas fa-user-circle"></i>
+            <span class="username">${comment.user}</span>
+          </div>
+          <div class="comment-date">${date}</div>
+        </div>
+        <div class="comment-rating">
+          ${stars}
+          <span class="rating-text">(${comment.score}/5)</span>
+        </div>
+        <div class="comment-text">
+          <p>${comment.description}</p>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  commentsContainer.innerHTML = `
+    <div class="comments-list">
+      ${commentsHTML}
+    </div>
+    <div class="rating-form-container">
+      <h3>Agregar tu calificación</h3>
+      <form id="rating-form" class="rating-form">
+        <div class="form-group">
+          <label for="user-comment">Tu comentario:</label>
+          <textarea id="user-comment" class="form-control" rows="4" placeholder="Escribe tu opinión sobre este producto..." required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Tu calificación:</label>
+          <div class="star-rating" id="star-rating">
+            ${[1, 2, 3, 4, 5].map(i => `
+              <i class="far fa-star" data-rating="${i}"></i>
+            `).join('')}
+          </div>
+          <span id="rating-text" class="rating-display">Selecciona una calificación</span>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-paper-plane"></i>
+          Enviar calificación
+        </button>
+      </form>
+    </div>
+  `;
+
+  // Configurar interactividad del formulario de calificación
+  setupRatingForm();
+}
+
+// Función para generar estrellas HTML
+function generateStars(rating) {
+  let stars = '';
+  for (let i = 1; i <= 5; i++) {
+    if (i <= rating) {
+      stars += '<i class="fas fa-star text-warning"></i>';
+    } else {
+      stars += '<i class="far fa-star text-muted"></i>';
+    }
+  }
+  return stars;
+}
+
+// Función para configurar el formulario de calificación
+function setupRatingForm() {
+  const stars = document.querySelectorAll('#star-rating i');
+  const ratingText = document.getElementById('rating-text');
+  const ratingForm = document.getElementById('rating-form');
+  let selectedRating = 0;
+
+  // Configurar interacción con estrellas
+  stars.forEach((star, index) => {
+    const rating = index + 1;
+
+    star.addEventListener('mouseenter', () => {
+      highlightStars(rating);
+    });
+
+    star.addEventListener('mouseleave', () => {
+      highlightStars(selectedRating);
+    });
+
+    star.addEventListener('click', () => {
+      selectedRating = rating;
+      highlightStars(selectedRating);
+      ratingText.textContent = `${selectedRating}/5 estrellas`;
+      ratingText.classList.add('selected');
+    });
+  });
+
+  // Función para resaltar estrellas
+  function highlightStars(rating) {
+    stars.forEach((star, index) => {
+      if (index < rating) {
+        star.classList.remove('far');
+        star.classList.add('fas', 'text-warning');
+      } else {
+        star.classList.remove('fas', 'text-warning');
+        star.classList.add('far');
+      }
+    });
+  }
+
+  // Manejar envío del formulario (simulación)
+  ratingForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const comment = document.getElementById('user-comment').value.trim();
+
+    if (!comment) {
+      alert('Por favor, escribe un comentario.');
+      return;
+    }
+
+    if (selectedRating === 0) {
+      alert('Por favor, selecciona una calificación.');
+      return;
+    }
+
+    addNewComment(comment, selectedRating);
+  });
+}
+
+// Función para agregar nuevo comentario (simulación visual)
+function addNewComment(comment, rating) {
+  const usuario = sessionStorage.getItem('usuario') || 'Usuario Anónimo';
+  const now = new Date();
+
+  // Crear elemento HTML para el nuevo comentario
+  const stars = generateStars(rating);
+  const date = now.toLocaleDateString('es-ES', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+
+  const newCommentHTML = `
+    <div class="comment-card new-comment">
+      <div class="comment-header">
+        <div class="comment-user">
+          <i class="fas fa-user-circle"></i>
+          <span class="username">${usuario}</span>
+        </div>
+        <div class="comment-date">${date}</div>
+      </div>
+      <div class="comment-rating">
+        ${stars}
+        <span class="rating-text">(${rating}/5)</span>
+      </div>
+      <div class="comment-text">
+        <p>${comment}</p>
+      </div>
+    </div>
+  `;
+
+  // Agregar al principio de la lista de comentarios
+  const commentsList = document.querySelector('.comments-list');
+  commentsList.insertAdjacentHTML('afterbegin', newCommentHTML);
+
+  // Resetear formulario
+  document.getElementById('rating-form').reset();
+  document.getElementById('rating-text').textContent = 'Selecciona una calificación';
+  document.getElementById('rating-text').classList.remove('selected');
+
+  // Resetear estrellas
+  const stars_elements = document.querySelectorAll('#star-rating i');
+  stars_elements.forEach(star => {
+    star.classList.remove('fas', 'text-warning');
+    star.classList.add('far');
+  });
+
+  // Mostrar mensaje de éxito
+  alert('¡Tu calificación ha sido agregada exitosamente!');
+}
+
