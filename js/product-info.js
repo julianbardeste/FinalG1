@@ -1,4 +1,3 @@
-
 "use strict";
 
 /* -------------------------
@@ -13,10 +12,12 @@ let allProducts = null;
 
 // Carga simple y caché en sessionStorage (se hace una vez por sesión)
 async function loadAllProducts() {
-  const CATEGORIES_URL = "https://japceibal.github.io/emercado-api/cats/cat.json";
-  const PRODUCTS_URL = "https://japceibal.github.io/emercado-api/cats_products/";
+  const CATEGORIES_URL =
+    "https://japceibal.github.io/emercado-api/cats/cat.json";
+  const PRODUCTS_URL =
+    "https://japceibal.github.io/emercado-api/cats_products/";
   const EXT_TYPE = ".json";
-  
+
   const cached = sessionStorage.getItem("allProductsCache");
   if (cached) {
     allProducts = JSON.parse(cached);
@@ -25,16 +26,24 @@ async function loadAllProducts() {
 
   try {
     // 1) obtener listado de categorías
-    const cats = await fetch(CATEGORIES_URL).then(r => r.json());
+    const cats = await fetch(CATEGORIES_URL).then((r) => r.json());
     // 2) por cada categoría pedir su JSON de productos
-    const proms = cats.map(c => fetch(PRODUCTS_URL + c.id + EXT_TYPE).then(r => r.json()).catch(()=>null));
+    const proms = cats.map((c) =>
+      fetch(PRODUCTS_URL + c.id + EXT_TYPE)
+        .then((r) => r.json())
+        .catch(() => null)
+    );
     const lists = await Promise.all(proms);
     // 3) consolidar todos los arrays en uno
     const merged = [];
-    lists.forEach(l => { if (l && l.products) merged.push(...l.products); });
+    lists.forEach((l) => {
+      if (l && l.products) merged.push(...l.products);
+    });
     // 4) eliminar duplicados por id (map simple)
     const map = {};
-    merged.forEach(p => { map[p.id] = p; });
+    merged.forEach((p) => {
+      map[p.id] = p;
+    });
     allProducts = Object.values(map);
     // 5) guardar en sessionStorage para no volver a pedir todo
     sessionStorage.setItem("allProductsCache", JSON.stringify(allProducts));
@@ -48,9 +57,12 @@ async function loadAllProducts() {
 function showSuggestions(items) {
   if (!suggestions) return;
   suggestions.innerHTML = "";
-  if (!items || items.length === 0) { suggestions.style.display = "none"; return; }
+  if (!items || items.length === 0) {
+    suggestions.style.display = "none";
+    return;
+  }
 
-  items.forEach(p => {
+  items.forEach((p) => {
     const li = document.createElement("li");
     li.className = "list-group-item d-flex align-items-center";
 
@@ -63,7 +75,9 @@ function showSuggestions(items) {
     img.width = 44;
     img.height = 44;
     // fallback si la imagen no carga
-    img.onerror = () => { img.src = "img/no-image.png"; };
+    img.onerror = () => {
+      img.src = "img/no-image.png";
+    };
 
     const textWrap = document.createElement("div");
     textWrap.className = "suggest-text ms-3";
@@ -75,9 +89,10 @@ function showSuggestions(items) {
     const sub = document.createElement("div");
     sub.className = "suggest-sub text-muted small";
     if (p.cost !== undefined) {
-        sub.textContent = `${p.currency || ''} ${p.cost}`;
+      sub.textContent = `${p.currency || ""} ${p.cost}`;
     } else if (p.description) {
-        sub.textContent = p.description.slice(0, 60) + (p.description.length > 60 ? "…" : "");
+      sub.textContent =
+        p.description.slice(0, 60) + (p.description.length > 60 ? "…" : "");
     }
 
     textWrap.appendChild(title);
@@ -88,8 +103,8 @@ function showSuggestions(items) {
 
     // Al clickear una sugerencia -> guardar productID y llevar a product-info
     li.addEventListener("click", () => {
-        localStorage.setItem("productID", p.id);
-        window.location.href = "product-info.html";
+      localStorage.setItem("productID", p.id);
+      window.location.href = "product-info.html";
     });
 
     suggestions.appendChild(li);
@@ -102,11 +117,15 @@ function showSuggestions(items) {
 if (navInput) {
   navInput.addEventListener("input", async () => {
     const q = navInput.value.trim().toLowerCase();
-    if (!q) { if (suggestions) suggestions.style.display = "none"; return; }
+    if (!q) {
+      if (suggestions) suggestions.style.display = "none";
+      return;
+    }
     if (!allProducts) await loadAllProducts();
-    const matches = allProducts.filter(p =>
-      (p.name && p.name.toLowerCase().includes(q)) ||
-      (p.description && p.description.toLowerCase().includes(q))
+    const matches = allProducts.filter(
+      (p) =>
+        (p.name && p.name.toLowerCase().includes(q)) ||
+        (p.description && p.description.toLowerCase().includes(q))
     );
     showSuggestions(matches.slice(0, 6)); // mostrar hasta 6 sugerencias
   });
@@ -114,11 +133,15 @@ if (navInput) {
 
 // clic fuera para ocultar las sugerencias
 document.addEventListener("click", (e) => {
-  if (navInput && suggestions && !navInput.contains(e.target) && !suggestions.contains(e.target)) {
+  if (
+    navInput &&
+    suggestions &&
+    !navInput.contains(e.target) &&
+    !suggestions.contains(e.target)
+  ) {
     suggestions.style.display = "none";
   }
 });
-
 
 /* ================================
    DETALLE DEL PRODUCTO
@@ -133,8 +156,12 @@ console.log("Elemento productContainer encontrado:", productContainer);
 
 // Spinner DOM (para mostrar/ocultar carga)
 const spinnerWrapper = document.getElementById("spinner-wrapper");
-function mostrarSpinner() { if (spinnerWrapper) spinnerWrapper.style.display = "block"; }
-function ocultarSpinner() { if (spinnerWrapper) spinnerWrapper.style.display = "none"; }
+function mostrarSpinner() {
+  if (spinnerWrapper) spinnerWrapper.style.display = "block";
+}
+function ocultarSpinner() {
+  if (spinnerWrapper) spinnerWrapper.style.display = "none";
+}
 
 // Recuperamos el ID guardado en localStorage (lo que se setea desde products.html o sugerencias)
 let productID = localStorage.getItem("productID");
@@ -207,7 +234,10 @@ function renderProduct(prod) {
   if (!productContainer) return;
 
   // Seguridad: asegurarnos que prod.images es un array (si no, usamos imagen fallback)
-  const images = Array.isArray(prod.images) && prod.images.length ? prod.images : ["img/no-image.png"];
+  const images =
+    Array.isArray(prod.images) && prod.images.length
+      ? prod.images
+      : ["img/no-image.png"];
 
   // 1) HTML principal del detalle (carrusel + info)
   productContainer.innerHTML = `
@@ -218,54 +248,90 @@ function renderProduct(prod) {
           <div class="product-image-container">
             <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-inner">
-                ${images.map((img, i) => `
+                ${images
+                  .map(
+                    (img, i) => `
                   <div class="carousel-item ${i === 0 ? "active" : ""}">
-                    <img src="${img}" class="d-block w-100" alt="${escapeHtml(prod.name || '')}">
+                    <img src="${img}" class="d-block w-100" alt="${escapeHtml(
+                      prod.name || ""
+                    )}">
                   </div>
-                `).join("")}
+                `
+                  )
+                  .join("")}
               </div>
 
-              ${images.length > 1 ? `
+              ${
+                images.length > 1
+                  ? `
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon"></span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
                   <span class="carousel-control-next-icon"></span>
                 </button>
-              ` : ''}
+              `
+                  : ""
+              }
             </div>
 
             <!-- Miniaturas -->
-            ${images.length > 1 ? `
+            ${
+              images.length > 1
+                ? `
               <div class="image-thumbnails d-flex gap-2 mt-3">
-                ${images.map((img, i) => `
-                  <div class="thumbnail-item ${i === 0 ? "active" : ""}" data-slide-to="${i}" style="cursor:pointer; width:72px; height:72px; overflow:hidden; border-radius:6px;">
-                    <img src="${img}" alt="${escapeHtml(prod.name || '')} - imagen ${i+1}" style="width:100%; height:100%; object-fit:cover;">
+                ${images
+                  .map(
+                    (img, i) => `
+                  <div class="thumbnail-item ${
+                    i === 0 ? "active" : ""
+                  }" data-slide-to="${i}" style="cursor:pointer; width:72px; height:72px; overflow:hidden; border-radius:6px;">
+                    <img src="${img}" alt="${escapeHtml(
+                      prod.name || ""
+                    )} - imagen ${
+                      i + 1
+                    }" style="width:100%; height:100%; object-fit:cover;">
                   </div>
-                `).join("")}
+                `
+                  )
+                  .join("")}
               </div>
-            ` : ''}
+            `
+                : ""
+            }
           </div>
         </div>
 
         <!-- Columna de info -->
         <div class="col-md-6">
           <div class="product-info">
-            <h1 class="product-title">${escapeHtml(prod.name || "(sin nombre)")}</h1>
+            <h1 class="product-title">${escapeHtml(
+              prod.name || "(sin nombre)"
+            )}</h1>
 
             <p class="product-category text-muted mb-1">
-              <i class="fas fa-tag me-2"></i>Categoría: ${escapeHtml(prod.category || "(sin categoría)")}
+              <i class="fas fa-tag me-2"></i>Categoría: ${escapeHtml(
+                prod.category || "(sin categoría)"
+              )}
             </p>
-            <p class="product-description">${escapeHtml(prod.description || "")}</p>
+            <p class="product-description">${escapeHtml(
+              prod.description || ""
+            )}</p>
 
             <div class="product-meta d-flex gap-3 align-items-center mt-3 mb-4">
               <div class="product-price fs-5 fw-bold">
                 <i class="fas fa-dollar-sign me-1"></i>
-                ${prod.currency ? escapeHtml(prod.currency) + " " : ""}${prod.cost !== undefined ? numberWithThousands(prod.cost) : "—"}
+                ${prod.currency ? escapeHtml(prod.currency) + " " : ""}${
+    prod.cost !== undefined ? numberWithThousands(prod.cost) : "—"
+  }
               </div>
               <div class="product-sold text-muted">
                 <i class="fas fa-chart-line me-1"></i>
-                ${prod.soldCount !== undefined ? numberWithThousands(prod.soldCount) + " vendidos" : "—"}
+                ${
+                  prod.soldCount !== undefined
+                    ? numberWithThousands(prod.soldCount) + " vendidos"
+                    : "—"
+                }
               </div>
             </div>
 
@@ -314,7 +380,11 @@ function renderRelatedProducts(relatedArray) {
   relatedContainer.innerHTML = "";
 
   // Si no hay productos relacionados, mostramos un mensaje
-  if (!relatedArray || !Array.isArray(relatedArray) || relatedArray.length === 0) {
+  if (
+    !relatedArray ||
+    !Array.isArray(relatedArray) ||
+    relatedArray.length === 0
+  ) {
     relatedContainer.innerHTML = `
       <div class="col-12">
         <p class="text-muted">No hay productos relacionados disponibles.</p>
@@ -324,7 +394,7 @@ function renderRelatedProducts(relatedArray) {
   }
 
   // Recorrer cada relacionado y crear la tarjeta
-  relatedArray.forEach(rel => {
+  relatedArray.forEach((rel) => {
     // Aseguramos datos por si faltan propiedades
     const relId = rel.id !== undefined ? rel.id : null;
     const relName = rel.name || "(sin nombre)";
@@ -338,10 +408,16 @@ function renderRelatedProducts(relatedArray) {
     col.innerHTML = `
       <div class="card h-100 related-card shadow-sm" style="cursor:pointer;">
         <div style="height:180px; overflow:hidden; border-top-left-radius:4px; border-top-right-radius:4px;">
-          <img src="${escapeHtml(relImage)}" class="card-img-top" alt="${escapeHtml(relName)}" style="width:100%; height:100%; object-fit:cover;">
+          <img src="${escapeHtml(
+            relImage
+          )}" class="card-img-top" alt="${escapeHtml(
+      relName
+    )}" style="width:100%; height:100%; object-fit:cover;">
         </div>
         <div class="card-body d-flex align-items-center justify-content-center">
-          <h5 class="card-title text-center mb-0" style="font-size:0.95rem;">${escapeHtml(relName)}</h5>
+          <h5 class="card-title text-center mb-0" style="font-size:0.95rem;">${escapeHtml(
+            relName
+          )}</h5>
         </div>
       </div>
     `;
@@ -349,7 +425,9 @@ function renderRelatedProducts(relatedArray) {
     // Manejo del error de carga de imagen (fallback)
     const imgTag = col.querySelector("img");
     if (imgTag) {
-      imgTag.onerror = () => { imgTag.src = "img/no-image.png"; };
+      imgTag.onerror = () => {
+        imgTag.src = "img/no-image.png";
+      };
     }
 
     // Al hacer click en la tarjeta:
@@ -381,37 +459,37 @@ function setProductID(id) {
 
 // Configuración de miniaturas y sincronización con el carrusel de Bootstrap
 function setupThumbnailsCarousel() {
-  const carousel = document.getElementById('carouselImages');
-  const thumbnails = document.querySelectorAll('.thumbnail-item');
+  const carousel = document.getElementById("carouselImages");
+  const thumbnails = document.querySelectorAll(".thumbnail-item");
 
   if (!carousel || !thumbnails || thumbnails.length === 0) return;
 
   // Crear instancia de Bootstrap Carousel (necesita que bootstrap.js esté cargado)
   const bootstrapCarousel = new bootstrap.Carousel(carousel, {
     interval: 5000,
-    wrap: true
+    wrap: true,
   });
 
   // Click en miniatura => ir al slide correspondiente
   thumbnails.forEach((thumbnail, index) => {
-    thumbnail.addEventListener('click', () => {
+    thumbnail.addEventListener("click", () => {
       bootstrapCarousel.to(index);
       updateActiveThumbnail(index);
     });
   });
 
   // Sincronizar miniaturas cuando el carrusel cambia (evento de Bootstrap)
-  carousel.addEventListener('slide.bs.carousel', (event) => {
+  carousel.addEventListener("slide.bs.carousel", (event) => {
     updateActiveThumbnail(event.to);
   });
 }
 
 function updateActiveThumbnail(activeIndex) {
-  const thumbnails = document.querySelectorAll('.thumbnail-item');
-  
+  const thumbnails = document.querySelectorAll(".thumbnail-item");
+
   thumbnails.forEach((thumbnail, index) => {
-    if (index === activeIndex) thumbnail.classList.add('active');
-    else thumbnail.classList.remove('active');
+    if (index === activeIndex) thumbnail.classList.add("active");
+    else thumbnail.classList.remove("active");
   });
 }
 
@@ -426,7 +504,7 @@ function escapeHtml(str) {
     .replace(/'/g, "&#039;");
 }
 
-// Formatear número con separador de miles (usa toLocaleString para soporte internacional) 
+// Formatear número con separador de miles (usa toLocaleString para soporte internacional)
 function numberWithThousands(n) {
   if (n === undefined || n === null) return "";
   if (typeof n === "number") return n.toLocaleString();
@@ -444,12 +522,12 @@ function loadComments(productId) {
   const commentsUrl = `https://japceibal.github.io/emercado-api/products_comments/${productId}.json`;
 
   fetch(commentsUrl)
-    .then(res => res.json())
-    .then(comments => {
+    .then((res) => res.json())
+    .then((comments) => {
       displayComments(comments);
     })
-    .catch(err => {
-      console.error('Error cargando comentarios:', err);
+    .catch((err) => {
+      console.error("Error cargando comentarios:", err);
       // En caso de error, mostrar el formulario sin comentarios existentes
       displayComments([]);
     });
@@ -457,7 +535,7 @@ function loadComments(productId) {
 
 // Función para mostrar comentarios
 function displayComments(comments) {
-  const commentsContainer = document.getElementById('comments-container');
+  const commentsContainer = document.getElementById("comments-container");
 
   if (!comments || comments.length === 0) {
     commentsContainer.innerHTML = `
@@ -469,26 +547,27 @@ function displayComments(comments) {
     return;
   }
 
-  const commentsHTML = comments.map(comment => {
-    const stars = generateStars(comment.score);
-    // Handle both date formats from API (YYYY-MM-DD HH:MM:SS and ISO)
-    let commentDate;
-    if (comment.dateTime.includes(' ')) {
-      // Format: "YYYY-MM-DD HH:MM:SS"
-      commentDate = new Date(comment.dateTime.replace(' ', 'T'));
-    } else {
-      commentDate = new Date(comment.dateTime);
-    }
+  const commentsHTML = comments
+    .map((comment) => {
+      const stars = generateStars(comment.score);
+      // Handle both date formats from API (YYYY-MM-DD HH:MM:SS and ISO)
+      let commentDate;
+      if (comment.dateTime.includes(" ")) {
+        // Format: "YYYY-MM-DD HH:MM:SS"
+        commentDate = new Date(comment.dateTime.replace(" ", "T"));
+      } else {
+        commentDate = new Date(comment.dateTime);
+      }
 
-    const date = commentDate.toLocaleDateString('es-ES', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+      const date = commentDate.toLocaleDateString("es-ES", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
 
-    return `
+      return `
       <div class="comment-card">
         <div class="comment-header">
           <div class="comment-user">
@@ -506,7 +585,8 @@ function displayComments(comments) {
         </div>
       </div>
     `;
-  }).join('');
+    })
+    .join("");
 
   commentsContainer.innerHTML = `
     <div class="comments-list">
@@ -522,9 +602,13 @@ function displayComments(comments) {
         <div class="form-group">
           <label>Tu calificación:</label>
           <div class="star-rating" id="star-rating">
-            ${[1, 2, 3, 4, 5].map(i => `
+            ${[1, 2, 3, 4, 5]
+              .map(
+                (i) => `
               <i class="far fa-star" data-rating="${i}"></i>
-            `).join('')}
+            `
+              )
+              .join("")}
           </div>
           <span id="rating-text" class="rating-display">Selecciona una calificación</span>
         </div>
@@ -542,7 +626,7 @@ function displayComments(comments) {
 
 // Función para generar estrellas HTML
 function generateStars(rating) {
-  let stars = '';
+  let stars = "";
   for (let i = 1; i <= 5; i++) {
     if (i <= rating) {
       stars += '<i class="fas fa-star text-warning"></i>';
@@ -555,28 +639,28 @@ function generateStars(rating) {
 
 // Función para configurar el formulario de calificación
 function setupRatingForm() {
-  const stars = document.querySelectorAll('#star-rating i');
-  const ratingText = document.getElementById('rating-text');
-  const ratingForm = document.getElementById('rating-form');
+  const stars = document.querySelectorAll("#star-rating i");
+  const ratingText = document.getElementById("rating-text");
+  const ratingForm = document.getElementById("rating-form");
   let selectedRating = 0;
 
   // Configurar interacción con estrellas
   stars.forEach((star, index) => {
     const rating = index + 1;
 
-    star.addEventListener('mouseenter', () => {
+    star.addEventListener("mouseenter", () => {
       highlightStars(rating);
     });
 
-    star.addEventListener('mouseleave', () => {
+    star.addEventListener("mouseleave", () => {
       highlightStars(selectedRating);
     });
 
-    star.addEventListener('click', () => {
+    star.addEventListener("click", () => {
       selectedRating = rating;
       highlightStars(selectedRating);
       ratingText.textContent = `${selectedRating}/5 estrellas`;
-      ratingText.classList.add('selected');
+      ratingText.classList.add("selected");
     });
   });
 
@@ -584,28 +668,28 @@ function setupRatingForm() {
   function highlightStars(rating) {
     stars.forEach((star, index) => {
       if (index < rating) {
-        star.classList.remove('far');
-        star.classList.add('fas', 'text-warning');
+        star.classList.remove("far");
+        star.classList.add("fas", "text-warning");
       } else {
-        star.classList.remove('fas', 'text-warning');
-        star.classList.add('far');
+        star.classList.remove("fas", "text-warning");
+        star.classList.add("far");
       }
     });
   }
 
   // Manejar envío del formulario (simulación)
-  ratingForm.addEventListener('submit', (e) => {
+  ratingForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const comment = document.getElementById('user-comment').value.trim();
+    const comment = document.getElementById("user-comment").value.trim();
 
     if (!comment) {
-      alert('Por favor, escribe un comentario.');
+      alert("Por favor, escribe un comentario.");
       return;
     }
 
     if (selectedRating === 0) {
-      alert('Por favor, selecciona una calificación.');
+      alert("Por favor, selecciona una calificación.");
       return;
     }
 
@@ -615,17 +699,17 @@ function setupRatingForm() {
 
 // Función para agregar nuevo comentario (simulación visual)
 function addNewComment(comment, rating) {
-  const usuario = sessionStorage.getItem('usuario') || 'Usuario Anónimo';
+  const usuario = sessionStorage.getItem("usuario") || "Usuario Anónimo";
   const now = new Date();
 
   // Crear elemento HTML para el nuevo comentario
   const stars = generateStars(rating);
-  const date = now.toLocaleDateString('es-ES', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
+  const date = now.toLocaleDateString("es-ES", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
   });
 
   const newCommentHTML = `
@@ -648,22 +732,22 @@ function addNewComment(comment, rating) {
   `;
 
   // Agregar al principio de la lista de comentarios
-  const commentsList = document.querySelector('.comments-list');
-  commentsList.insertAdjacentHTML('afterbegin', newCommentHTML);
+  const commentsList = document.querySelector(".comments-list");
+  commentsList.insertAdjacentHTML("afterbegin", newCommentHTML);
 
   // Resetear formulario
-  document.getElementById('rating-form').reset();
-  document.getElementById('rating-text').textContent = 'Selecciona una calificación';
-  document.getElementById('rating-text').classList.remove('selected');
+  document.getElementById("rating-form").reset();
+  document.getElementById("rating-text").textContent =
+    "Selecciona una calificación";
+  document.getElementById("rating-text").classList.remove("selected");
 
   // Resetear estrellas
-  const stars_elements = document.querySelectorAll('#star-rating i');
-  stars_elements.forEach(star => {
-    star.classList.remove('fas', 'text-warning');
-    star.classList.add('far');
+  const stars_elements = document.querySelectorAll("#star-rating i");
+  stars_elements.forEach((star) => {
+    star.classList.remove("fas", "text-warning");
+    star.classList.add("far");
   });
 
   // Mostrar mensaje de éxito
-  alert('¡Tu calificación ha sido agregada exitosamente!');
+  alert("¡Tu calificación ha sido agregada exitosamente!");
 }
-
