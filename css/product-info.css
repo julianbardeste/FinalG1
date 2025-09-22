@@ -439,3 +439,40 @@
         justify-content: space-between;
     }
 }
+
+/* Ajustar tamaño de las columnas en product-detail-card */
+.product-detail-card {
+    grid-template-columns: 5fr 2fr; /* Imagen un poco más ancha que la info */
+    align-items: stretch; /* Ambas columnas ocupan toda la altura */
+}
+
+/* Que el contenedor de la imagen aproveche mejor el espacio */
+.product-image-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Imagen principal más grande */
+.product-main-image {
+    height: 500px; /* Subimos de 400px a 500px */
+}
+
+/* Información del producto más destacada */
+.product-info {
+    padding: 3rem;
+    background: rgba(250, 250, 250, 0.9);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-md);
+}
+
+/* Ajuste para pantallas medianas: balance entre imagen e info */
+@media (max-width: 992px) {
+    .product-detail-card {
+        grid-template-columns: 1fr; /* Una sola columna */
+    }
+    .product-main-image {
+        height: 350px; /* Imagen más chica en tablets */
+    }
+}
