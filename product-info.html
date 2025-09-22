@@ -8,6 +8,7 @@
     />
     <title>eMercado - Todo lo que busques está aquí</title>
 
+    <!-- Fuentes y estilos necesarios -->
     <link
       href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
       rel="stylesheet"
@@ -17,11 +18,21 @@
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/products.css" rel="stylesheet" />
     <link href="css/product-info.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap y FontAwesome actualizados -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
+    <!-- =====================
+         Barra de navegación
+    ====================== -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
       <div class="container">
         <button
@@ -46,10 +57,22 @@
             <li class="nav-item">
               <a class="nav-link" href="sell.html">Vender</a>
             </li>
+            <!-- Barra de búsqueda -->
             <li class="nav-item flex-grow-1 mx-3">
               <div class="position-relative w-100">
-                <input id="navSearchInput" class="form-control" type="search" placeholder="Buscar productos..." autocomplete="off" />
-                <ul id="searchSuggestions" class="list-group position-absolute w-100" style="z-index:2000; display:none; max-height:300px; overflow:auto;"></ul>
+                <input
+                  id="navSearchInput"
+                  class="form-control"
+                  type="search"
+                  placeholder="Buscar productos..."
+                  autocomplete="off"
+                />
+                <!-- Lista de sugerencias de búsqueda -->
+                <ul
+                  id="searchSuggestions"
+                  class="list-group position-absolute w-100"
+                  style="z-index:2000; display:none; max-height:300px; overflow:auto;"
+                ></ul>
               </div>
             </li>
             <li class="nav-item"></li>
@@ -57,18 +80,39 @@
         </div>
       </div>
     </nav>
+
     <div class="container-fluid px-4">
-      <!-- Título principal -->
+      <!-- =====================
+           Título principal
+      ====================== -->
       <h1 class="section-title">Detalles del Producto</h1>
       
-      <!-- Contenedor del producto -->
+      <!-- =====================
+           Contenedor del producto
+           Aquí JS inyectará los datos
+      ====================== -->
       <div class="product-detail-container">
         <div id="product-container">
-          <!-- JS inyectará aquí la información -->
+          <!-- JS inyectará aquí la información del producto -->
         </div>
       </div>
+
+      <!-- =====================
+           Sección de productos relacionados
+           Aquí se mostrarán las tarjetas con
+           nombre + imagen de los productos relacionados.
+           Importante: el contenido se genera dinámicamente con JS.
+      ====================== -->
+      <h2 class="section-title mt-5">Productos relacionados</h2>
+      <div id="related-products" class="row g-4">
+        <!-- JS inyectará aquí las tarjetas de productos relacionados -->
+      </div>
     </div>
-    <footer class="text-muted">
+
+    <!-- =====================
+         Footer del sitio
+    ====================== -->
+    <footer class="text-muted mt-5">
       <div class="container">
         <p class="float-end">
           <a href="#">Volver arriba</a>
@@ -81,6 +125,11 @@
         </p>
       </div>
     </footer>
+
+    <!-- =====================
+         Spinner de carga
+         (se muestra mientras el contenido carga)
+    ====================== -->
     <div id="spinner-wrapper">
       <div class="lds-ring">
         <div></div>
@@ -89,6 +138,10 @@
         <div></div>
       </div>
     </div>
+
+    <!-- =====================
+         Scripts necesarios
+    ====================== -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
