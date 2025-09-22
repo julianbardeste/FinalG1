@@ -1,0 +1,82 @@
+/* ============================
+   CATEGORIES.CSS
+   ============================
+   Objetivo: darle a la página de categorías
+   un estilo similar al de product-info.html.
+   Esto incluye tipografía, tarjetas y 
+   presentación visual más moderna.
+================================ */
+
+/* 1. Reset básico para que los márgenes/paddings
+   no interfieran con el diseño */
+body, h1, h2, h3, p, ul, li {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2. Fuente y color de fondo general */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f8;  /* gris claro suave */
+  color: #333; /* texto gris oscuro */
+  line-height: 1.6;
+}
+
+/* 3. Título principal de la página */
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin: 20px 0;
+  color: #2c3e50; /* azul grisáceo sobrio */
+}
+
+/* 4. Contenedor de las categorías 
+   → Grid flexible que se adapta a distintos tamaños de pantalla */
+#categories-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto; /* centra el contenido */
+}
+
+/* 5. Tarjeta de categoría */
+.category-card {
+  background: #fff; /* fondo blanco */
+  border-radius: 10px; /* esquinas redondeadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* sombra suave */
+  overflow: hidden; /* que la imagen no sobresalga */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+/* Efecto hover para dar sensación interactiva */
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* 6. Imagen de la categoría */
+.category-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover; /* la imagen se recorta sin deformarse */
+}
+
+/* 7. Contenido textual dentro de la tarjeta */
+.category-info {
+  padding: 15px;
+}
+
+.category-info h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #34495e;
+}
+
+.category-info p {
+  font-size: 0.95rem;
+  color: #666;
+}
