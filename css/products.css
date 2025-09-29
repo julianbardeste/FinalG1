@@ -1,466 +1,739 @@
-        :root {
-            --primary-color: #ff6b35;
-            --secondary-color: #f7931e;
-            --accent-color: #ffb347;
-            --text-dark: #2d3748;
-            --text-light: #718096;
-            --border-color: #e2e8f0;
-            --bg-light: #f7fafc;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.06);
-            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
-            --radius: 16px;
-            --radius-sm: 8px;
-        }
+/* ============================================================================
+   PRODUCTS.CSS - SISTEMA DE DISEÑO PARA LA PÁGINA DE PRODUCTOS
+   ============================================================================
 
-        * {
-            box-sizing: border-box;
-        }
+   DEFINICIÓN DE VARIABLES CSS PERSONALIZADAS (CSS Custom Properties)
+   Estas variables permiten mantener consistencia visual en todo el archivo
+   y facilitan el mantenimiento y personalización del diseño.
+============================================================================ */
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            color: var(--text-dark);
-        }
+/* === VARIABLES DEL SISTEMA DE DISEÑO === */
+:root {
+  /* PALETA DE COLORES PRINCIPAL */
+  --primary-color: #ff6b35;    /* Naranja principal - color de marca */
+  --secondary-color: #f7931e;  /* Naranja secundario - para acentos */
+  --accent-color: #ffb347;     /* Naranja claro - para destacados */
 
-        /* Estilos para la navbar */
-        .navbar {
-            z-index: 1000;
-            position: relative;
-        }
+  /* COLORES DE TEXTO */
+  --text-dark: #2d3748;        /* Gris oscuro - texto principal */
+  --text-light: #718096;       /* Gris claro - texto secundario */
 
-        .navbar-nav .nav-link {
-            color: rgba(255, 255, 255, 0.85) !important;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
+  /* COLORES DE INTERFAZ */
+  --border-color: #e2e8f0;     /* Gris muy claro - bordes y divisores */
+  --bg-light: #f7fafc;         /* Gris casi blanco - fondos secundarios */
 
-        .navbar-nav .nav-link:hover {
-            color: var(--primary-color) !important;
-        }
+  /* SISTEMA DE SOMBRAS - Para profundidad visual */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
 
-        .navbar-brand {
-            font-weight: 700;
-            color: white !important;
-        }
+  /* SISTEMA DE BORDER-RADIUS */
+  --radius: 16px;       /* Border radius grande - para elementos principales */
+  --radius-sm: 8px;     /* Border radius pequeño - para elementos secundarios */
+}
 
-        /* Header con filtros */
-        .filters-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: var(--radius);
-            padding: 2rem;
-            margin: 2rem 0;
-            box-shadow: var(--shadow-md);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
+/* === CONFIGURACIÓN GLOBAL === */
+/* Reset global para todos los elementos */
+* {
+  box-sizing: border-box; /* Incluye padding y border en el ancho total */
+}
 
-        .section-title {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
+/* === ESTILOS DEL CUERPO PRINCIPAL === */
+/* Configuración base del body con gradiente de fondo */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Stack de fuentes modernas */
+  /* Gradiente diagonal de fondo - de gris claro a azul grisáceo */
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh; /* Mínimo altura completa del viewport */
+  color: var(--text-dark); /* Color de texto principal usando variable CSS */
+}
 
-        /* Controles de filtro modernos */
-        .filter-group {
-            background: var(--bg-light);
-            border-radius: var(--radius-sm);
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            border: 1px solid var(--border-color);
-        }
+/* === NAVEGACIÓN PRINCIPAL === */
+/* Barra de navegación con z-index alto para mantenerla siempre visible */
+.navbar {
+  z-index: 1000; /* Índice Z alto - se mantiene sobre otros elementos */
+  position: relative; /* Posicionamiento relativo para el contexto de apilamiento */
+}
 
-        .filter-group h6 {
-            color: var(--text-dark);
-            font-weight: 600;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+/* Enlaces de navegación con efectos de transición */
+.navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.85) !important; /* Blanco semi-transparente */
+  font-weight: 500; /* Peso de fuente medio-bold */
+  transition: color 0.3s ease; /* Transición suave para cambios de color */
+}
 
-        /* Radio buttons modernos */
-        .form-check {
-            margin-bottom: 0.75rem;
-        }
+/* Estado hover de los enlaces de navegación */
+.navbar-nav .nav-link:hover {
+  color: var(--primary-color) !important; /* Cambia al color principal de marca */
+}
 
-        .form-check-input {
-            margin-right: 0.75rem;
-            border: 2px solid var(--border-color);
-            width: 1.2rem;
-            height: 1.2rem;
-        }
+/* Marca/logo de la navegación */
+.navbar-brand {
+  font-weight: 700; /* Peso de fuente bold para destacar */
+  color: white !important; /* Blanco puro forzado */
+}
 
-        .form-check-input:checked {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
+/* === SECCIÓN DE FILTROS === */
+/* Contenedor de filtros con efecto glassmorphism */
+.filters-section {
+  background: rgba(255, 255, 255, 0.95); /* Fondo blanco casi opaco */
+  backdrop-filter: blur(20px); /* Efecto de desenfoque del fondo - glassmorphism */
+  border-radius: var(--radius); /* Bordes redondeados usando variable */
+  padding: 2rem; /* Espaciado interno generoso */
+  margin: 2rem 0; /* Margen vertical */
+  box-shadow: var(--shadow-md); /* Sombra media para profundidad */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil blanco transparente */
+}
 
-        .form-check-label {
-            color: var(--text-dark);
-            font-weight: 500;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
+/* === TÍTULO DE SECCIÓN === */
+/* Título con gradiente de texto para efecto visual llamativo */
+.section-title {
+  /* Gradiente diagonal usando los colores principales */
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  /* Propiedades para aplicar el gradiente solo al texto */
+  -webkit-background-clip: text; /* Webkit prefix para compatibilidad */
+  -webkit-text-fill-color: transparent; /* Hace el texto transparente */
+  background-clip: text; /* Versión estándar */
 
-        .form-check-label:hover {
-            color: var(--primary-color);
-        }
+  font-size: 2rem; /* Tamaño grande para impacto visual */
+  font-weight: 700; /* Peso de fuente bold */
+  margin-bottom: 1.5rem; /* Espaciado inferior */
+  text-align: center; /* Centrado horizontal */
+}
 
-        /* Inputs de rango */
-        .range-inputs {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+/* === GRUPOS DE FILTROS === */
+/* Contenedores individuales para cada grupo de filtros */
+.filter-group {
+  background: var(--bg-light); /* Fondo gris muy claro usando variable */
+  border-radius: var(--radius-sm); /* Bordes redondeados pequeños */
+  padding: 1.5rem; /* Espaciado interno amplio */
+  margin-bottom: 1rem; /* Separación entre grupos */
+  border: 1px solid var(--border-color); /* Borde sutil */
+}
 
-        .form-control {
-            border: 2px solid var(--border-color);
-            border-radius: var(--radius-sm);
-            padding: 0.75rem;
-            transition: all 0.3s ease;
-            background: white;
-        }
+/* Títulos de los grupos de filtros */
+.filter-group h6 {
+  color: var(--text-dark); /* Color de texto oscuro */
+  font-weight: 600; /* Semi-bold para destacar */
+  margin-bottom: 1rem; /* Espacio debajo del título */
+  font-size: 0.9rem; /* Tamaño de fuente pequeño */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  letter-spacing: 0.5px; /* Espaciado entre letras para mejor legibilidad */
+}
 
-        .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-            outline: none;
-        }
+/* === CONTROLES DE FORMULARIO (RADIO BUTTONS Y CHECKBOXES) === */
+/* Contenedor de cada opción de filtro */
+.form-check {
+  margin-bottom: 0.75rem; /* Espaciado entre opciones */
+}
 
-        /* Botones modernos */
-        .btn-modern {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border: none;
-            border-radius: var(--radius-sm);
-            padding: 0.75rem 1.5rem;
-            color: white;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+/* Estilo personalizado para inputs de radio y checkbox */
+.form-check-input {
+  margin-right: 0.75rem; /* Espacio entre el input y la etiqueta */
+  border: 2px solid var(--border-color); /* Borde gris claro */
+  width: 1.2rem; /* Ancho personalizado */
+  height: 1.2rem; /* Alto personalizado */
+}
 
-        .btn-modern:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-            color: white;
-        }
+/* Estado seleccionado de radio buttons y checkboxes */
+.form-check-input:checked {
+  background-color: var(--primary-color); /* Fondo con color principal */
+  border-color: var(--primary-color); /* Borde con color principal */
+}
 
-        .btn-modern::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
+/* Etiquetas de las opciones de filtro */
+.form-check-label {
+  color: var(--text-dark); /* Color de texto oscuro */
+  font-weight: 500; /* Peso de fuente medio */
+  cursor: pointer; /* Cursor de mano para indicar interactividad */
+  transition: color 0.3s ease; /* Transición suave para cambios de color */
+}
 
-        .btn-modern:hover::before {
-            left: 100%;
-        }
+/* Estado hover de las etiquetas */
+.form-check-label:hover {
+  color: var(--primary-color); /* Cambia al color principal en hover */
+}
 
-        .btn-outline-modern {
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            background: transparent;
-            border-radius: var(--radius-sm);
-            padding: 0.75rem 1.5rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
+/* === INPUTS DE RANGO (PRECIO MÍNIMO Y MÁXIMO) === */
+/* Contenedor flex para inputs de rango de precios */
+.range-inputs {
+  display: flex; /* Layout flexible */
+  gap: 1rem; /* Espacio entre inputs */
+  align-items: center; /* Alineación vertical centrada */
+  flex-wrap: wrap; /* Permite wrap en pantallas pequeñas */
+}
 
-        .btn-outline-modern:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-1px);
-        }
+/* Estilo base para todos los controles de formulario */
+.form-control {
+  border: 2px solid var(--border-color); /* Borde gris claro */
+  border-radius: var(--radius-sm); /* Bordes redondeados pequeños */
+  padding: 0.75rem; /* Espaciado interno */
+  transition: all 0.3s ease; /* Transición suave para todos los cambios */
+  background: white; /* Fondo blanco */
+}
 
-        /* Grid de productos */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-            padding: 2rem 0;
-        }
+/* Estado focus de los controles de formulario */
+.form-control:focus {
+  border-color: var(--primary-color); /* Borde cambia al color principal */
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); /* Sombra de enfoque azul sutil */
+  outline: none; /* Remueve el outline por defecto del navegador */
+}
 
-        /* Tarjetas de producto */
-        .product-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: var(--radius);
-            overflow: hidden;
-            transition: all 0.4s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
+/* === BOTONES MODERNOS === */
+/* Botón principal con gradiente y efectos avanzados */
+.btn-modern {
+  /* Gradiente diagonal usando colores principales */
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  border: none; /* Sin borde */
+  border-radius: var(--radius-sm); /* Bordes redondeados pequeños */
+  padding: 0.75rem 1.5rem; /* Espaciado interno horizontal y vertical */
+  color: white; /* Texto blanco */
+  font-weight: 600; /* Semi-bold */
+  transition: all 0.3s ease; /* Transición suave para todos los efectos */
+  position: relative; /* Para posicionamiento de pseudo-elementos */
+  overflow: hidden; /* Oculta el efecto de brillo que sobresale */
+}
 
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
+/* Estado hover del botón moderno */
+.btn-modern:hover {
+  transform: translateY(-2px); /* Efecto de elevación */
+  box-shadow: var(--shadow-lg); /* Sombra grande para profundidad */
+  color: white; /* Mantiene el color blanco */
+}
 
-        .product-image {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
+/* === EFECTO DE BRILLO EN BOTONES === */
+/* Pseudo-elemento para crear efecto de brillo que se desliza */
+.btn-modern::before {
+  content: ""; /* Contenido vacío requerido para pseudo-elementos */
+  position: absolute; /* Posicionamiento absoluto dentro del botón */
+  top: 0; /* Desde la parte superior */
+  left: -100%; /* Inicia fuera del botón por la izquierda */
+  width: 100%; /* Ancho completo del botón */
+  height: 100%; /* Alto completo del botón */
+  /* Gradiente horizontal que simula un brillo */
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2), /* Blanco semi-transparente en el centro */
+    transparent
+  );
+  transition: left 0.5s; /* Transición para el movimiento */
+}
 
-        .product-card:hover .product-image {
-            transform: scale(1.05);
-        }
+/* Activa el efecto de brillo en hover */
+.btn-modern:hover::before {
+  left: 100%; /* Mueve el brillo hacia la derecha atravesando el botón */
+}
 
-        .product-content {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
+/* === BOTÓN OUTLINE MODERNO === */
+/* Botón con borde pero fondo transparente */
+.btn-outline-modern {
+  border: 2px solid var(--primary-color); /* Borde con color principal */
+  color: var(--primary-color); /* Texto con color principal */
+  background: transparent; /* Fondo transparente */
+  border-radius: var(--radius-sm); /* Bordes redondeados pequeños */
+  padding: 0.75rem 1.5rem; /* Espaciado interno */
+  font-weight: 600; /* Semi-bold */
+  transition: all 0.3s ease; /* Transición suave */
+}
 
-        .product-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 0.75rem;
-            line-height: 1.3;
-        }
+/* Estado hover del botón outline */
+.btn-outline-modern:hover {
+  background: var(--primary-color); /* Fondo se rellena con color principal */
+  color: white; /* Texto cambia a blanco */
+  transform: translateY(-1px); /* Ligera elevación */
+}
 
-        .product-description {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            flex-grow: 1;
-            line-height: 1.5;
-        }
+/* === GRID DE PRODUCTOS === */
+/* Layout de grid responsivo para mostrar los productos */
+.products-grid {
+  display: grid; /* Activa CSS Grid */
+  /* Grid responsivo: columnas que se ajustan automáticamente */
+  /* Cada columna tiene mínimo 320px y se expande según el espacio */
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem; /* Espacio de 2rem entre elementos del grid */
+  padding: 2rem 0; /* Espaciado vertical del contenedor */
+}
 
-        .product-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
+/* === TARJETAS DE PRODUCTO === */
+/* Estilo base de cada tarjeta individual de producto */
+.product-card {
+  background: rgba(255, 255, 255, 0.95); /* Fondo blanco casi opaco */
+  backdrop-filter: blur(20px); /* Efecto glassmorphism - desenfoque del fondo */
+  border-radius: var(--radius); /* Bordes redondeados grandes usando variable */
+  overflow: hidden; /* Oculta contenido que sobresalga de los bordes */
+  transition: all 0.4s ease; /* Transición suave y lenta para todos los efectos */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil blanco transparente */
+  position: relative; /* Para posicionamiento de elementos internos */
+  height: 100%; /* Altura completa disponible en el grid */
+  display: flex; /* Layout flexible */
+  flex-direction: column; /* Organización vertical de contenido */
+}
 
-        .product-price {
-            font-size: 1.25rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+/* Estado hover de las tarjetas de producto */
+.product-card:hover {
+  transform: translateY(-8px); /* Elevación de 8px para efecto flotante */
+  box-shadow: var(--shadow-lg); /* Sombra grande para crear profundidad */
+}
 
-        .product-sold {
-            background: var(--bg-light);
-            color: var(--text-light);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
+/* === IMÁGENES DE PRODUCTO === */
+/* Imagen principal de cada producto */
+.product-image {
+  width: 100%; /* Ancho completo de la tarjeta */
+  height: 220px; /* Altura fija para uniformidad */
+  object-fit: cover; /* Recorta y ajusta sin deformar la imagen */
+  transition: transform 0.4s ease; /* Transición suave para efectos de zoom */
+}
 
-        .product-btn {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border: none;
-            border-radius: var(--radius-sm);
-            padding: 0.75rem 1.5rem;
-            color: white;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-        }
+/* Efecto zoom en la imagen al hacer hover en la tarjeta */
+.product-card:hover .product-image {
+  transform: scale(1.05); /* Zoom del 5% - efecto sutil */
+}
 
-        .product-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-            color: white;
-        }
+/* === CONTENIDO DE LA TARJETA === */
+/* Contenedor del contenido textual de cada producto */
+.product-content {
+  padding: 1.5rem; /* Espaciado interno generoso */
+  flex-grow: 1; /* Ocupa el espacio restante en la tarjeta */
+  display: flex; /* Layout flexible */
+  flex-direction: column; /* Organización vertical */
+}
 
-        .product-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
+/* Título del producto */
+.product-title {
+  font-size: 1.25rem; /* Tamaño de fuente destacado */
+  font-weight: 700; /* Bold para llamar la atención */
+  color: var(--text-dark); /* Color de texto oscuro */
+  margin-bottom: 0.75rem; /* Espacio debajo del título */
+  line-height: 1.3; /* Altura de línea optimizada */
+}
 
-        .product-btn:hover::before {
-            left: 100%;
-        }
+/* Descripción del producto */
+.product-description {
+  color: var(--text-light); /* Color de texto claro/secundario */
+  font-size: 0.9rem; /* Tamaño de fuente menor que el título */
+  margin-bottom: 1rem; /* Espaciado inferior */
+  flex-grow: 1; /* Se expande para ocupar espacio disponible */
+  line-height: 1.5; /* Altura de línea para buena legibilidad */
+}
 
-        /* Estados de carga y vacío */
-        .empty-state {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: var(--radius);
-            margin: 2rem 0;
-        }
+/* === METADATOS DEL PRODUCTO === */
+/* Contenedor para precio y cantidad vendida */
+.product-meta {
+  display: flex; /* Layout flexible */
+  justify-content: space-between; /* Distribuye elementos en extremos */
+  align-items: center; /* Alineación vertical centrada */
+  margin-bottom: 1.5rem; /* Espaciado inferior */
+  flex-wrap: wrap; /* Permite wrap en pantallas pequeñas */
+  gap: 0.5rem; /* Espacio entre elementos cuando hacen wrap */
+}
 
-        .empty-state i {
-            font-size: 4rem;
-            color: var(--text-light);
-            margin-bottom: 1rem;
-        }
+/* Precio del producto con gradiente */
+.product-price {
+  font-size: 1.25rem; /* Tamaño destacado */
+  font-weight: 700; /* Bold para enfatizar */
+  /* Gradiente diagonal usando colores principales */
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  /* Aplicación del gradiente solo al texto */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
-        .empty-state h3 {
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-        }
+/* Badge con cantidad de productos vendidos */
+.product-sold {
+  background: var(--bg-light); /* Fondo gris claro */
+  color: var(--text-light); /* Texto gris claro */
+  padding: 0.25rem 0.75rem; /* Espaciado interno del badge */
+  border-radius: 20px; /* Bordes muy redondeados - forma de píldora */
+  font-size: 0.8rem; /* Tamaño de fuente pequeño */
+  font-weight: 500; /* Peso medio */
+}
 
-        .empty-state p {
-            color: var(--text-light);
-        }
+/* === BOTONES DE PRODUCTO === */
+/* Botón de acción principal en cada tarjeta de producto */
+.product-btn {
+  /* Gradiente diagonal usando colores principales */
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  border: none; /* Sin borde */
+  border-radius: var(--radius-sm); /* Bordes redondeados pequeños */
+  padding: 0.75rem 1.5rem; /* Espaciado interno */
+  color: white; /* Texto blanco */
+  font-weight: 600; /* Semi-bold */
+  transition: all 0.3s ease; /* Transición suave para efectos */
+  width: 100%; /* Ancho completo de la tarjeta */
+  position: relative; /* Para pseudo-elementos */
+  overflow: hidden; /* Oculta efectos que sobresalgan */
+}
 
-        /* Barra de búsqueda integrada */
-        .search-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-md);
-        }
+/* Estado hover del botón de producto */
+.product-btn:hover {
+  transform: translateY(-2px); /* Elevación sutil */
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3); /* Sombra azul para profundidad */
+  color: white; /* Mantiene texto blanco */
+}
 
-        .search-input {
-            position: relative;
-        }
+/* Efecto de brillo deslizante en botones de producto */
+.product-btn::before {
+  content: ""; /* Contenido vacío para pseudo-elemento */
+  position: absolute; /* Posicionamiento absoluto */
+  top: 0; /* Desde arriba */
+  left: -100%; /* Inicia fuera del botón */
+  width: 100%; /* Ancho completo */
+  height: 100%; /* Alto completo */
+  /* Gradiente horizontal que simula brillo */
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2), /* Brillo blanco semi-transparente */
+    transparent
+  );
+  transition: left 0.5s; /* Transición del movimiento */
+}
 
-        .search-input input {
-            padding-left: 3rem;
-        }
+/* Activa el brillo en hover */
+.product-btn:hover::before {
+  left: 100%; /* Mueve el brillo hacia la derecha */
+}
 
-        .search-input .fa-search {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-light);
-            z-index: 2;
-        }
+/* === ESTADOS ESPECIALES === */
+/* Estado cuando no hay productos para mostrar */
+.empty-state {
+  text-align: center; /* Contenido centrado */
+  padding: 4rem 2rem; /* Espaciado interno amplio */
+  background: rgba(255, 255, 255, 0.95); /* Fondo blanco casi opaco */
+  backdrop-filter: blur(20px); /* Efecto glassmorphism */
+  border-radius: var(--radius); /* Bordes redondeados grandes */
+  margin: 2rem 0; /* Margen vertical */
+}
 
-        #searchSuggestions {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            border-radius: var(--radius-sm);
-            box-shadow: var(--shadow-lg);
-            z-index: 1000;
-            max-height: 300px;
-            overflow-y: auto;
-            border: 1px solid var(--border-color);
-        }
+/* Icono del estado vacío */
+.empty-state i {
+  font-size: 4rem; /* Icono muy grande para impacto visual */
+  color: var(--text-light); /* Color gris claro */
+  margin-bottom: 1rem; /* Espaciado inferior */
+}
 
-        .suggestion-item {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border-color);
-            cursor: pointer;
-            transition: background 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+/* Título del estado vacío */
+.empty-state h3 {
+  color: var(--text-dark); /* Texto oscuro */
+  margin-bottom: 1rem; /* Espaciado inferior */
+}
 
-        .suggestion-item:hover {
-            background: var(--bg-light);
-        }
+/* Descripción del estado vacío */
+.empty-state p {
+  color: var(--text-light); /* Texto gris claro */
+}
 
-        .suggestion-item img {
-            width: 44px;
-            height: 44px;
-            object-fit: cover;
-            border-radius: var(--radius-sm);
-        }
+/* === SECCIÓN DE BÚSQUEDA === */
+/* Contenedor de la barra de búsqueda integrada */
+.search-section {
+  background: rgba(255, 255, 255, 0.95); /* Fondo blanco casi opaco */
+  backdrop-filter: blur(20px); /* Efecto glassmorphism */
+  border-radius: var(--radius); /* Bordes redondeados grandes */
+  padding: 1.5rem; /* Espaciado interno */
+  margin-bottom: 2rem; /* Margen inferior */
+  box-shadow: var(--shadow-md); /* Sombra media */
+}
 
-        .suggest-text {
-            flex-grow: 1;
-        }
+/* Contenedor del input de búsqueda */
+.search-input {
+  position: relative; /* Para posicionar el icono absolutamente */
+}
 
-        .suggest-sub {
-            color: var(--text-light);
-            font-size: 0.85rem;
-        }
+/* Input de búsqueda con espacio para el icono */
+.search-input input {
+  padding-left: 3rem; /* Espacio izquierdo para el icono de búsqueda */
+}
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .filters-section {
-                margin: 1rem 0;
-                padding: 1.5rem;
-            }
+/* Icono de búsqueda posicionado sobre el input */
+.search-input .fa-search {
+  position: absolute; /* Posicionamiento absoluto */
+  left: 1rem; /* Posición desde la izquierda */
+  top: 50%; /* Centrado vertical */
+  transform: translateY(-50%); /* Ajuste fino del centrado */
+  color: var(--text-light); /* Color gris claro */
+  z-index: 2; /* Sobre el input */
+}
 
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-                gap: 1.5rem;
-                padding: 1rem 0;
-            }
+/* === SUGERENCIAS DE BÚSQUEDA === */
+/* Dropdown con sugerencias que aparece debajo del input */
+#searchSuggestions {
+  position: absolute; /* Posicionado absolutamente respecto al contenedor */
+  top: 100%; /* Justo debajo del input */
+  left: 0; /* Alineado a la izquierda */
+  right: 0; /* Alineado a la derecha - ocupa todo el ancho */
+  background: white; /* Fondo blanco */
+  border-radius: var(--radius-sm); /* Bordes redondeados pequeños */
+  box-shadow: var(--shadow-lg); /* Sombra grande para destacar */
+  z-index: 1000; /* Índice Z alto para estar sobre otros elementos */
+  max-height: 300px; /* Altura máxima antes de scroll */
+  overflow-y: auto; /* Scroll vertical si es necesario */
+  border: 1px solid var(--border-color); /* Borde sutil */
+}
 
-            .range-inputs {
-                flex-direction: column;
-                align-items: stretch;
-            }
+/* Elementos individuales de sugerencia */
+.suggestion-item {
+  padding: 1rem; /* Espaciado interno */
+  border-bottom: 1px solid var(--border-color); /* Separador entre sugerencias */
+  cursor: pointer; /* Indica que es clickeable */
+  transition: background 0.3s ease; /* Transición suave del fondo */
+  display: flex; /* Layout flexible */
+  align-items: center; /* Alineación vertical centrada */
+  gap: 1rem; /* Espacio entre elementos */
+}
 
-            .section-title {
-                font-size: 1.5rem;
-            }
-        }
+/* Estado hover de cada sugerencia */
+.suggestion-item:hover {
+  background: var(--bg-light); /* Fondo gris claro en hover */
+}
 
-        @media (max-width: 480px) {
-            .products-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
+/* Imagen miniatura en cada sugerencia */
+.suggestion-item img {
+  width: 44px; /* Ancho fijo pequeño */
+  height: 44px; /* Alto fijo pequeño */
+  object-fit: cover; /* Recorta sin deformar */
+  border-radius: var(--radius-sm); /* Bordes redondeados */
+}
 
-            .product-content {
-                padding: 1rem;
-            }
+/* Contenedor del texto de la sugerencia */
+.suggest-text {
+  flex-grow: 1; /* Ocupa el espacio disponible */
+}
 
-            .filters-section {
-                padding: 1rem;
-            }
-        }
+/* Texto secundario de la sugerencia */
+.suggest-sub {
+  color: var(--text-light); /* Color gris claro */
+  font-size: 0.85rem; /* Tamaño de fuente pequeño */
+}
 
-        /* Animaciones de entrada */
-        .product-card {
-            animation: fadeInUp 0.6s ease-out;
-        }
+/* === DISEÑO RESPONSIVE === */
+/* Media query para tablets y pantallas medianas (hasta 768px) */
+@media (max-width: 768px) {
+  /* Ajustes para la sección de filtros en tablets */
+  .filters-section {
+    margin: 1rem 0; /* Margen vertical reducido */
+    padding: 1.5rem; /* Padding reducido */
+  }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+  /* Grid de productos optimizado para tablets */
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Columnas más estrechas */
+    gap: 1.5rem; /* Gap reducido */
+    padding: 1rem 0; /* Padding vertical reducido */
+  }
 
-        /* Stagger animation para las tarjetas */
-        .product-card:nth-child(1) { animation-delay: 0.1s; }
-        .product-card:nth-child(2) { animation-delay: 0.2s; }
-        .product-card:nth-child(3) { animation-delay: 0.3s; }
-        .product-card:nth-child(4) { animation-delay: 0.4s; }
-        .product-card:nth-child(5) { animation-delay: 0.5s; }
-        .product-card:nth-child(6) { animation-delay: 0.6s; }
+  /* Inputs de rango en layout vertical para tablets */
+  .range-inputs {
+    flex-direction: column; /* Cambia a orientación vertical */
+    align-items: stretch; /* Ocupa todo el ancho disponible */
+  }
+
+  /* Título de sección más pequeño */
+  .section-title {
+    font-size: 1.5rem; /* Tamaño reducido para tablets */
+  }
+}
+
+/* Media query para móviles (hasta 480px) */
+@media (max-width: 480px) {
+  /* Grid de una sola columna en móviles */
+  .products-grid {
+    grid-template-columns: 1fr; /* Una sola columna */
+    gap: 1rem; /* Gap mínimo */
+  }
+
+  /* Contenido de producto con padding reducido */
+  .product-content {
+    padding: 1rem; /* Padding mínimo para móviles */
+  }
+
+  /* Sección de filtros compacta */
+  .filters-section {
+    padding: 1rem; /* Padding mínimo */
+  }
+}
+
+/* === ANIMACIONES === */
+/* Animación de entrada para las tarjetas de producto */
+.product-card {
+  animation: fadeInUp 0.6s ease-out; /* Animación de aparición desde abajo */
+}
+
+/* Keyframe para animación de aparición desde abajo */
+@keyframes fadeInUp {
+  from {
+    opacity: 0; /* Inicia invisible */
+    transform: translateY(30px); /* Inicia 30px más abajo */
+  }
+  to {
+    opacity: 1; /* Termina visible */
+    transform: translateY(0); /* Termina en posición original */
+  }
+}
+
+/* === ANIMACIÓN ESCALONADA === */
+/* Retrasos de animación para crear efecto de aparición progresiva */
+.product-card:nth-child(1) {
+  animation-delay: 0.1s; /* Primera tarjeta - retraso mínimo */
+}
+.product-card:nth-child(2) {
+  animation-delay: 0.2s; /* Segunda tarjeta */
+}
+.product-card:nth-child(3) {
+  animation-delay: 0.3s; /* Tercera tarjeta */
+}
+.product-card:nth-child(4) {
+  animation-delay: 0.4s; /* Cuarta tarjeta */
+}
+.product-card:nth-child(5) {
+  animation-delay: 0.5s; /* Quinta tarjeta */
+}
+.product-card:nth-child(6) {
+  animation-delay: 0.6s; /* Sexta tarjeta - retraso máximo */
+}
+
+/* ============================================================================
+   ESTILO UNIFICADO CON PRODUCT-INFO
+   ============================================================================
+   Los siguientes estilos aseguran consistencia visual entre la página de
+   productos y la página de información detallada del producto.
+============================================================================ */
+
+/* === GRID DE PRODUCTOS ALTERNATIVO === */
+/* Versión alternativa del grid con espaciado diferente */
+#products-container {
+  display: grid; /* Layout de grid */
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* Columnas más estrechas */
+  gap: 1.5rem; /* Gap reducido */
+  margin-top: 1.5rem; /* Margen superior */
+  align-items: stretch; /* Todas las tarjetas tienen la misma altura */
+}
+
+/* === TARJETA DE PRODUCTO (VERSIÓN UNIFICADA) === */
+/* Estilo de tarjeta consistente con product-info */
+.product-card {
+  border-radius: var(--radius); /* Bordes redondeados grandes */
+  overflow: hidden; /* Oculta contenido que sobresalga */
+  background: rgba(255, 255, 255, 0.96); /* Fondo blanco casi completamente opaco */
+  box-shadow: var(--shadow-md); /* Sombra media */
+  transition: transform 0.25s ease, box-shadow 0.25s ease; /* Transiciones más rápidas */
+  cursor: pointer; /* Indica interactividad */
+  display: flex; /* Layout flexible */
+  flex-direction: column; /* Organización vertical */
+  height: 100%; /* Altura completa disponible */
+}
+
+/* Estados hover y focus de la tarjeta unificada */
+.product-card:hover,
+.product-card:focus {
+  transform: translateY(-8px); /* Elevación consistente */
+  box-shadow: var(--shadow-lg); /* Sombra grande */
+  outline: none; /* Remueve outline por defecto del focus */
+}
+
+/* === IMAGEN DEL PRODUCTO (VERSIÓN UNIFICADA) === */
+/* Imagen optimizada para consistencia visual */
+.product-card img {
+  width: 100%; /* Ancho completo */
+  height: 180px; /* Altura estándar más compacta */
+  object-fit: cover; /* Recorta sin deformar */
+  display: block; /* Elimina espacios en blanco debajo */
+}
+
+/* === CONTENIDO DE LA TARJETA (VERSIÓN UNIFICADA) === */
+/* Contenedor del contenido textual optimizado */
+.product-card-body {
+  padding: 1rem; /* Padding más compacto */
+  flex-grow: 1; /* Ocupa espacio disponible */
+  display: flex; /* Layout flexible */
+  flex-direction: column; /* Organización vertical */
+  justify-content: space-between; /* Distribuye contenido verticalmente */
+}
+
+/* === TÍTULO CON GRADIENTE === */
+/* Título que mantiene consistencia con product-info */
+.product-card-title {
+  font-size: 1.2rem; /* Tamaño balanceado */
+  font-weight: 700; /* Bold para destacar */
+  margin-bottom: 0.5rem; /* Espaciado inferior */
+  /* Gradiente diagonal usando colores principales */
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  /* Aplicación del gradiente al texto */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* === DESCRIPCIÓN DEL PRODUCTO === */
+/* Texto descriptivo con estilo unificado */
+.product-card-text {
+  font-size: 0.9rem; /* Tamaño ligeramente menor */
+  color: var(--text-muted); /* Color de texto apagado */
+  margin-bottom: 0.75rem; /* Espaciado inferior */
+}
+
+/* === PRECIO DEL PRODUCTO === */
+/* Precio destacado con color principal */
+.product-card-price {
+  font-size: 1.3rem; /* Tamaño grande para destacar */
+  font-weight: 800; /* Extra bold */
+  color: var(--primary-color); /* Color principal de marca */
+  margin-bottom: 0.75rem; /* Espaciado inferior */
+}
+
+/* === CONTADOR DE VENTAS === */
+/* Información de productos vendidos */
+.product-card-sold {
+  font-size: 0.85rem; /* Tamaño pequeño - información secundaria */
+  color: var(--text-muted); /* Color de texto apagado */
+  margin-bottom: 1rem; /* Espaciado inferior */
+}
+
+/* === BOTÓN DE ACCIÓN (VERSIÓN UNIFICADA) === */
+/* Botón de acción principal de cada tarjeta */
+.product-btn {
+  display: inline-block; /* Comportamiento de enlace pero con características de bloque */
+  width: 100%; /* Ancho completo de la tarjeta */
+  text-align: center; /* Texto centrado */
+  background: var(--primary-color); /* Fondo con color principal */
+  color: white; /* Texto blanco */
+  font-weight: 600; /* Semi-bold */
+  padding: 0.7rem 1rem; /* Espaciado interno optimizado */
+  border-radius: var(--radius-sm); /* Bordes redondeados pequeños */
+  transition: background 0.25s ease, transform 0.2s ease; /* Transiciones suaves */
+  text-decoration: none; /* Sin subrayado de enlace */
+}
+
+/* Estado hover del botón de acción */
+.product-btn:hover {
+  background: var(--secondary-color); /* Cambia al color secundario */
+  transform: translateY(-2px); /* Elevación sutil */
+}
+
+/* === AJUSTES RESPONSIVE PARA TARJETAS UNIFICADAS === */
+/* Optimizaciones para tablets */
+@media (max-width: 768px) {
+  .product-card img {
+    height: 150px; /* Altura de imagen reducida en tablets */
+  }
+}

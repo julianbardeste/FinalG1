@@ -1,56 +1,87 @@
+<!-- Declaración del tipo de documento HTML5 -->
 <!DOCTYPE html>
+<!-- Elemento HTML raíz con idioma español -->
 <html lang="es">
 
+<!-- Sección head: contiene metadatos y recursos del documento -->
 <head>
+  <!-- Configuración del tipo de contenido y codificación de caracteres UTF-8 -->
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta viewport para diseño responsivo en dispositivos móviles -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Título de la página que aparece en la pestaña del navegador -->
   <title>eMercado - Todo lo que busques está aquí</title>
+  <!-- Fuente Raleway de Google Fonts con diferentes pesos y estilos -->
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <!-- Framework Bootstrap para estilos y componentes -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome para iconos -->
   <link href="css/font-awesome.min.css" rel="stylesheet">
+  <!-- Estilos generales del sitio -->
   <link href="css/styles.css" rel="stylesheet">
 </head>
 
+<!-- Inicio del contenido del cuerpo de la página -->
 <body>
+  <!-- Barra de navegación principal con fondo oscuro y responsiva -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+    <!-- Contenedor principal de la navegación -->
     <div class="container">
+      <!-- Botón hamburguesa para dispositivos móviles -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <!-- Contenido colapsable de la navegación -->
       <div class="collapse navbar-collapse" id="navbarNav">
+        <!-- Lista principal de navegación -->
         <ul class="navbar-nav w-100 justify-content-between">
+          <!-- Enlace a la página de inicio -->
           <li class="nav-item">
             <a class="nav-link" href="index.html">Inicio</a>
           </li>
+          <!-- Enlace a la página de categorías -->
           <li class="nav-item">
             <a class="nav-link" href="categories.html">Categorías</a>
           </li>
+          <!-- Enlace a la página de venta -->
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
+          <!-- Elemento vacío para espaciado -->
           <li class="nav-item">
           </li>
         </ul>
       </div>
     </div>
   </nav>
+  <!-- Contenido principal de la página del carrito de compras -->
   <main>
+    <!-- Contenedor principal para el contenido -->
     <div class="container">
+      <!-- Alerta informativa sobre el estado de desarrollo de la funcionalidad -->
       <div class="alert alert-danger text-center" role="alert">
+        <!-- Título de la alerta indicando que la funcionalidad está en desarrollo -->
         <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
       </div>
     </div>
   </main>
+  <!-- Pie de página del sitio web -->
   <footer class="text-muted">
+    <!-- Contenedor del footer con información institucional -->
     <div class="container">
+      <!-- Enlace para volver al inicio de la página (alineado a la derecha) -->
       <p class="float-end">
         <a href="#">Volver arriba</a>
       </p>
+      <!-- Información sobre la afiliación institucional -->
       <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
     </div>
   </footer>
+
+  <!-- Indicador de carga (Spinner) que se muestra durante peticiones AJAX -->
   <div id="spinner-wrapper">
+    <!-- Animación de carga tipo anillo -->
     <div class="lds-ring">
       <div></div>
       <div></div>
@@ -58,9 +89,16 @@
       <div></div>
     </div>
   </div>
+
+  <!-- Sección de scripts JavaScript -->
+  <!-- Bootstrap bundle para funcionalidades interactivas -->
   <script src="js/bootstrap.bundle.min.js"></script>
+  <!-- Script de inicialización general del sitio -->
   <script src="js/init.js"></script>
+  <!-- Script específico para la funcionalidad del carrito de compras -->
   <script src="js/cart.js"></script>
+<!-- Cierre del elemento body -->
 </body>
 
+<!-- Cierre del elemento HTML -->
 </html>

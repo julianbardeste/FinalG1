@@ -1,24 +1,38 @@
+<!-- Declaración del tipo de documento HTML5 -->
 <!DOCTYPE html>
+<!-- Elemento HTML raíz con idioma español -->
 <html lang="es">
+  <!-- Sección head: contiene metadatos y recursos del documento -->
   <head>
+    <!-- Configuración del tipo de contenido y codificación de caracteres UTF-8 -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- Meta viewport para diseño responsivo en dispositivos móviles -->
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    <!-- Título de la página que aparece en la pestaña del navegador -->
     <title>eMercado - Todo lo que busques está aquí</title>
+    <!-- Fuente Raleway de Google Fonts con diferentes pesos y estilos -->
     <link
       href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
       rel="stylesheet"
     />
+    <!-- Framework Bootstrap para estilos y componentes -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Estilos para el componente Dropzone (subida de archivos con drag & drop) -->
     <link href="css/dropzone.css" rel="stylesheet" />
+    <!-- Estilos generales del sitio -->
     <link href="css/styles.css" rel="stylesheet" />
   </head>
 
+  <!-- Inicio del contenido del cuerpo de la página -->
   <body>
+    <!-- Barra de navegación principal con fondo oscuro y responsiva -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+      <!-- Contenedor principal de la navegación -->
       <div class="container">
+        <!-- Botón hamburguesa para dispositivos móviles -->
         <button
           class="navbar-toggler"
           type="button"
@@ -30,38 +44,56 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+        <!-- Contenido colapsable de la navegación -->
         <div class="collapse navbar-collapse" id="navbarNav">
+          <!-- Lista principal de navegación -->
           <ul class="navbar-nav w-100 justify-content-between">
+            <!-- Enlace a la página de inicio -->
             <li class="nav-item">
               <a class="nav-link" href="index.html">Inicio</a>
             </li>
+            <!-- Enlace a la página de categorías -->
             <li class="nav-item">
               <a class="nav-link" href="categories.html">Categorías</a>
             </li>
+            <!-- Enlace a la página de venta (página actual - marcada como activa) -->
             <li class="nav-item">
               <a class="nav-link active" href="sell.html">Vender</a>
             </li>
+            <!-- Elemento vacío para espaciado -->
             <li class="nav-item"></li>
+            <!-- Área para mostrar el nombre del usuario logueado -->
             <li class="nav-item">
               <span id="userNavbar" class="nav-link text-white"></span>
-              <!--Aca va el nombre del usuario-->
+              <!-- Aquí va el nombre del usuario -->
             </li>
           </ul>
         </div>
       </div>
     </nav>
+    <!-- Contenedor principal de la página -->
     <div class="container">
+      <!-- Encabezado de la página de venta -->
       <div class="text-center p-4">
+        <!-- Título principal de la sección -->
         <h2>Vender</h2>
+        <!-- Descripción instructiva para el usuario -->
         <p class="lead">Ingresa los datos del artículo a vender.</p>
       </div>
+      <!-- Fila centrada para el contenido principal -->
       <div class="row justify-content-md-center">
+        <!-- Columna principal para el formulario de venta -->
         <div class="col-md-8 order-md-1">
+          <!-- Título de la sección del formulario -->
           <h4 class="mb-3">Información del producto</h4>
+          <!-- Formulario principal para registrar el producto a vender -->
           <form class="needs-validation" id="sell-info">
+            <!-- Sección para el nombre del producto -->
             <div class="row">
               <div class="col-md-6 mb-3">
+                <!-- Etiqueta para el campo de nombre -->
                 <label for="productName">Nombre</label>
+                <!-- Campo de entrada para el nombre del producto -->
                 <input
                   type="text"
                   class="form-control"
@@ -69,22 +101,30 @@
                   value=""
                   name="productName"
                 />
+                <!-- Mensaje de error para validación -->
                 <div class="invalid-feedback">Ingresa un nombre</div>
               </div>
             </div>
+            <!-- Sección para subir imágenes del producto -->
             <div class="row">
               <div class="col-md-8 order-md-1">
+                <!-- Etiqueta para la sección de imágenes -->
                 <label>Imágenes</label>
+                <!-- Área de drag & drop para subir archivos con Dropzone -->
                 <div class="needsclick dz-clickable" id="file-upload">
+                  <!-- Mensaje instructivo para el usuario -->
                   <div class="dz-message needsclick">
                     Arrastra tus fotos aquí<br />
                   </div>
                 </div>
               </div>
             </div>
+            <!-- Sección para la descripción del producto -->
             <div class="row">
               <div class="col-md-12 mb-3">
+                <!-- Etiqueta para el campo de descripción -->
                 <label for="productDescription">Descripción</label>
+                <!-- Campo de texto multilínea para descripción detallada -->
                 <textarea
                   name="productDescription"
                   class="form-control"
@@ -92,9 +132,12 @@
                 ></textarea>
               </div>
             </div>
+            <!-- Sección para costo y moneda -->
             <div class="row">
+              <!-- Campo para el costo del producto -->
               <div class="col-md-3 mb-3">
                 <label for="productCostInput">Costo</label>
+                <!-- Input numérico para el precio con validación -->
                 <input
                   type="number"
                   name="productCostInput"
@@ -105,36 +148,48 @@
                   value="0"
                   min="0"
                 />
+                <!-- Mensaje de error para validación -->
                 <div class="invalid-feedback">
                   El costo debe ser mayor que 0.
                 </div>
               </div>
+              <!-- Selector de moneda -->
               <div class="col-md-4 mb-3">
                 <label for="productCurrency">Moneda</label>
+                <!-- Dropdown para seleccionar la moneda -->
                 <select
                   name="productCurrency"
                   class="form-select custom-select d-block w-100"
                   id="productCurrency"
                   required
                 >
+                  <!-- Opción por defecto oculta -->
                   <option value="" hidden selected>Seleccionar moneda</option>
+                  <!-- Opción para pesos uruguayos -->
                   <option>Pesos Uruguayos (UYU)</option>
+                  <!-- Opción para dólares -->
                   <option>Dólares (USD)</option>
                 </select>
+                <!-- Mensaje de error para validación -->
                 <div class="invalid-feedback">
                   Ingresa una categoría válida.
                 </div>
               </div>
             </div>
+            <!-- Sección para selección de categoría -->
             <div class="row">
               <div class="col-md-7 mb-3">
+                <!-- Etiqueta para el campo de categoría -->
                 <label for="productCategory">Categoría</label>
+                <!-- Dropdown para seleccionar la categoría del producto -->
                 <select
                   name="productCategory"
                   class="custom-select form-select d-block w-100"
                   id="productCategory"
                 >
+                  <!-- Opción por defecto -->
                   <option value="">Elija la categoría...</option>
+                  <!-- Opciones de categorías disponibles -->
                   <option>Autos</option>
                   <option>Juguetes</option>
                   <option>Muebles</option>
@@ -142,14 +197,18 @@
                   <option>Computadoras</option>
                   <option>Vestimenta</option>
                 </select>
+                <!-- Mensaje de error para validación -->
                 <div class="invalid-feedback">
                   Por favor ingresa una categoría válida.
                 </div>
               </div>
             </div>
+            <!-- Sección para cantidad en stock -->
             <div class="row">
               <div class="col-md-3 mb-3">
+                <!-- Etiqueta para el campo de cantidad -->
                 <label for="productCountInput">Cantidad en stock</label>
+                <!-- Input numérico para especificar la cantidad disponible -->
                 <input
                   type="number"
                   name="productCountInput"
@@ -159,12 +218,17 @@
                   value="1"
                   min="0"
                 />
+                <!-- Mensaje de error para validación -->
                 <div class="invalid-feedback">La cantidad es requerida.</div>
               </div>
             </div>
+            <!-- Separador visual -->
             <hr class="mb-4" />
+            <!-- Título de la sección de tipo de publicación -->
             <h5 class="mb-3">Tipo de publicación</h5>
+            <!-- Grupo de radio buttons para seleccionar el tipo de publicación -->
             <div class="d-block my-3">
+              <!-- Opción Gold (más cara, más visibilidad) -->
               <div class="custom-control custom-radio">
                 <input
                   id="goldradio"
@@ -178,6 +242,7 @@
                   >Gold (13%)</label
                 >
               </div>
+              <!-- Opción Premium (costo medio, buena visibilidad) -->
               <div class="custom-control custom-radio">
                 <input
                   id="premiumradio"
@@ -190,6 +255,7 @@
                   >Premium (7%)</label
                 >
               </div>
+              <!-- Opción Estándar (más económica) -->
               <div class="custom-control custom-radio">
                 <input
                   id="standardradio"
@@ -202,6 +268,7 @@
                   >Estándar (3%)</label
                 >
               </div>
+              <!-- Botón para mostrar las condiciones de cada tipo de publicación -->
               <div class="row">
                 <button
                   type="button"
@@ -213,9 +280,13 @@
                 </button>
               </div>
             </div>
+            <!-- Separador visual -->
             <hr class="mb-4" />
+            <!-- Título de la sección de resumen de costos -->
             <h4 class="mb-3">Costos</h4>
+            <!-- Lista que muestra el desglose de costos -->
             <ul class="list-group mb-3">
+              <!-- Precio unitario del producto -->
               <li
                 class="list-group-item d-flex justify-content-between lh-condensed"
               >
@@ -223,8 +294,10 @@
                   <h6 class="my-0">Precio</h6>
                   <small class="text-muted">Unitario del producto</small>
                 </div>
+                <!-- Valor dinámico que se actualiza vía JavaScript -->
                 <span class="text-muted" id="productCostText">-</span>
               </li>
+              <!-- Porcentaje de comisión según el tipo de publicación -->
               <li
                 class="list-group-item d-flex justify-content-between lh-condensed"
               >
@@ -232,24 +305,35 @@
                   <h6 class="my-0">Porcentaje</h6>
                   <small class="text-muted">Según el tipo de publicación</small>
                 </div>
+                <!-- Valor dinámico que se actualiza según el tipo seleccionado -->
                 <span class="text-muted" id="comissionText">-</span>
               </li>
+              <!-- Costo total incluyendo comisiones -->
               <li class="list-group-item d-flex justify-content-between">
                 <span>Total ($)</span>
+                <!-- Valor total calculado dinámicamente -->
                 <strong id="totalCostText">-</strong>
               </li>
             </ul>
+            <!-- Separador visual final -->
             <hr class="mb-4" />
+            <!-- Botón principal para enviar el formulario y publicar el producto -->
             <button class="btn btn-primary btn-lg" type="submit">Vender</button>
+          <!-- Fin del formulario de venta -->
           </form>
         </div>
       </div>
     </div>
+
+    <!-- Pie de página del sitio web -->
     <footer class="text-muted">
+      <!-- Contenedor del footer con información institucional -->
       <div class="container">
+        <!-- Enlace para volver al inicio de la página (alineado a la derecha) -->
         <p class="float-end">
           <a href="#">Volver arriba</a>
         </p>
+        <!-- Información sobre la afiliación institucional -->
         <p>
           Este sitio forma parte de
           <a href="https://jovenesaprogramar.edu.uy/" target="_blank"
@@ -259,22 +343,30 @@
       </div>
     </footer>
 
+    <!-- Alerta para mostrar mensajes de resultado (oculta por defecto) -->
     <div
       class="alert alert-primary-dismissible fade"
       id="alertResult"
       role="alert"
     >
+      <!-- Contenedor para el mensaje de resultado -->
       <span id="resultSpan"></span>
     </div>
 
+    <!-- Modal para mostrar las condiciones de cada tipo de publicación -->
     <div class="modal fade" tabindex="-1" role="dialog" id="contidionsModal">
+      <!-- Contenedor del diálogo modal -->
       <div class="modal-dialog" role="document">
+        <!-- Contenido principal del modal -->
         <div class="modal-content">
+          <!-- Encabezado del modal -->
           <div class="modal-header">
             <h5 class="modal-title">Condiciones de publicación</h5>
           </div>
+          <!-- Cuerpo del modal con las descripciones de cada plan -->
           <div class="modal-body">
             <div class="container">
+              <!-- Sección del plan Gold -->
               <div class="row">
                 <h5 class="text-warning">Gold (13%)</h5>
                 <p class="muted text-justify">
@@ -282,7 +374,9 @@
                   de las condiciones de Premium y Estándar.
                 </p>
               </div>
+              <!-- Separador entre planes -->
               <hr />
+              <!-- Sección del plan Premium -->
               <div class="row">
                 <h5 class="text-primary">Premium (7%)</h5>
                 <p class="muted text-justify">
@@ -291,7 +385,9 @@
                   pertenezca.
                 </p>
               </div>
+              <!-- Separador entre planes -->
               <hr />
+              <!-- Sección del plan Estándar -->
               <div class="row">
                 <h5 class="text-secondary">Estándar (3%)</h5>
                 <p class="muted text-justify">
@@ -302,6 +398,7 @@
               </div>
             </div>
           </div>
+          <!-- Pie del modal con botón de cierre -->
           <div class="modal-footer">
             <button
               type="button"
@@ -314,7 +411,9 @@
         </div>
       </div>
     </div>
+    <!-- Indicador de carga (Spinner) que se muestra durante peticiones AJAX -->
     <div id="spinner-wrapper">
+      <!-- Animación de carga tipo anillo -->
       <div class="lds-ring">
         <div></div>
         <div></div>
@@ -322,9 +421,17 @@
         <div></div>
       </div>
     </div>
+
+    <!-- Sección de scripts JavaScript -->
+    <!-- Bootstrap bundle para funcionalidades interactivas -->
     <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- Dropzone.js para funcionalidad de subida de archivos drag & drop -->
     <script src="js/dropzone.js"></script>
+    <!-- Script de inicialización general del sitio -->
     <script src="js/init.js"></script>
+    <!-- Script específico para la funcionalidad de venta -->
     <script src="js/sell.js"></script>
+  <!-- Cierre del elemento body -->
   </body>
+<!-- Cierre del elemento HTML -->
 </html>

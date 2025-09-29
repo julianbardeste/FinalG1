@@ -1,6 +1,8 @@
 <!DOCTYPE html>
+<!-- Página principal de eMercado - Plataforma de comercio electrónico -->
 <html lang="es">
   <head>
+    <!-- Configuración de codificación y viewport para dispositivos móviles -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta
       name="viewport"
@@ -8,17 +10,21 @@
     />
     <title>eMercado - Todo lo que busques está aquí</title>
 
+    <!-- Fuentes externas de Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
       rel="stylesheet"
     />
+    <!-- Hojas de estilo CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
   </head>
 
   <body>
+    <!-- Barra de navegación principal -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
       <div class="container">
+        <!-- Botón hamburguesa para dispositivos móviles -->
         <button
           class="navbar-toggler"
           type="button"
@@ -30,8 +36,10 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+        <!-- Menú de navegación colapsible -->
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav w-100 justify-content-between">
+            <!-- Enlaces de navegación principales -->
             <li class="nav-item">
               <a class="nav-link active" href="index.html">Inicio</a>
             </li>
@@ -42,19 +50,24 @@
               <a class="nav-link" href="sell.html">Vender</a>
             </li>
             <li class="nav-item"></li>
+            <!-- Área donde se mostrará la información del usuario logueado -->
             <li class="nav-item">
               <span id="userNavbar" class="nav-link text-white"></span>
-              <!--Aca va el nombre del usuario-->
+              <!-- Aquí se inserta dinámicamente el dropdown del usuario -->
             </li>
           </ul>
         </div>
       </div>
     </nav>
+    <!-- Contenido principal de la página -->
     <main>
+      <!-- Espacio para banner o jumbotron (actualmente vacío) -->
       <div class="jumbotron text-center"></div>
+      <!-- Sección de categorías principales -->
       <div class="album py-5 bg-light">
         <div class="container">
           <div class="row">
+            <!-- Tarjeta de categoría: Autos -->
             <div class="col-md-4">
               <div
                 class="card mb-4 shadow-sm custom-card cursor-active"
@@ -74,6 +87,7 @@
                 </div>
               </div>
             </div>
+            <!-- Tarjeta de categoría: Juguetes -->
             <div class="col-md-4">
               <div
                 class="card mb-4 shadow-sm custom-card cursor-active"
@@ -93,6 +107,7 @@
                 </div>
               </div>
             </div>
+            <!-- Tarjeta de categoría: Muebles -->
             <div class="col-md-4">
               <div
                 class="card mb-4 shadow-sm custom-card cursor-active"
@@ -112,6 +127,7 @@
               </div>
             </div>
           </div>
+          <!-- Botón para ver todas las categorías -->
           <div class="row">
             <a class="btn btn-light btn-lg btn-block" href="categories.html"
               >Y mucho más!</a
@@ -120,6 +136,7 @@
         </div>
       </div>
     </main>
+    <!-- Pie de página -->
     <footer class="text-muted">
       <div class="container">
         <p class="float-end">
@@ -133,6 +150,7 @@
         </p>
       </div>
     </footer>
+    <!-- Scripts de JavaScript necesarios para el funcionamiento -->
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/index.js"></script>
     <script src="js/init.js"></script>

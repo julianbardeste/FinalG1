@@ -1,34 +1,51 @@
+<!-- Declaración del tipo de documento HTML5 -->
 <!DOCTYPE html>
+<!-- Elemento HTML raíz con idioma español -->
 <html lang="es">
+  <!-- Sección head: contiene metadatos y recursos del documento -->
   <head>
+    <!-- Configuración de codificación de caracteres UTF-8 -->
     <meta charset="UTF-8" />
+    <!-- Meta viewport para diseño responsivo en dispositivos móviles -->
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    <!-- Título de la página que aparece en la pestaña del navegador -->
     <title>eMercado - Todo lo que busques está aquí</title>
 
-    <!-- Fuentes y estilos -->
+    <!-- Sección de hojas de estilo y fuentes -->
+    <!-- Fuente Raleway de Google Fonts con pesos específicos -->
     <link
       href="https://fonts.googleapis.com/css?family=Raleway:300,400,700,900&display=swap"
       rel="stylesheet"
     />
+    <!-- Font Awesome local para iconos -->
     <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Bootstrap local para framework CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Estilos generales del sitio -->
     <link href="css/styles.css" rel="stylesheet" />
+    <!-- Estilos específicos para la página de productos -->
     <link href="css/products.css" rel="stylesheet" />
+    <!-- Bootstrap desde CDN como respaldo -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <!-- Font Awesome desde CDN con versión más reciente -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
   </head>
+  <!-- Inicio del contenido del cuerpo de la página -->
   <body>
+    <!-- Barra de navegación principal con fondo oscuro y responsiva -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+      <!-- Contenedor principal de la navegación -->
       <div class="container">
+        <!-- Botón hamburguesa para dispositivos móviles -->
         <button
           class="navbar-toggler"
           type="button"
@@ -40,47 +57,59 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+        <!-- Contenido colapsable de la navegación -->
         <div class="collapse navbar-collapse" id="navbarNav">
+          <!-- Lista principal de navegación -->
           <ul class="navbar-nav w-100 justify-content-between">
+            <!-- Enlace al inicio -->
             <li class="nav-item">
               <a class="nav-link" href="index.html">Inicio</a>
             </li>
+            <!-- Enlace a categorías -->
             <li class="nav-item">
               <a class="nav-link" href="categories.html">Categorías</a>
             </li>
+            <!-- Enlace para vender productos -->
             <li class="nav-item">
               <a class="nav-link" href="sell.html">Vender</a>
             </li>
+            <!-- Elemento vacío para espaciado -->
             <li class="nav-item"></li>
           </ul>
         </div>
       </div>
     </nav>
+    <!-- Contenedor principal con padding horizontal -->
     <div class="container-fluid px-4">
-      <!-- Sección de búsqueda -->
+      <!-- Sección de búsqueda con campo de entrada y sugerencias -->
       <div class="search-section">
         <div class="search-input">
+          <!-- Icono de lupa para la búsqueda -->
           <i class="fas fa-search"></i>
+          <!-- Campo de entrada para buscar productos -->
           <input
             type="text"
             class="form-control"
             id="navSearchInput"
             placeholder="Buscar productos..."
           />
+          <!-- Contenedor para mostrar sugerencias de búsqueda (oculto por defecto) -->
           <div id="searchSuggestions" style="display: none"></div>
         </div>
       </div>
 
-      <!-- Título principal -->
+      <!-- Título principal de la sección -->
       <h1 class="section-title">Catálogo de Productos</h1>
 
-      <!-- Sección de filtros -->
+      <!-- Sección de filtros y ordenamiento -->
       <div class="filters-section">
         <div class="row">
-          <!-- Ordenamiento -->
+          <!-- Columna para opciones de ordenamiento -->
           <div class="col-lg-4 col-md-6 mb-3">
+            <!-- Grupo de filtros para ordenar productos -->
             <div class="filter-group">
               <h6><i class="fas fa-sort me-2"></i>Ordenar por</h6>
+              <!-- Radio button para ordenar alfabéticamente A-Z -->
               <div class="form-check">
                 <input
                   class="form-check-input"
@@ -92,6 +121,7 @@
                   A-Z (Nombre)
                 </label>
               </div>
+              <!-- Radio button para ordenar alfabéticamente Z-A -->
               <div class="form-check">
                 <input
                   class="form-check-input"
@@ -103,6 +133,7 @@
                   Z-A (Nombre)
                 </label>
               </div>
+              <!-- Radio button para ordenar por precio ascendente -->
               <div class="form-check">
                 <input
                   class="form-check-input"
@@ -114,6 +145,7 @@
                   Precio: Menor a Mayor
                 </label>
               </div>
+              <!-- Radio button para ordenar por precio descendente -->
               <div class="form-check">
                 <input
                   class="form-check-input"
@@ -125,6 +157,7 @@
                   Precio: Mayor a Menor
                 </label>
               </div>
+              <!-- Radio button para ordenar por popularidad/ventas -->
               <div class="form-check">
                 <input
                   class="form-check-input"
@@ -139,11 +172,14 @@
             </div>
           </div>
 
-          <!-- Filtro por precio -->
+          <!-- Columna para filtro por rango de precios -->
           <div class="col-lg-8 col-md-6 mb-3">
+            <!-- Grupo de filtros para rango de precios -->
             <div class="filter-group">
               <h6><i class="fas fa-filter me-2"></i>Filtrar por Precio</h6>
+              <!-- Contenedor para inputs de rango de precios -->
               <div class="range-inputs">
+                <!-- Input para precio mínimo -->
                 <div class="flex-grow-1">
                   <label for="rangeFilterPriceMin" class="form-label"
                     >Precio Mínimo</label
@@ -155,6 +191,7 @@
                     placeholder="Min"
                   />
                 </div>
+                <!-- Input para precio máximo -->
                 <div class="flex-grow-1">
                   <label for="rangeFilterPriceMax" class="form-label"
                     >Precio Máximo</label
@@ -166,10 +203,13 @@
                     placeholder="Max"
                   />
                 </div>
+                <!-- Botones de acción para filtros -->
                 <div class="d-flex gap-2 align-self-end">
+                  <!-- Botón para aplicar filtro de precios -->
                   <button class="btn btn-modern" id="rangeFilterPrice">
                     <i class="fas fa-search me-2"></i>Filtrar
                   </button>
+                  <!-- Botón para limpiar filtros aplicados -->
                   <button class="btn btn-outline-modern" id="clearRangeFilter">
                     <i class="fas fa-times me-2"></i>Limpiar
                   </button>
@@ -180,37 +220,46 @@
         </div>
       </div>
 
-      <!-- Grid de productos -->
+      <!-- Grid principal donde se muestran los productos -->
       <div class="products-grid" id="productos">
-        <!-- Los productos se insertan aquí dinámicamente -->
+        <!-- Los productos se insertan aquí dinámicamente mediante JavaScript -->
       </div>
     </div>
 
-    <!-- Contenido principal -->
+    <!-- Sección de contenido principal alternativa -->
     <main class="products-main pb-5 container">
+      <!-- Fila para mostrar productos en formato alternativo -->
       <div class="row" id="productos-old">
-        <!-- Aquí JS insertará las cards -->
+        <!-- Contenedor alternativo donde JavaScript puede insertar las cards de productos -->
       </div>
     </main>
 
-    <!-- Footer -->
+    <!-- Pie de página del sitio web -->
     <footer class="text-muted">
+      <!-- Contenedor del footer con información institucional -->
       <div class="container">
+        <!-- Información sobre la afiliación institucional -->
         <p class="mb-1">
           Este sitio forma parte de
           <a href="https://jovenesaprogramar.edu.uy/" target="_blank"
             >Jóvenes a Programar</a
           >
         </p>
+        <!-- Enlace para volver arriba -->
         <p><a href="#">Volver arriba</a></p>
       </div>
     </footer>
 
-    <!-- Scripts -->
-    <!-- JavaScript mejorado para la interfaz -->
+    <!-- Sección de scripts JavaScript -->
+    <!-- Bootstrap desde CDN para funcionalidades interactivas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap local como respaldo -->
     <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- Script de inicialización general del sitio -->
     <script src="js/init.js"></script>
+    <!-- Script específico para la funcionalidad de productos -->
     <script src="js/products.js"></script>
+  <!-- Cierre del elemento body -->
   </body>
+<!-- Cierre del elemento HTML -->
 </html>

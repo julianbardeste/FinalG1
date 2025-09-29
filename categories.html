@@ -1,25 +1,39 @@
+<!-- Declaración del tipo de documento HTML5 -->
 <!DOCTYPE html>
+<!-- Elemento HTML raíz con idioma español -->
 <html lang="es">
+  <!-- Sección head: contiene metadatos y recursos del documento -->
   <head>
+    <!-- Configuración del tipo de contenido y codificación de caracteres UTF-8 -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- Meta viewport para diseño responsivo en dispositivos móviles -->
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    <!-- Título de la página que aparece en la pestaña del navegador -->
     <title>eMercado - Todo lo que busques está aquí</title>
 
+    <!-- Enlace a fuentes de Google Fonts (familia Raleway con diferentes pesos) -->
     <link
       href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
       rel="stylesheet"
     />
+    <!-- Hoja de estilos de Font Awesome para iconos -->
     <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Hoja de estilos de Bootstrap para el framework CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Hoja de estilos personalizada del sitio -->
     <link href="css/styles.css" rel="stylesheet" />
   </head>
 
+  <!-- Inicio del contenido del cuerpo de la página -->
   <body>
+    <!-- Barra de navegación principal con fondo oscuro y responsiva -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+      <!-- Contenedor principal de la navegación -->
       <div class="container">
+        <!-- Botón hamburguesa para dispositivos móviles -->
         <button
           class="navbar-toggler"
           type="button"
@@ -31,44 +45,75 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+        <!-- Contenido colapsable de la navegación -->
         <div class="collapse navbar-collapse" id="navbarNav">
+          <!-- Lista principal de navegación con distribución justificada -->
           <ul class="navbar-nav w-100 justify-content-between">
+            <!-- Enlace al inicio -->
             <li class="nav-item">
               <a class="nav-link" href="index.html">Inicio</a>
             </li>
+            <!-- Enlace a categorías (página actual - marcada como activa) -->
             <li class="nav-item">
               <a class="nav-link active" href="categories.html">Categorías</a>
             </li>
+            <!-- Enlace para vender productos -->
             <li class="nav-item">
               <a class="nav-link" href="sell.html">Vender</a>
             </li>
+            <!-- Sección de búsqueda con autocompletado -->
             <li class="nav-item flex-grow-1 mx-3">
               <div class="position-relative w-100">
-                <input id="navSearchInput" class="form-control" type="search" placeholder="Buscar productos..." autocomplete="off" />
-                <ul id="searchSuggestions" class="list-group position-absolute w-100" style="z-index:2000; display:none; max-height:300px; overflow:auto;"></ul>
+                <!-- Campo de búsqueda con autocompletado -->
+                <input
+                  id="navSearchInput"
+                  class="form-control"
+                  type="search"
+                  placeholder="Buscar productos..."
+                  autocomplete="off"
+                />
+                <!-- Lista de sugerencias de búsqueda (oculta por defecto) -->
+                <ul
+                  id="searchSuggestions"
+                  class="list-group position-absolute w-100"
+                  style="
+                    z-index: 2000;
+                    display: none;
+                    max-height: 300px;
+                    overflow: auto;
+                  "
+                ></ul>
               </div>
             </li>
+            <!-- Elemento vacío para espaciado -->
             <li class="nav-item"></li>
+            <!-- Área para mostrar el nombre del usuario logueado -->
             <li class="nav-item">
               <span id="userNavbar" class="nav-link text-white"></span>
-              <!--Aca va el nombre del usuario-->
+              <!-- Aquí va el nombre del usuario -->
             </li>
           </ul>
         </div>
       </div>
     </nav>
+    <!-- Contenido principal de la página -->
     <main class="pb-5">
+      <!-- Encabezado de la página de categorías -->
       <div class="text-center p-4">
         <h2>Categorías</h2>
         <p class="lead">Verás aquí todas las categorías del sitio.</p>
       </div>
+      <!-- Contenedor principal para el contenido -->
       <div class="container">
+        <!-- Fila para los controles de ordenamiento -->
         <div class="row">
           <div class="col text-end">
+            <!-- Grupo de botones para ordenar las categorías -->
             <div
               class="btn-group btn-group-toggle mb-4"
               data-bs-toggle="buttons"
             >
+              <!-- Opción para ordenar alfabéticamente A-Z -->
               <input
                 type="radio"
                 class="btn-check"
@@ -76,6 +121,7 @@
                 id="sortAsc"
               />
               <label class="btn btn-light" for="sortAsc">A-Z</label>
+              <!-- Opción para ordenar alfabéticamente Z-A -->
               <input
                 type="radio"
                 class="btn-check"
@@ -83,6 +129,7 @@
                 id="sortDesc"
               />
               <label class="btn btn-light" for="sortDesc">Z-A</label>
+              <!-- Opción para ordenar por cantidad (seleccionada por defecto) -->
               <input
                 type="radio"
                 class="btn-check"
@@ -91,17 +138,22 @@
                 checked
               />
               <label class="btn btn-light" for="sortByCount"
-                ><i class="fas fa-sort-amount-down mr-1"></i
+                ><!-- Icono de ordenamiento por cantidad -->
+                <i class="fas fa-sort-amount-down mr-1"></i
               ></label>
             </div>
           </div>
         </div>
+        <!-- Fila para los controles de filtrado por cantidad -->
         <div class="row">
           <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
+            <!-- Contenedor interno para el filtro de rango -->
             <div class="row container p-0 m-0">
+              <!-- Etiqueta del filtro -->
               <div class="col">
                 <p class="font-weight-normal text-end my-2">Cant.</p>
               </div>
+              <!-- Campo para el valor mínimo del filtro -->
               <div class="col">
                 <input
                   class="form-control"
@@ -110,6 +162,7 @@
                   id="rangeFilterCountMin"
                 />
               </div>
+              <!-- Campo para el valor máximo del filtro -->
               <div class="col">
                 <input
                   class="form-control"
@@ -118,11 +171,14 @@
                   id="rangeFilterCountMax"
                 />
               </div>
+              <!-- Botones de filtrar y limpiar -->
               <div class="col-3 p-0">
                 <div class="btn-group" role="group">
+                  <!-- Botón para aplicar el filtro de rango -->
                   <button class="btn btn-light btn-block" id="rangeFilterCount">
                     Filtrar
                   </button>
+                  <!-- Botón para limpiar el filtro aplicado -->
                   <button class="btn btn-link btn-sm" id="clearRangeFilter">
                     Limpiar
                   </button>
@@ -131,17 +187,23 @@
             </div>
           </div>
         </div>
-        
+
+        <!-- Fila para mostrar la lista de categorías -->
         <div class="row">
+          <!-- Contenedor donde se cargarán dinámicamente las categorías -->
           <div class="list-group" id="cat-list-container"></div>
         </div>
       </div>
     </main>
+    <!-- Pie de página del sitio web -->
     <footer class="text-muted">
+      <!-- Contenedor del footer con información institucional -->
       <div class="container">
+        <!-- Enlace para volver arriba alineado a la derecha -->
         <p class="float-end">
           <a href="#">Volver arriba</a>
         </p>
+        <!-- Información sobre la afiliación institucional -->
         <p>
           Este sitio forma parte de
           <a href="https://jovenesaprogramar.edu.uy/" target="_blank"
@@ -150,6 +212,7 @@
         </p>
       </div>
     </footer>
+    <!-- Spinner de carga que se muestra durante las peticiones AJAX -->
     <div id="spinner-wrapper">
       <div class="lds-ring">
         <div></div>
@@ -158,8 +221,13 @@
         <div></div>
       </div>
     </div>
+    <!-- JavaScript de Bootstrap para funcionalidades interactivas -->
     <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- Script de inicialización general del sitio -->
     <script src="js/init.js"></script>
+    <!-- Script específico para la funcionalidad de categorías -->
     <script src="js/categories.js"></script>
+  <!-- Cierre del elemento body -->
   </body>
+<!-- Cierre del elemento HTML -->
 </html>

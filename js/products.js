@@ -1,4 +1,5 @@
-// Obtengo el ID de la categoría seleccionada desde localStorage
+// === CONFIGURACIÓN INICIAL ===
+// Obtener el ID de la categoría seleccionada desde localStorage
 let catID = localStorage.getItem("catID");
 
 // Si no hay catID, usar uno por defecto para testing
@@ -7,72 +8,79 @@ if (!catID) {
     console.log("No se encontró catID, usando 101 por defecto");
 }
 
-// Construyo la URL dinámica con el catID guardado
+// Construir la URL dinámica con el catID guardado
 let url = `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`;
 
+// Arrays para almacenar productos originales y filtrados
 let productos = [];
 let productosFiltrados = [];
 
-// Referencias a elementos del DOM
+// === REFERENCIAS A ELEMENTOS DEL DOM ===
 const tabla = document.getElementById("productos");
 
+// Elementos de ordenamiento
 const sortAsc = document.getElementById("sortAsc");
 const sortDesc = document.getElementById("sortDesc");
 const sortPriceAsc = document.getElementById("sortPriceAsc");
 const sortPriceDesc = document.getElementById("sortPriceDesc");
 const sortByCount = document.getElementById("sortByCount");
 
+// Elementos de filtrado por precio
 const minInput = document.getElementById("rangeFilterPriceMin");
 const maxInput = document.getElementById("rangeFilterPriceMax");
 const filterBtn = document.getElementById("rangeFilterPrice");
 const clearBtn = document.getElementById("clearRangeFilter");
 
-// Función mejorada para mostrar productos
-        function showProducts(list) {
-            if (!tabla) {
-                console.error("Elemento tabla no encontrado!");
-                return;
-            }
-            tabla.innerHTML = "";
+// === FUNCIONES DE VISUALIZACIÓN ===
+// Función para mostrar productos en formato de tarjetas
+function showProducts(list) {
+    // Verificar que el elemento contenedor existe
+    if (!tabla) {
+        console.error("Elemento tabla no encontrado!");
+        return;
+    }
+    tabla.innerHTML = "";
 
-            if (list.length === 0) {
-                tabla.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-box-open"></i>
-                        <h3>No hay productos disponibles</h3>
-                        <p>No se encontraron productos que coincidan con tus criterios de búsqueda.</p>
-                    </div>
-                `;
-                return;
-            }
+    // Mostrar mensaje si no hay productos
+    if (list.length === 0) {
+        tabla.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-box-open"></i>
+                <h3>No hay productos disponibles</h3>
+                <p>No se encontraron productos que coincidan con tus criterios de búsqueda.</p>
+            </div>
+        `;
+        return;
+    }
 
-            list.forEach((prod, index) => {
-                const productCard = document.createElement("div");
-                productCard.className = "product-card";
-                productCard.style.animationDelay = `${index * 0.1}s`;
+    // Crear tarjeta para cada producto
+    list.forEach((prod, index) => {
+        const productCard = document.createElement("div");
+        productCard.className = "product-card";
+        productCard.style.animationDelay = `${index * 0.1}s`; // Animación escalonada
 
-                productCard.innerHTML = `
-                    <img src="${prod.image}" class="product-image" alt="${prod.name}" 
-                         onerror="this.src='https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400'">
-                    <div class="product-content">
-                        <h5 class="product-title">${prod.name}</h5>
-                        <p class="product-description">${prod.description}</p>
-                        <div class="product-meta">
-                            <span class="product-price">${prod.currency} ${prod.cost.toLocaleString()}</span>
-                            <span class="product-sold">
-                                <i class="fas fa-chart-line me-1"></i>
-                                ${prod.soldCount.toLocaleString()} vendidos
-                            </span>
-                        </div>
-                        <button class="product-btn ver-mas" data-id="${prod.id}">
-                            <i class="fas fa-eye me-2"></i>Ver Detalles
-                        </button>
-                    </div>
-                `;
+        productCard.innerHTML = `
+            <img src="${prod.image}" class="product-image" alt="${prod.name}"
+                 onerror="this.src='https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400'">
+            <div class="product-content">
+                <h5 class="product-title">${prod.name}</h5>
+                <p class="product-description">${prod.description}</p>
+                <div class="product-meta">
+                    <span class="product-price">${prod.currency} ${prod.cost.toLocaleString()}</span>
+                    <span class="product-sold">
+                        <i class="fas fa-chart-line me-1"></i>
+                        ${prod.soldCount.toLocaleString()} vendidos
+                    </span>
+                </div>
+                <button class="product-btn ver-mas" data-id="${prod.id}">
+                    <i class="fas fa-eye me-2"></i>Ver Detalles
+                </button>
+            </div>
+        `;
 
-                tabla.appendChild(productCard);
-            });
-        }
+        tabla.appendChild(productCard);
+    });
+}
 
         // Función de ordenamiento (mantiene tu lógica original)
         function sortProducts() {

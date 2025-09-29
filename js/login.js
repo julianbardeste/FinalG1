@@ -1,15 +1,20 @@
+// Controlador del formulario de inicio de sesión
 document
   .getElementById("ingresarform")
   .addEventListener("submit", function (e) {
-    // Agregamos un evento al formulario con el id "ingresarform"
-    e.preventDefault(); // evita que se envíe el formulario
+    // Prevenir el envío normal del formulario
+    e.preventDefault();
 
-    const usuario = document.getElementById("username").value; // obtenemos el valor del campo de usuario
-    const clave = document.getElementById("password").value; // obtenemos el valor del campo de clave
+    // Obtener los valores de los campos de entrada
+    const usuario = document.getElementById("username").value;
+    const clave = document.getElementById("password").value;
 
+    // Validar que ambos campos tengan contenido
     if (usuario && clave) {
+      // Marcar al usuario como logueado en sessionStorage
       sessionStorage.setItem("logueado", "true");
-      sessionStorage.setItem("usuario", usuario); //se guarda el nombre de usuario
+      sessionStorage.setItem("usuario", usuario);
+      // Redirigir a la página principal
       window.location.href = "index.html";
     }
   });
