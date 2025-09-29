@@ -1,3 +1,5 @@
+/* === ESTILOS GLOBALES === */
+/* Fuente principal para elementos importantes del sitio */
 .jumbotron,
 .card-body,
 .container,
@@ -5,14 +7,18 @@
   font-family: "Verdana", serif !important;
 }
 
+/* Título principal del jumbotron en negrita */
 .jumbotron .display-4 {
   font-weight: bold;
 }
 
+/* Remover decoración de enlaces en la navegación */
 nav a {
   text-decoration: none;
 }
 
+/* === IMÁGENES PLACEHOLDER === */
+/* Estilos para imágenes de marcador de posición */
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
@@ -22,169 +28,209 @@ nav a {
   user-select: none;
 }
 
+/* Imágenes placeholder grandes en dispositivos medianos y grandes */
 @media (min-width: 768px) {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
   }
 }
 
+/* === JUMBOTRON PRINCIPAL === */
+/* Sección hero/banner principal del sitio con imagen de fondo */
 .jumbotron {
-  height: 50vh;
+  height: 50vh; /* 50% del viewport height para adaptarse a diferentes pantallas */
   padding: 5em inherit;
   margin-bottom: 0;
-  background-color: #53c0fb;
-  background: url("../img/cover_back.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: black;
-  font-weight: bold;
+  background-color: #53c0fb; /* Color de fallback azul claro */
+  background: url("../img/cover_back.png"); /* Imagen de fondo principal */
+  background-size: cover; /* La imagen cubre todo el contenedor */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita repetición de la imagen */
+  color: black; /* Texto en negro para contraste */
+  font-weight: bold; /* Texto en negrita para destacar */
 }
 
+/* Media query para tablets y desktop - mayor padding en pantallas grandes */
 @media (min-width: 768px) {
   .jumbotron {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    padding-top: 6rem; /* Padding superior mayor en pantallas grandes */
+    padding-bottom: 6rem; /* Padding inferior mayor en pantallas grandes */
   }
 }
 
+/* Elimina margen inferior del último párrafo en jumbotron */
 .jumbotron p:last-child {
   margin-bottom: 0;
 }
 
+/* Título principal del jumbotron con peso de fuente ligero */
 .jumbotron-heading {
   font-weight: 300;
 }
 
+/* Contenedor interno del jumbotron con fondo semitransparente */
 .jumbotron .container {
-  max-width: 40rem;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 10px;
-  text-shadow: 1px 1px 2px grey;
+  max-width: 40rem; /* Ancho máximo para legibilidad */
+  background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco semitransparente */
+  border-radius: 10px; /* Esquinas redondeadas */
+  text-shadow: 1px 1px 2px grey; /* Sombra de texto para mejorar legibilidad */
 }
 
+/* Texto principal/destacado del jumbotron */
 .jumbotron .lead {
-  font-size: 38px;
+  font-size: 38px; /* Tamaño de fuente grande para impacto visual */
 }
 
+/* === FOOTER === */
+/* Pie de página con espaciado vertical */
 footer {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-top: 3rem; /* Espaciado superior generoso */
+  padding-bottom: 3rem; /* Espaciado inferior generoso */
 }
 
+/* Párrafos del footer con margen inferior reducido */
 footer p {
   margin-bottom: 0.25rem;
 }
 
+/* === HEADER DEL SITIO === */
+/* Enlaces del header en color blanco con transición suave */
 .site-header a {
   color: white;
-  transition: ease-in-out color 0.15s;
+  transition: ease-in-out color 0.15s; /* Transición suave para cambios de color */
 }
 
+/* Enlaces en menús desplegables del header en negro */
 .site-header .dropdown-menu a {
-  color: black;
+  color: black; /* Contraste adecuado sobre fondo claro del dropdown */
 }
 
+/* === ZONA DE SUBIDA DE ARCHIVOS === */
+/* Zona de arrastrar y soltar archivos con borde punteado azul */
 .dropzone {
-  border: 2px dashed #0087f7;
-  border-radius: 5px;
-  background: white;
+  border: 2px dashed #0087f7; /* Borde punteado azul para indicar zona de drop */
+  border-radius: 5px; /* Esquinas ligeramente redondeadas */
+  background: white; /* Fondo blanco limpio */
 }
 
+/* === UTILIDADES DE IMAGEN === */
+/* Clase para ajustar imágenes al contenedor */
 .img-fit {
-  max-height: 100%;
+  max-height: 100%; /* La imagen no excede la altura del contenedor */
 }
 
+/* === ALERTAS FLOTANTES === */
+/* Alertas posicionadas de forma fija en la parte superior centrada */
 .alert {
-  position: fixed;
-  top: 80px;
-  width: 50%;
-  left: 50%;
-  transform: translate(-50%, 0);
+  position: fixed; /* Posición fija que no se mueve con scroll */
+  top: 80px; /* Distancia desde la parte superior */
+  width: 50%; /* Ancho del 50% de la pantalla */
+  left: 50%; /* Posicionado al 50% desde la izquierda */
+  transform: translate(-50%, 0); /* Centrado horizontal perfecto */
 }
 
+/* === INDICADOR DE CARGA (SPINNER) === */
+/* Contenedor principal del spinner de carga */
 .lds-ring {
   display: inline-block;
   position: relative;
-  width: 64px;
-  height: 64px;
-  top: 50%;
-  left: 50%;
+  width: 64px; /* Ancho fijo del spinner */
+  height: 64px; /* Alto fijo del spinner */
+  top: 50%; /* Centrado vertical */
+  left: 50%; /* Centrado horizontal */
 }
 
+/* === UTILIDADES DE CURSOR === */
+/* Clase para elementos que deben mostrar cursor de puntero */
 .cursor-active {
   cursor: pointer;
 }
 
+/* === UTILIDADES DE POSICIONAMIENTO === */
+/* Elemento flotado a la izquierda con fondo semitransparente */
 .left {
   float: left;
   padding: 4px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco semitransparente */
 }
 
+/* Elementos individuales del spinner (anillos) */
 .lds-ring div {
   box-sizing: border-box;
   display: block;
   position: absolute;
-  width: 51px;
-  height: 51px;
+  width: 51px; /* Ancho de cada anillo */
+  height: 51px; /* Alto de cada anillo */
   margin: 6px;
-  border: 6px solid #fff;
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #fff transparent transparent transparent;
+  border: 6px solid #fff; /* Borde blanco */
+  border-radius: 50%; /* Forma circular */
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite; /* Animación continua */
+  border-color: #fff transparent transparent transparent; /* Solo un cuarto del borde visible */
 }
 
+/* Retrasos de animación para crear efecto escalonado */
 .lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
+  animation-delay: -0.45s; /* Primer anillo con mayor retraso */
 }
 
 .lds-ring div:nth-child(2) {
-  animation-delay: -0.3s;
+  animation-delay: -0.3s; /* Segundo anillo */
 }
 
 .lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
+  animation-delay: -0.15s; /* Tercer anillo */
 }
 
+/* === ANIMACIÓN DEL SPINNER === */
+/* Keyframe para rotación continua del spinner */
 @keyframes lds-ring {
   0% {
-    transform: rotate(0deg);
+    transform: rotate(0deg); /* Posición inicial */
   }
 
   100% {
-    transform: rotate(360deg);
+    transform: rotate(360deg); /* Rotación completa de 360 grados */
   }
 }
 
+/* === FORMULARIO DE INICIO DE SESIÓN === */
+/* Contenedor del formulario de login centrado y con ancho limitado */
 .signin {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
+  width: 100%; /* Ancho completo disponible */
+  max-width: 330px; /* Ancho máximo para mantener legibilidad */
+  padding: 15px; /* Espaciado interno */
+  margin: auto; /* Centrado automático */
 }
 
+/* === OVERLAY DEL SPINNER === */
+/* Overlay que cubre toda la pantalla durante la carga */
 #spinner-wrapper {
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1021;
-  display: none;
+  position: fixed; /* Posición fija que cubre todo */
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo negro semitransparente */
+  width: 100%; /* Ancho completo de la ventana */
+  height: 100%; /* Alto completo de la ventana */
+  top: 0; /* Desde la parte superior */
+  left: 0; /* Desde la parte izquierda */
+  z-index: 1021; /* Índice Z alto para estar sobre otros elementos */
+  display: none; /* Oculto por defecto, se muestra con JavaScript */
 }
 
+/* === CONTENIDO PRINCIPAL === */
+/* Altura mínima del main para ocupar espacio disponible */
 main {
-  min-height: calc(100vh - 210px);
+  min-height: calc(100vh - 210px); /* Altura viewport menos header y footer estimados */
 }
 
+/* === TARJETAS PERSONALIZADAS === */
+/* Enlaces de tarjetas que mantienen el color heredado sin decoración */
 a.custom-card,
 a.custom-card:hover {
-  color: inherit;
-  text-decoration: inherit;
+  color: inherit; /* Hereda el color del elemento padre */
+  text-decoration: inherit; /* Hereda la decoración del elemento padre */
 }
 
+/* === ELEMENTOS MARCADOS/SELECCIONADOS === */
+/* Clase para elementos marcados o seleccionados (ej: estrellas) */
 .checked {
-  color: orange;
+  color: orange; /* Color naranja para indicar estado activo/marcado */
 }

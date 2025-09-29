@@ -1,57 +1,64 @@
-/* ----- General ----- */
+/* === ESTILOS GENERALES DE LA PÁGINA DE LOGIN === */
+/* Configuración base del cuerpo de la página */
 body {
-  font-family: "Raleway", sans-serif;
-  background-color: #eee;
+  font-family: "Raleway", sans-serif; /* Fuente principal Raleway para mayor legibilidad */
+  background-color: #eee; /* Fondo gris claro neutro */
 }
 
-/* ----- Card principal ----- */
+/* === TARJETA PRINCIPAL DEL LOGIN === */
+/* Contenedor principal del formulario con bordes redondeados */
 .card.rounded-3.text-black {
-  border-radius: 1rem;
-  overflow: hidden; /* importante para bordes redondeados internos */
+  border-radius: 1rem; /* Bordes redondeados suaves de 1rem */
+  overflow: hidden; /* Oculta contenido que sobresale - importante para bordes redondeados internos */
 }
 
-/* ----- Columnas ----- */
+/* === DISEÑO RESPONSIVE PARA TABLETS Y DESKTOP === */
+/* Media query para pantallas medianas y grandes (768px+) */
 @media (min-width: 768px) {
-  /* Columna izquierda: bordes redondeados */
+  /* Columna izquierda del formulario con bordes redondeados */
   .col-lg-6:first-child {
-    border-top-left-radius: 1rem;
-    border-bottom-left-radius: 1rem;
-    overflow: hidden;
+    border-top-left-radius: 1rem; /* Esquina superior izquierda redondeada */
+    border-bottom-left-radius: 1rem; /* Esquina inferior izquierda redondeada */
+    overflow: hidden; /* Previene desbordamiento de contenido */
   }
 
-  /* Columna derecha: bordes redondeados */
+  /* Columna derecha con gradiente y bordes redondeados */
   .gradient-custom-2 {
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
+    border-top-right-radius: 1rem; /* Esquina superior derecha redondeada */
+    border-bottom-right-radius: 1rem; /* Esquina inferior derecha redondeada */
   }
 }
 
-/* ----- Fondo de la columna derecha ----- */
+/* === SECCIÓN VISUAL LATERAL === */
+/* Fondo de la columna derecha con imagen y overlay oscuro */
 .gradient-custom-2 {
-  /* imagen de fondo con overlay */
+  /* Imagen de fondo con overlay semi-transparente para mejorar legibilidad */
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("https://i.ytimg.com/vi/vLoz6f2ZoY4/maxresdefault.jpg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  color: #fff;
+    url("https://i.ytimg.com/vi/vLoz6f2ZoY4/maxresdefault.jpg"); /* Overlay negro + imagen */
+  background-position: center; /* Centra la imagen de fondo */
+  background-size: cover; /* La imagen cubre todo el contenedor sin distorsión */
+  background-repeat: no-repeat; /* Evita repetición de la imagen */
+  color: #fff; /* Texto blanco para contraste sobre fondo oscuro */
 }
 
-/* ----- Botón de inicio de sesión ----- */
+/* === BOTÓN DE INICIO DE SESIÓN === */
+/* Estilo principal del botón de login con efectos de transición */
 #botonIS {
-  background-color: rgb(7, 1, 87) !important;
-  color: #fff;
-  transition: all 0.3s ease;
+  background-color: rgb(7, 1, 87) !important; /* Azul marino oscuro (forzado con !important) */
+  color: #fff; /* Texto blanco para contraste */
+  transition: all 0.3s ease; /* Transición suave para todos los cambios */
 }
 
+/* Estado hover del botón con efectos visuales */
 #botonIS:hover {
-  background-color: rgb(0, 0, 150) !important;
-  transform: scale(1.05);
+  background-color: rgb(0, 0, 150) !important; /* Azul más brillante al pasar mouse */
+  transform: scale(1.05); /* Efecto de crecimiento sutil (5% mayor) */
 }
 
-/* ----- Altura del formulario en desktop ----- */
+/* === ALTURA COMPLETA EN PANTALLAS GRANDES === */
+/* Media query para ocupar toda la altura de la ventana en desktop */
 @media (min-width: 768px) {
   .gradient-form {
-    height: 100vh !important;
+    height: 100vh !important; /* Altura completa del viewport (forzado con !important) */
   }
 }

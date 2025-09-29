@@ -1,58 +1,104 @@
-/*
- * The MIT License
- * Copyright (c) 2012 Matias Meno <m@tias.me>
- */
+/* ============================================================================
+   DROPZONE.CSS - ESTILOS PARA LA LIBRERÍA DROPZONE.JS
+   ============================================================================
+
+   LICENCIA: MIT License
+   Copyright (c) 2012 Matias Meno <m@tias.me>
+
+   PROPÓSITO:
+   - Proporcionar estilos para la funcionalidad de arrastrar y soltar archivos
+   - Crear una interfaz visual atractiva para la subida de archivos
+   - Mostrar previsualizaciones de archivos subidos
+   - Indicadores de progreso y estados de error/éxito
+   - Animaciones suaves para mejorar la experiencia del usuario
+
+   CARACTERÍSTICAS:
+   - Zona de drop con efectos visuales
+   - Previsualización de imágenes con miniaturas
+   - Barras de progreso animadas
+   - Estados de error y éxito con iconografía
+   - Efectos hover y transiciones CSS
+============================================================================ */
+/* === CONFIGURACIÓN GLOBAL === */
+/* Reset de box-sizing para dropzone y todos sus elementos hijos */
 .dropzone,
 .dropzone * {
-  box-sizing: border-box;
+  box-sizing: border-box; /* Incluye padding y border en el ancho total */
 }
 
+/* === CONTENEDOR PRINCIPAL DE DROPZONE === */
+/* Contenedor base para la zona de arrastrar y soltar */
 .dropzone {
-  position: relative;
+  position: relative; /* Para posicionamiento de elementos internos */
 }
+/* === PREVISUALIZACIÓN DE ARCHIVOS === */
+/* Contenedor para cada archivo individual en la previsualización */
 .dropzone .dz-preview {
-  position: relative;
-  display: inline-block;
-  width: 120px;
-  margin: 0.5em;
+  position: relative; /* Para posicionamiento de elementos internos como iconos */
+  display: inline-block; /* Se organizan horizontalmente */
+  width: 120px; /* Ancho fijo para consistencia */
+  margin: 0.5em; /* Margen alrededor de cada preview */
 }
+/* === BARRA DE PROGRESO === */
+/* Contenedor de la barra de progreso de subida */
 .dropzone .dz-preview .dz-progress {
-  display: block;
-  height: 15px;
-  border: 1px solid #aaa;
+  display: block; /* Ocupa toda la línea */
+  height: 15px; /* Altura de la barra */
+  border: 1px solid #aaa; /* Borde gris para definir límites */
 }
+
+/* Indicador visual del progreso de subida */
 .dropzone .dz-preview .dz-progress .dz-upload {
-  display: block;
-  height: 100%;
-  width: 0;
-  background: green;
+  display: block; /* Ocupa toda la línea */
+  height: 100%; /* Altura completa de la barra */
+  width: 0; /* Inicia en 0% - se anima con JavaScript */
+  background: green; /* Color verde para indicar progreso */
 }
+/* === MENSAJE DE ERROR === */
+/* Mensaje que se muestra cuando hay errores en la subida */
 .dropzone .dz-preview .dz-error-message {
-  color: red;
-  display: none;
+  color: red; /* Color rojo para errores */
+  display: none; /* Oculto por defecto */
 }
+
+/* === ESTADOS DE ERROR === */
+/* Mostrar mensaje e icono cuando hay error */
 .dropzone .dz-preview.dz-error .dz-error-message,
 .dropzone .dz-preview.dz-error .dz-error-mark {
-  display: block;
-}
-.dropzone .dz-preview.dz-success .dz-success-mark {
-  display: block;
-}
-.dropzone .dz-preview .dz-error-mark,
-.dropzone .dz-preview .dz-success-mark {
-  position: absolute;
-  display: none;
-  left: 30px;
-  top: 30px;
-  width: 54px;
-  height: 58px;
-  left: 50%;
-  margin-left: -27px;
+  display: block; /* Se muestran cuando hay error */
 }
 
+/* === ESTADO DE ÉXITO === */
+/* Mostrar marca de éxito cuando la subida es exitosa */
+.dropzone .dz-preview.dz-success .dz-success-mark {
+  display: block; /* Se muestra cuando la subida es exitosa */
+}
+/* === ICONOS DE ESTADO === */
+/* Posicionamiento de iconos de error y éxito */
+.dropzone .dz-preview .dz-error-mark,
+.dropzone .dz-preview .dz-success-mark {
+  position: absolute; /* Posicionamiento absoluto sobre la previsualización */
+  display: none; /* Ocultos por defecto */
+  left: 30px; /* Posición inicial (sobrescrita por centrado) */
+  top: 30px; /* Posición vertical */
+  width: 54px; /* Ancho del icono */
+  height: 58px; /* Alto del icono */
+  left: 50%; /* Centrado horizontal */
+  margin-left: -27px; /* Ajuste para centrado perfecto (mitad del ancho) */
+}
+
+/* ============================================================================
+   ANIMACIONES KEYFRAMES
+   ============================================================================
+   Definiciones de animaciones para diferentes efectos visuales en Dropzone.
+============================================================================ */
+
+/* === ANIMACIÓN "PASSING-THROUGH" (WEBKIT) === */
+/* Animación que hace que los elementos aparezcan desde abajo, se muestren y desaparezcan por arriba */
 @-webkit-keyframes passing-through {
   0% {
-    opacity: 0;
+    opacity: 0; /* Inicia invisible */
+    /* Inicia 40px más abajo - con prefijos para compatibilidad */
     -webkit-transform: translateY(40px);
     -moz-transform: translateY(40px);
     -ms-transform: translateY(40px);
@@ -61,7 +107,8 @@
   }
   30%,
   70% {
-    opacity: 1;
+    opacity: 1; /* Visible en el medio de la animación */
+    /* En posición original */
     -webkit-transform: translateY(0px);
     -moz-transform: translateY(0px);
     -ms-transform: translateY(0px);
@@ -69,7 +116,8 @@
     transform: translateY(0px);
   }
   100% {
-    opacity: 0;
+    opacity: 0; /* Termina invisible */
+    /* Termina 40px más arriba */
     -webkit-transform: translateY(-40px);
     -moz-transform: translateY(-40px);
     -ms-transform: translateY(-40px);
@@ -77,6 +125,8 @@
     transform: translateY(-40px);
   }
 }
+/* === ANIMACIÓN "PASSING-THROUGH" (MOZILLA) === */
+/* Versión Mozilla de la animación passing-through */
 @-moz-keyframes passing-through {
   0% {
     opacity: 0;
@@ -104,6 +154,8 @@
     transform: translateY(-40px);
   }
 }
+/* === ANIMACIÓN "PASSING-THROUGH" (ESTÁNDAR) === */
+/* Versión estándar de la animación para navegadores modernos */
 @keyframes passing-through {
   0% {
     opacity: 0;
@@ -131,9 +183,12 @@
     transform: translateY(-40px);
   }
 }
+/* === ANIMACIÓN "SLIDE-IN" (WEBKIT) === */
+/* Animación de entrada desde abajo que se detiene en posición final */
 @-webkit-keyframes slide-in {
   0% {
-    opacity: 0;
+    opacity: 0; /* Inicia invisible */
+    /* Inicia 40px más abajo */
     -webkit-transform: translateY(40px);
     -moz-transform: translateY(40px);
     -ms-transform: translateY(40px);
@@ -141,7 +196,8 @@
     transform: translateY(40px);
   }
   30% {
-    opacity: 1;
+    opacity: 1; /* Se hace visible */
+    /* Llega a posición final y se queda ahí */
     -webkit-transform: translateY(0px);
     -moz-transform: translateY(0px);
     -ms-transform: translateY(0px);
@@ -149,6 +205,8 @@
     transform: translateY(0px);
   }
 }
+/* === ANIMACIÓN "SLIDE-IN" (MOZILLA) === */
+/* Versión Mozilla de la animación slide-in */
 @-moz-keyframes slide-in {
   0% {
     opacity: 0;
@@ -167,6 +225,8 @@
     transform: translateY(0px);
   }
 }
+/* === ANIMACIÓN "SLIDE-IN" (ESTÁNDAR) === */
+/* Versión estándar de la animación slide-in */
 @keyframes slide-in {
   0% {
     opacity: 0;
@@ -185,8 +245,11 @@
     transform: translateY(0px);
   }
 }
+/* === ANIMACIÓN "PULSE" (WEBKIT) === */
+/* Animación de pulsación que hace crecer y encoger el elemento */
 @-webkit-keyframes pulse {
   0% {
+    /* Tamaño normal - escala 1 */
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
     -ms-transform: scale(1);
@@ -194,6 +257,7 @@
     transform: scale(1);
   }
   10% {
+    /* Crece al 110% del tamaño original */
     -webkit-transform: scale(1.1);
     -moz-transform: scale(1.1);
     -ms-transform: scale(1.1);
@@ -201,6 +265,7 @@
     transform: scale(1.1);
   }
   20% {
+    /* Regresa al tamaño normal */
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
     -ms-transform: scale(1);
@@ -208,6 +273,8 @@
     transform: scale(1);
   }
 }
+/* === ANIMACIÓN "PULSE" (MOZILLA) === */
+/* Versión Mozilla de la animación pulse */
 @-moz-keyframes pulse {
   0% {
     -webkit-transform: scale(1);
@@ -231,6 +298,8 @@
     transform: scale(1);
   }
 }
+/* === ANIMACIÓN "PULSE" (ESTÁNDAR) === */
+/* Versión estándar de la animación pulse */
 @keyframes pulse {
   0% {
     -webkit-transform: scale(1);
@@ -254,53 +323,83 @@
     transform: scale(1);
   }
 }
+/* ============================================================================
+   SECCIÓN PERSONALIZADA DE SUBIDA DE ARCHIVOS
+   ============================================================================
+   Estilos específicos para el elemento #file-upload y sus componentes.
+============================================================================ */
+
+/* === CONFIGURACIÓN GLOBAL DEL FILE-UPLOAD === */
+/* Reset de box-sizing para el componente file-upload */
 #file-upload,
 #file-upload * {
-  box-sizing: border-box;
+  box-sizing: border-box; /* Incluye padding y border en el cálculo del tamaño */
 }
 
+/* === ZONA DE SUBIDA PRINCIPAL === */
+/* Contenedor principal para arrastrar y soltar archivos */
 #file-upload {
-  min-height: 150px;
-  border: 2px dashed silver;
-  border-radius: 5px;
-  background: white;
-  margin-bottom: 10px;
+  min-height: 150px; /* Altura mínima para una zona de drop adecuada */
+  border: 2px dashed silver; /* Borde punteado plateado - indica zona de drop */
+  border-radius: 5px; /* Esquinas ligeramente redondeadas */
+  background: white; /* Fondo blanco limpio */
+  margin-bottom: 10px; /* Margen inferior para separación */
 }
+/* === ZONA CLICKEABLE === */
+/* Estilos cuando la zona de subida es clickeable */
 #file-upload.dz-clickable {
-  cursor: pointer;
+  cursor: pointer; /* Cursor de mano para indicar que es clickeable */
 }
+
+/* Elementos internos no deben mostrar cursor clickeable por defecto */
 #file-upload.dz-clickable * {
-  cursor: default;
+  cursor: default; /* Cursor normal para elementos internos */
 }
+
+/* Mensaje y sus elementos sí deben ser clickeables */
 #file-upload.dz-clickable .dz-message,
 #file-upload.dz-clickable .dz-message * {
-  cursor: pointer;
+  cursor: pointer; /* Cursor de mano para el mensaje */
 }
+/* === ESTADOS DE INTERACCIÓN === */
+/* Ocultar mensaje cuando se inicia la subida */
 #file-upload.dz-started .dz-message {
-  display: none;
+  display: none; /* El mensaje desaparece cuando hay archivos */
 }
+
+/* Estado cuando se arrastra un archivo sobre la zona */
 #file-upload.dz-drag-hover {
-  border-style: solid;
+  border-style: solid; /* Borde cambia de punteado a sólido */
 }
+
+/* Mensaje con opacidad reducida durante drag hover */
 #file-upload.dz-drag-hover .dz-message {
-  opacity: 0.5;
+  opacity: 0.5; /* Se atenúa el mensaje durante el arrastre */
 }
+/* === MENSAJE DE LA ZONA DE SUBIDA === */
+/* Texto instructivo en el centro de la zona */
 #file-upload .dz-message {
-  text-align: center;
-  margin: 4em 0;
+  text-align: center; /* Centrado horizontal */
+  margin: 4em 0; /* Margen vertical amplio para centrado visual */
 }
+/* === PREVISUALIZACIÓN EN FILE-UPLOAD === */
+/* Contenedor de previsualización dentro del file-upload */
 #file-upload .dz-preview {
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-  margin: 16px;
-  min-height: 100px;
+  position: relative; /* Para posicionamiento de elementos internos */
+  display: inline-block; /* Se organizan horizontalmente */
+  vertical-align: top; /* Alineación superior */
+  margin: 16px; /* Margen alrededor de cada preview */
+  min-height: 100px; /* Altura mínima para consistencia */
 }
+/* === EFECTOS HOVER EN PREVISUALIZACIÓN === */
+/* Preview se eleva al hacer hover */
 #file-upload .dz-preview:hover {
-  z-index: 1000;
+  z-index: 1000; /* Se coloca por encima de otros elementos */
 }
+
+/* Detalles se muestran completamente en hover */
 #file-upload .dz-preview:hover .dz-details {
-  opacity: 1;
+  opacity: 1; /* Detalles completamente visibles */
 }
 #file-upload .dz-preview.dz-file-preview .dz-image {
   border-radius: 20px;
@@ -485,41 +584,65 @@
   opacity: 1;
   pointer-events: auto;
 }
+/* === MENSAJE DE ERROR DETALLADO === */
+/* Tooltip de error que aparece debajo de la previsualización */
 #file-upload .dz-preview .dz-error-message {
-  pointer-events: none;
-  z-index: 1000;
-  position: absolute;
-  display: block;
-  display: none;
-  opacity: 0;
+  pointer-events: none; /* No interfiere con eventos del mouse */
+  z-index: 1000; /* Por encima de otros elementos */
+  position: absolute; /* Posicionado absolutamente */
+  display: block; /* Mostrar como bloque */
+  display: none; /* Oculto por defecto (declaración dual) */
+  opacity: 0; /* Invisible por defecto */
+  /* Transición suave de opacidad con prefijos */
   -webkit-transition: opacity 0.3s ease;
   -moz-transition: opacity 0.3s ease;
   -ms-transition: opacity 0.3s ease;
   -o-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease;
-  border-radius: 8px;
-  font-size: 13px;
-  top: 130px;
-  left: -10px;
-  width: 140px;
-  background: #be2626;
-  background: linear-gradient(to bottom, #be2626, #a92222);
-  padding: 0.5em 1.2em;
-  color: white;
+  border-radius: 8px; /* Bordes redondeados */
+  font-size: 13px; /* Fuente pequeña */
+  top: 130px; /* Posición vertical debajo del preview */
+  left: -10px; /* Ligeramente desplazado a la izquierda */
+  width: 140px; /* Ancho fijo */
+  background: #be2626; /* Color rojo (fallback) */
+  background: linear-gradient(to bottom, #be2626, #a92222); /* Gradiente rojo */
+  padding: 0.5em 1.2em; /* Espaciado interno */
+  color: white; /* Texto blanco para contraste */
 }
+/* === FLECHA DEL TOOLTIP DE ERROR === */
+/* Flecha que apunta hacia arriba desde el mensaje de error */
 #file-upload .dz-preview .dz-error-message:after {
-  content: "";
-  position: absolute;
-  top: -6px;
-  left: 64px;
-  width: 0;
-  height: 0;
+  content: ""; /* Contenido vacío requerido para pseudo-elemento */
+  position: absolute; /* Posicionado respecto al mensaje */
+  top: -6px; /* Posicionado encima del mensaje */
+  left: 64px; /* Centrado horizontalmente */
+  width: 0; /* Sin ancho - solo bordes */
+  height: 0; /* Sin altura - solo bordes */
+  /* Bordes transparentes a los lados */
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-bottom: 6px solid #be2626;
+  border-bottom: 6px solid #be2626; /* Borde inferior rojo - forma la flecha */
 }
 
+/* === OVERRIDE DE ESTADOS DE ERROR === */
+/* Oculta los elementos de error por defecto (puede ser sobrescrito por JavaScript) */
 #file-upload .dz-preview.dz-error .dz-error-message,
 #file-upload .dz-preview.dz-error .dz-error-mark {
-  display: none;
+  display: none; /* Ocultos hasta que JavaScript los maneje */
 }
+
+/* ============================================================================
+   FIN DE DROPZONE.CSS
+   ============================================================================
+   Archivo completado con comentarios comprensivos en español.
+
+   RESUMEN DE FUNCIONALIDADES:
+   - Zona de arrastrar y soltar archivos
+   - Previsualización de archivos con miniaturas
+   - Barras de progreso animadas
+   - Estados de error y éxito con iconografía
+   - Efectos hover y transiciones suaves
+   - Animaciones keyframes para elementos dinámicos
+   - Tooltips de error con flechas
+   - Soporte completo para navegadores con prefijos CSS
+============================================================================ */

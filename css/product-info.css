@@ -1,748 +1,938 @@
-/* Estilos para product-info.html con el mismo diseño moderno que products.css */
+/* ============================================================================
+   PRODUCT-INFO.CSS - ESTILOS PARA LA PÁGINA DE DETALLE DE PRODUCTO
+   ============================================================================
 
-/* Asegurar que la navbar sea visible */
+   PROPÓSITO:
+   - Proporcionar una interfaz moderna y atractiva para mostrar detalles de productos
+   - Mantener consistencia visual con la página de productos (products.css)
+   - Implementar carrusel de imágenes con miniaturas interactivas
+   - Sistema de comentarios y calificaciones integrado
+   - Diseño completamente responsive para todos los dispositivos
+
+   CARACTERÍSTICAS PRINCIPALES:
+   - Efecto glassmorphism en contenedores
+   - Gradientes de texto para elementos destacados
+   - Animaciones suaves y efectos hover
+   - Sistema de miniaturas con estados activos
+   - Formulario de calificaciones con estrellas interactivas
+============================================================================ */
+
+/* === NAVEGACIÓN PRINCIPAL === */
+/* Configuración de la barra de navegación con alta prioridad visual */
 .navbar {
-  z-index: 1000;
-  position: relative;
+  z-index: 1000; /* Índice Z alto para mantenerse sobre otros elementos */
+  position: relative; /* Posicionamiento relativo para contexto de apilamiento */
 }
 
+/* Enlaces de navegación con efectos de transición */
 .navbar-nav .nav-link {
-  color: rgba(255, 255, 255, 0.85) !important;
-  font-weight: 500;
-  transition: color 0.3s ease;
+  color: rgba(255, 255, 255, 0.85) !important; /* Blanco semi-transparente */
+  font-weight: 500; /* Peso medio de fuente */
+  transition: color 0.3s ease; /* Transición suave para cambios de color */
 }
 
+/* Estado hover de los enlaces de navegación */
 .navbar-nav .nav-link:hover {
-  color: var(--primary-color) !important;
+  color: var(--primary-color) !important; /* Cambia al color principal en hover */
 }
 
+/* Marca/logo de la navegación */
 .navbar-brand {
-  font-weight: 700;
-  color: white !important;
+  font-weight: 700; /* Bold para destacar la marca */
+  color: white !important; /* Blanco puro forzado */
 }
 
+/* === CONTENEDOR PRINCIPAL DEL PRODUCTO === */
+/* Contenedor con efecto glassmorphism que alberga toda la información del producto */
 .product-detail-container {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border-radius: var(--radius);
-  padding: 2rem;
-  margin: 2rem 0;
-  box-shadow: var(--shadow-md);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.95); /* Fondo blanco casi opaco */
+  backdrop-filter: blur(20px); /* Efecto de desenfoque del fondo - glassmorphism */
+  border-radius: var(--radius); /* Bordes redondeados usando variable CSS */
+  padding: 2rem; /* Espaciado interno generoso */
+  margin: 2rem 0; /* Margen vertical para separación */
+  box-shadow: var(--shadow-md); /* Sombra media para dar profundidad */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil blanco transparente */
 }
 
-/* Contenedor principal del producto */
+/* === TARJETA PRINCIPAL DE DETALLE === */
+/* Layout en grid de dos columnas para imagen y contenido */
 .product-detail-card {
-  background: white;
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  margin-bottom: 2rem;
-  border: 1px solid var(--border-color);
-  transition: all 0.3s ease;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  align-items: start;
+  background: white; /* Fondo blanco sólido */
+  border-radius: var(--radius); /* Bordes redondeados grandes */
+  overflow: hidden; /* Oculta contenido que sobresalga */
+  box-shadow: var(--shadow-lg); /* Sombra grande para destacar */
+  margin-bottom: 2rem; /* Margen inferior */
+  border: 1px solid var(--border-color); /* Borde sutil */
+  transition: all 0.3s ease; /* Transición suave para efectos hover */
+  display: grid; /* Layout de grid CSS */
+  grid-template-columns: 1fr 1fr; /* Dos columnas de igual tamaño */
+  gap: 2rem; /* Espacio entre columnas */
+  align-items: start; /* Alineación superior de elementos */
 }
 
+/* Estado hover de la tarjeta principal */
 .product-detail-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px); /* Elevación de 5px para efecto flotante */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); /* Sombra extendida y difusa */
 }
 
-/* Imagen del producto */
+/* === CONTENEDOR DE IMÁGENES === */
+/* Contenedor principal que alberga la imagen destacada */
 .product-image-container {
-  position: relative;
-  overflow: hidden;
-  border-radius: var(--radius-sm);
-  margin-bottom: 1rem;
+  position: relative; /* Para posicionamiento de elementos internos */
+  overflow: hidden; /* Oculta partes de imagen que sobresalgan durante zoom */
+  border-radius: var(--radius-sm); /* Bordes redondeados pequeños */
+  margin-bottom: 1rem; /* Espacio debajo del contenedor */
 }
 
+/* === IMAGEN PRINCIPAL DEL PRODUCTO === */
+/* Imagen destacada grande con efecto zoom */
 .product-main-image {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  border-radius: var(--radius-sm);
-  transition: transform 0.3s ease;
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+  height: 400px; /* Altura fija para consistencia */
+  object-fit: cover; /* Recorta y ajusta sin deformar */
+  border-radius: var(--radius-sm); /* Bordes redondeados */
+  transition: transform 0.3s ease; /* Transición suave para efecto zoom */
 }
 
+/* Efecto zoom en hover de la imagen principal */
 .product-main-image:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); /* Zoom del 5% - efecto sutil */
 }
 
-/* Carrusel de imágenes */
+/* === CARRUSEL DE IMÁGENES === */
+/* Imágenes dentro del carrusel de Bootstrap */
 .carousel-item img {
-  height: 400px;
-  object-fit: cover;
-  border-radius: var(--radius-sm);
+  height: 400px; /* Altura consistente con imagen principal */
+  object-fit: cover; /* Recorta sin deformar */
+  border-radius: var(--radius-sm); /* Bordes redondeados */
 }
 
-/* Miniaturas de imágenes */
+/* === MINIATURAS DE IMÁGENES === */
+/* Contenedor horizontal para las miniaturas/thumbnails */
 .image-thumbnails {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-  justify-content: space-between;
-  width: 100%;
-  overflow-x: auto;
-  padding: 0.25rem;
+  display: flex; /* Layout flexible horizontal */
+  gap: 1rem; /* Espacio entre miniaturas */
+  margin-top: 1rem; /* Margen superior */
+  justify-content: space-between; /* Distribuye miniaturas uniformemente */
+  width: 100%; /* Ancho completo */
+  overflow-x: auto; /* Scroll horizontal si es necesario */
+  padding: 0.25rem; /* Padding mínimo para efectos de borde */
 }
 
-/* Scrollbar personalizado para las miniaturas */
+/* === SCROLLBAR PERSONALIZADA === */
+/* Estilización de la barra de scroll para las miniaturas (solo Webkit) */
 .image-thumbnails::-webkit-scrollbar {
-  height: 4px;
+  height: 4px; /* Altura de la scrollbar */
 }
 
+/* Track (riel) de la scrollbar */
 .image-thumbnails::-webkit-scrollbar-track {
-  background: var(--bg-light);
-  border-radius: 2px;
+  background: var(--bg-light); /* Fondo gris claro */
+  border-radius: 2px; /* Bordes redondeados */
 }
 
+/* Thumb (deslizador) de la scrollbar */
 .image-thumbnails::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 2px;
+  background: var(--primary-color); /* Color principal */
+  border-radius: 2px; /* Bordes redondeados */
 }
 
+/* Estado hover del thumb de la scrollbar */
 .image-thumbnails::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary-color);
+  background: var(--secondary-color); /* Color secundario en hover */
 }
 
+/* === MINIATURA INDIVIDUAL === */
+/* Cada thumbnail individual con efectos interactivos */
 .thumbnail-item {
-  flex: 1;
-  height: 100px;
-  max-width: 120px;
-  min-width: 80px;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: 3px solid transparent;
-  position: relative;
+  flex: 1; /* Se expande para ocupar espacio disponible */
+  height: 100px; /* Altura fija */
+  max-width: 120px; /* Ancho máximo */
+  min-width: 80px; /* Ancho mínimo */
+  border-radius: var(--radius-sm); /* Bordes redondeados */
+  overflow: hidden; /* Oculta contenido que sobresalga */
+  cursor: pointer; /* Indica que es clickeable */
+  transition: all 0.3s ease; /* Transición suave para todos los efectos */
+  border: 3px solid transparent; /* Borde transparente por defecto */
+  position: relative; /* Para pseudo-elementos */
 }
 
+/* Estado hover de miniatura */
 .thumbnail-item:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px); /* Elevación en hover */
+  box-shadow: var(--shadow-lg); /* Sombra grande */
 }
 
+/* Estado activo de miniatura (imagen seleccionada) */
 .thumbnail-item.active {
-  border-color: var(--primary-color);
-  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
-  transform: translateY(-2px);
+  border-color: var(--primary-color); /* Borde con color principal */
+  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3); /* Sombra coloreada */
+  transform: translateY(-2px); /* Elevación permanente */
 }
 
+/* === IMÁGENES DENTRO DE MINIATURAS === */
+/* Imágenes dentro de cada thumbnail */
 .thumbnail-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
+  width: 100%; /* Ancho completo de la miniatura */
+  height: 100%; /* Alto completo de la miniatura */
+  object-fit: cover; /* Recorta sin deformar */
+  transition: transform 0.3s ease; /* Transición suave para zoom */
 }
 
+/* Efecto zoom en hover de imagen de miniatura */
 .thumbnail-item:hover img {
-  transform: scale(1.05);
+  transform: scale(1.05); /* Zoom del 5% en hover */
 }
 
+/* Zoom sutil en miniatura activa */
 .thumbnail-item.active img {
-  transform: scale(1.02);
+  transform: scale(1.02); /* Zoom del 2% - efecto más sutil para estado activo */
 }
 
+/* Overlay coloreado en miniatura activa */
 .thumbnail-item.active::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 107, 53, 0.2);
-  border-radius: var(--radius-sm);
+  content: ""; /* Contenido vacío requerido para pseudo-elemento */
+  position: absolute; /* Posicionamiento absoluto para cubrir toda la miniatura */
+  top: 0; /* Desde arriba */
+  left: 0; /* Desde la izquierda */
+  right: 0; /* Hasta la derecha */
+  bottom: 0; /* Hasta abajo */
+  background: rgba(255, 107, 53, 0.2); /* Overlay naranja semi-transparente */
+  border-radius: var(--radius-sm); /* Bordes redondeados */
 }
 
+/* === CONTROLES DEL CARRUSEL === */
+/* Botones de navegación anterior/siguiente del carrusel */
 .carousel-control-prev,
 .carousel-control-next {
-  width: 50px;
-  height: 50px;
-  background: rgba(255, 107, 53, 0.8);
-  border-radius: 50%;
-  top: 50%;
-  transform: translateY(-50%);
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  width: 50px; /* Ancho fijo circular */
+  height: 50px; /* Alto fijo circular */
+  background: rgba(255, 107, 53, 0.8); /* Fondo naranja semi-transparente */
+  border-radius: 50%; /* Forma circular */
+  top: 50%; /* Centrado vertical */
+  transform: translateY(-50%); /* Ajuste fino del centrado */
+  backdrop-filter: blur(10px); /* Efecto glassmorphism */
+  border: 2px solid rgba(255, 255, 255, 0.3); /* Borde blanco sutil */
 }
 
+/* Botón anterior - posicionado a la izquierda */
 .carousel-control-prev {
-  left: 15px;
+  left: 15px; /* Posición desde la izquierda */
 }
 
+/* Botón siguiente - posicionado a la derecha */
 .carousel-control-next {
-  right: 15px;
+  right: 15px; /* Posición desde la derecha */
 }
 
+/* Estado hover de los controles del carrusel */
 .carousel-control-prev:hover,
 .carousel-control-next:hover {
-  background: var(--primary-color);
+  background: var(--primary-color); /* Fondo sólido en hover */
 }
 
-/* Información del producto */
+/* === INFORMACIÓN DEL PRODUCTO === */
+/* Contenedor de toda la información textual del producto */
 .product-info {
-  padding: 2rem;
+  padding: 2rem; /* Espaciado interno generoso */
 }
 
+/* === TÍTULO DEL PRODUCTO === */
+/* Título principal con gradiente de texto */
 .product-title {
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: var(--text-dark);
-  margin-bottom: 1rem;
+  font-size: 2.25rem; /* Tamaño grande para impacto visual */
+  font-weight: 700; /* Bold para destacar */
+  color: var(--text-dark); /* Color de texto oscuro (fallback) */
+  margin-bottom: 1rem; /* Espaciado inferior */
+  /* Gradiente diagonal usando colores principales */
   background: linear-gradient(
     135deg,
     var(--primary-color),
     var(--secondary-color)
   );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  /* Aplicación del gradiente solo al texto */
+  -webkit-background-clip: text; /* Webkit prefix */
+  -webkit-text-fill-color: transparent; /* Hace el texto transparente para mostrar el gradiente */
+  background-clip: text; /* Versión estándar */
 }
 
+/* === CATEGORÍA DEL PRODUCTO === */
+/* Etiqueta de categoría con estilo distintivo */
 .product-category {
-  color: var(--text-light);
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 1.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  color: var(--text-light); /* Color gris claro */
+  font-size: 1rem; /* Tamaño estándar */
+  font-weight: 500; /* Peso medio */
+  margin-bottom: 1.5rem; /* Espaciado inferior */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  letter-spacing: 0.5px; /* Espaciado entre letras para mejor legibilidad */
 }
 
+/* === DESCRIPCIÓN DEL PRODUCTO === */
+/* Descripción detallada del producto */
 .product-description {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: var(--text-dark);
-  margin-bottom: 2rem;
+  font-size: 1.1rem; /* Tamaño ligeramente mayor para legibilidad */
+  line-height: 1.7; /* Altura de línea optimizada para lectura */
+  color: var(--text-dark); /* Color de texto oscuro */
+  margin-bottom: 2rem; /* Espaciado inferior generoso */
 }
 
+/* === METADATOS DEL PRODUCTO === */
+/* Contenedor para precio y estadísticas */
 .product-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  display: flex; /* Layout flexible */
+  flex-direction: column; /* Organización vertical */
+  gap: 1rem; /* Espacio entre elementos */
+  margin-bottom: 2rem; /* Espaciado inferior */
 }
 
+/* === PRECIO DEL PRODUCTO === */
+/* Precio destacado con icono */
 .product-price {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  font-size: 2rem; /* Tamaño grande para destacar */
+  font-weight: 700; /* Bold */
+  color: var(--primary-color); /* Color principal */
+  display: flex; /* Layout flexible */
+  align-items: center; /* Alineación vertical centrada */
+  gap: 0.5rem; /* Espacio entre precio e icono */
 }
 
+/* Icono del precio */
 .product-price i {
-  font-size: 1.5rem;
+  font-size: 1.5rem; /* Tamaño del icono */
 }
 
+/* === PRODUCTOS VENDIDOS === */
+/* Contador de productos vendidos con icono */
 .product-sold {
-  font-size: 1.1rem;
-  color: var(--text-light);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  font-size: 1.1rem; /* Tamaño medio */
+  color: var(--text-light); /* Color gris claro */
+  display: flex; /* Layout flexible */
+  align-items: center; /* Alineación vertical centrada */
+  gap: 0.5rem; /* Espacio entre texto e icono */
 }
 
+/* Icono de productos vendidos */
 .product-sold i {
-  color: var(--accent-color);
+  color: var(--accent-color); /* Color de acento */
 }
 
-/* Botones modernos */
+/* === CONTENEDOR DE BOTONES === */
+/* Contenedor flexible para los botones de acción */
 .buttons-container {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
-  flex-wrap: wrap;
+  display: flex; /* Layout flexible */
+  gap: 1rem; /* Espacio entre botones */
+  margin-top: 2rem; /* Margen superior */
+  flex-wrap: wrap; /* Permite wrap en pantallas pequeñas */
 }
 
+/* === BOTONES DE PRODUCTO === */
+/* Estilo base para todos los botones de acción */
 .product-btn {
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  min-width: 200px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  padding: 1rem 2rem; /* Espaciado interno generoso */
+  border: none; /* Sin borde por defecto */
+  border-radius: var(--radius-sm); /* Bordes redondeados */
+  font-weight: 600; /* Semi-bold */
+  font-size: 1.1rem; /* Tamaño de fuente destacado */
+  cursor: pointer; /* Cursor de mano */
+  transition: all 0.3s ease; /* Transición suave para todos los efectos */
+  text-decoration: none; /* Sin subrayado si es enlace */
+  display: inline-flex; /* Layout flexible en línea */
+  align-items: center; /* Alineación vertical centrada */
+  justify-content: center; /* Centrado horizontal */
+  gap: 0.5rem; /* Espacio entre texto e icono */
+  min-width: 200px; /* Ancho mínimo para consistencia */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  letter-spacing: 0.5px; /* Espaciado entre letras */
 }
 
+/* === BOTÓN PRINCIPAL === */
+/* Botón de acción primaria con gradiente */
 .product-btn-primary {
+  /* Gradiente diagonal usando colores principales */
   background: linear-gradient(
     135deg,
     var(--primary-color),
     var(--secondary-color)
   );
-  color: white;
-  box-shadow: var(--shadow-md);
+  color: white; /* Texto blanco */
+  box-shadow: var(--shadow-md); /* Sombra media */
 }
 
+/* Estado hover del botón principal */
 .product-btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-  color: white;
+  transform: translateY(-2px); /* Elevación */
+  box-shadow: var(--shadow-lg); /* Sombra grande */
+  color: white; /* Mantiene texto blanco */
 }
 
+/* === BOTÓN DE ÉXITO === */
+/* Botón para acciones exitosas con gradiente personalizado */
 .product-btn-success {
-  background: linear-gradient(135deg, #ff8c42, #ff6b35);
-  color: white;
-  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, #ff8c42, #ff6b35); /* Gradiente naranja personalizado */
+  color: white; /* Texto blanco */
+  box-shadow: var(--shadow-md); /* Sombra media */
 }
 
+/* Estado hover del botón de éxito */
 .product-btn-success:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-  color: white;
+  transform: translateY(-2px); /* Elevación */
+  box-shadow: var(--shadow-lg); /* Sombra grande */
+  color: white; /* Mantiene texto blanco */
 }
 
+/* === BOTÓN OUTLINE === */
+/* Botón con borde pero fondo transparente */
 .product-btn-outline {
-  background: transparent;
-  color: var(--primary-color);
-  border: 2px solid var(--primary-color);
+  background: transparent; /* Fondo transparente */
+  color: var(--primary-color); /* Texto con color principal */
+  border: 2px solid var(--primary-color); /* Borde con color principal */
 }
 
+/* Estado hover del botón outline */
 .product-btn-outline:hover {
-  background: var(--primary-color);
-  color: white;
-  transform: translateY(-2px);
+  background: var(--primary-color); /* Fondo se rellena con color principal */
+  color: white; /* Texto cambia a blanco */
+  transform: translateY(-2px); /* Elevación */
 }
 
-/* Efectos de animación */
+/* === ANIMACIONES === */
+/* Keyframe para animación de aparición desde abajo */
 @keyframes fadeInUp {
   from {
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 0; /* Inicia invisible */
+    transform: translateY(30px); /* Inicia 30px más abajo */
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1; /* Termina visible */
+    transform: translateY(0); /* Termina en posición original */
   }
 }
 
+/* Aplicación de animación a la tarjeta principal */
 .product-detail-card {
-  animation: fadeInUp 0.6s ease;
+  animation: fadeInUp 0.6s ease; /* Animación de aparición suave */
 }
 
-/* Estados de error */
+/* === ESTADOS DE ERROR === */
+/* Estilo para mostrar errores de carga o datos no encontrados */
 .error-state {
-  text-align: center;
-  padding: 3rem;
-  color: var(--text-light);
+  text-align: center; /* Contenido centrado */
+  padding: 3rem; /* Espaciado interno amplio */
+  color: var(--text-light); /* Color de texto gris claro */
 }
 
+/* Icono de error */
 .error-state i {
-  font-size: 4rem;
-  color: #ff6b35;
-  margin-bottom: 1rem;
+  font-size: 4rem; /* Icono muy grande para impacto visual */
+  color: #ff6b35; /* Color naranja para llamar la atención */
+  margin-bottom: 1rem; /* Espaciado inferior */
 }
 
+/* Título del mensaje de error */
 .error-state h3 {
-  color: var(--text-dark);
-  margin-bottom: 0.5rem;
+  color: var(--text-dark); /* Color de texto oscuro */
+  margin-bottom: 0.5rem; /* Espaciado inferior */
 }
 
-/* Loading state */
+/* === ESTADO DE CARGA === */
+/* Estilo para mostrar indicador de carga */
 .loading-state {
-  text-align: center;
-  padding: 3rem;
+  text-align: center; /* Contenido centrado */
+  padding: 3rem; /* Espaciado interno amplio */
 }
 
+/* === SPINNER DE CARGA === */
+/* Indicador circular giratorio */
 .loading-spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid var(--border-color);
-  border-top: 4px solid var(--primary-color);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 0 auto 1rem;
+  width: 50px; /* Ancho del spinner */
+  height: 50px; /* Alto del spinner */
+  border: 4px solid var(--border-color); /* Borde gris claro */
+  border-top: 4px solid var(--primary-color); /* Borde superior con color principal */
+  border-radius: 50%; /* Forma circular */
+  animation: spin 1s linear infinite; /* Animación de rotación continua */
+  margin: 0 auto 1rem; /* Centrado horizontal con margen inferior */
 }
 
+/* Keyframe para animación de rotación del spinner */
 @keyframes spin {
   0% {
-    transform: rotate(0deg);
+    transform: rotate(0deg); /* Posición inicial */
   }
   100% {
-    transform: rotate(360deg);
+    transform: rotate(360deg); /* Rotación completa */
   }
 }
 
-/* Responsive */
+/* ============================================================================
+   DISEÑO RESPONSIVE PRINCIPAL
+   ============================================================================
+   Ajustes principales para tablets y dispositivos medianos.
+============================================================================ */
+
+/* === TABLETS Y PANTALLAS MEDIANAS (hasta 768px) === */
 @media (max-width: 768px) {
+  /* Contenedor principal más compacto */
   .product-detail-container {
-    padding: 1rem;
+    padding: 1rem; /* Padding reducido */
   }
 
+  /* Tarjeta cambia a layout de una columna */
   .product-detail-card {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    grid-template-columns: 1fr; /* Una sola columna */
+    gap: 1rem; /* Gap reducido */
   }
 
+  /* Información del producto más compacta */
   .product-info {
-    padding: 1.5rem;
+    padding: 1.5rem; /* Padding reducido */
   }
 
+  /* Título del producto más pequeño */
   .product-title {
-    font-size: 1.75rem;
+    font-size: 1.75rem; /* Tamaño reducido */
   }
 
+  /* Precio más pequeño */
   .product-price {
-    font-size: 1.5rem;
+    font-size: 1.5rem; /* Tamaño reducido */
   }
 
+  /* Botones en layout vertical */
   .buttons-container {
-    flex-direction: column;
+    flex-direction: column; /* Orientación vertical */
   }
 
+  /* Botones ocupan todo el ancho */
   .product-btn {
-    width: 100%;
-    min-width: auto;
+    width: 100%; /* Ancho completo */
+    min-width: auto; /* Remueve ancho mínimo */
   }
 
+  /* Imágenes del carrusel más pequeñas */
   .carousel-item img {
-    height: 250px;
+    height: 250px; /* Altura reducida */
   }
 
-  /* Miniaturas responsive */
+  /* === MINIATURAS RESPONSIVE === */
+  /* Ajustes para miniaturas en tablets */
   .image-thumbnails {
-    justify-content: space-between;
-    gap: 0.5rem;
+    justify-content: space-between; /* Distribución uniforme */
+    gap: 0.5rem; /* Gap reducido */
   }
 
+  /* Miniaturas más pequeñas */
   .thumbnail-item {
-    height: 70px;
-    max-width: 90px;
-    min-width: 60px;
+    height: 70px; /* Altura reducida */
+    max-width: 90px; /* Ancho máximo reducido */
+    min-width: 60px; /* Ancho mínimo reducido */
   }
 }
 
+/* === MÓVILES PEQUEÑOS (hasta 576px) === */
 @media (max-width: 576px) {
+  /* Contenedor muy compacto para móviles */
   .product-detail-container {
-    margin: 1rem 0;
-    padding: 1rem;
+    margin: 1rem 0; /* Margen mínimo */
+    padding: 1rem; /* Padding mínimo */
   }
 
+  /* Título aún más pequeño */
   .product-title {
-    font-size: 1.5rem;
+    font-size: 1.5rem; /* Tamaño mínimo */
   }
 
+  /* Imágenes del carrusel muy pequeñas */
   .carousel-item img {
-    height: 200px;
+    height: 200px; /* Altura mínima */
   }
 
-  /* Miniaturas en móviles pequeños */
+  /* === MINIATURAS EN MÓVILES PEQUEÑOS === */
+  /* Miniaturas muy pequeñas para móviles */
   .thumbnail-item {
-    height: 60px;
-    max-width: 70px;
-    min-width: 50px;
+    height: 60px; /* Altura mínima */
+    max-width: 70px; /* Ancho máximo mínimo */
+    min-width: 50px; /* Ancho mínimo mínimo */
   }
 
+  /* Miniaturas con gap mínimo */
   .image-thumbnails {
-    gap: 0.25rem;
-    justify-content: space-between;
+    gap: 0.25rem; /* Gap mínimo */
+    justify-content: space-between; /* Distribución uniforme */
   }
 }
 
-/* Ajustar tamaño de las columnas en product-detail-card */
+/* ============================================================================
+   AJUSTES ESPECIALES DE LAYOUT
+   ============================================================================
+   Configuraciones específicas para optimizar la distribución del contenido.
+============================================================================ */
+
+/* === DISTRIBUCIÓN DE COLUMNAS EN DESKTOP === */
+/* Ajuste de proporción entre imagen e información */
 .product-detail-card {
-  grid-template-columns: 5fr 2fr; /* Imagen un poco más ancha que la info */
-  align-items: stretch; /* Ambas columnas ocupan toda la altura */
+  grid-template-columns: 5fr 2fr; /* Imagen ocupa más espacio que la información */
+  align-items: stretch; /* Ambas columnas ocupan toda la altura disponible */
 }
 
-/* Que el contenedor de la imagen aproveche mejor el espacio */
+/* === OPTIMIZACIÓN DEL CONTENEDOR DE IMÁGENES === */
+/* Contenedor que aprovecha mejor el espacio vertical */
 .product-image-container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  height: 100%; /* Altura completa disponible */
+  display: flex; /* Layout flexible */
+  flex-direction: column; /* Organización vertical */
+  justify-content: space-between; /* Distribuye espacio entre imagen principal y miniaturas */
 }
 
-/* Imagen principal más grande */
+/* === IMAGEN PRINCIPAL DESTACADA === */
+/* Imagen principal más grande para mejor visualización */
 .product-main-image {
-  height: 500px; /* Subimos de 400px a 500px */
+  height: 500px; /* Aumentado de 400px a 500px para mayor impacto */
 }
 
-/* Información del producto más destacada */
+/* === INFORMACIÓN DEL PRODUCTO DESTACADA === */
+/* Panel de información con fondo especial */
 .product-info {
-  padding: 3rem;
-  background: rgba(250, 250, 250, 0.9);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-md);
+  padding: 3rem; /* Espaciado interno amplio */
+  background: rgba(250, 250, 250, 0.9); /* Fondo gris muy claro y semi-transparente */
+  border-radius: var(--radius-sm); /* Bordes redondeados */
+  box-shadow: var(--shadow-md); /* Sombra para destacar */
 }
 
-/* Ajuste para pantallas medianas: balance entre imagen e info */
+/* === TABLETS GRANDES (hasta 992px) === */
+/* Ajuste para encontrar balance entre imagen e información en tablets */
 @media (max-width: 992px) {
+  /* Cambia a layout de una columna en tablets grandes */
   .product-detail-card {
     grid-template-columns: 1fr; /* Una sola columna */
   }
+
+  /* Imagen principal más pequeña en tablets */
   .product-main-image {
-    height: 350px; /* Imagen más chica en tablets */
+    height: 350px; /* Tamaño intermedio para tablets */
   }
 }
 
 
-/* ===================== */
-/* ESTILOS PARA COMENTARIOS */
-/* ===================== */
+/* ============================================================================
+   SISTEMA DE COMENTARIOS Y CALIFICACIONES
+   ============================================================================
+   Sección completa para mostrar y gestionar comentarios de productos,
+   incluyendo calificaciones con estrellas y formulario de envío.
+============================================================================ */
 
+/* === CONTENEDOR PRINCIPAL DE CALIFICACIONES === */
+/* Contenedor con glassmorphism para la sección de comentarios */
 .calificaciones {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-radius: var(--radius);
-    padding: 2rem;
-    margin: 2rem 0;
-    box-shadow: var(--shadow-md);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.95); /* Fondo blanco casi opaco */
+    backdrop-filter: blur(20px); /* Efecto glassmorphism */
+    border-radius: var(--radius); /* Bordes redondeados grandes */
+    padding: 2rem; /* Espaciado interno generoso */
+    margin: 2rem 0; /* Margen vertical */
+    box-shadow: var(--shadow-md); /* Sombra media */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil */
 }
 
+/* === TÍTULO DE LA SECCIÓN DE COMENTARIOS === */
+/* Título con gradiente para la sección de calificaciones */
 .section-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--text-dark);
-    margin-bottom: 2rem;
-    text-align: center;
+    font-size: 2rem; /* Tamaño grande */
+    font-weight: 700; /* Bold */
+    color: var(--text-dark); /* Color de texto oscuro (fallback) */
+    margin-bottom: 2rem; /* Espaciado inferior */
+    text-align: center; /* Centrado horizontal */
+    /* Gradiente diagonal usando colores principales */
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    /* Aplicación del gradiente al texto */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-/* Lista de comentarios */
+/* === LISTA DE COMENTARIOS === */
+/* Contenedor vertical para todos los comentarios */
 .comments-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
+    display: flex; /* Layout flexible */
+    flex-direction: column; /* Organización vertical */
+    gap: 1.5rem; /* Espacio entre comentarios */
+    margin-bottom: 3rem; /* Margen inferior antes del formulario */
 }
 
+/* === TARJETA DE COMENTARIO === */
+/* Estilo para cada comentario individual */
 .comment-card {
-    background: white;
-    border-radius: var(--radius-sm);
-    padding: 1.5rem;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border-color);
-    transition: all 0.3s ease;
+    background: white; /* Fondo blanco */
+    border-radius: var(--radius-sm); /* Bordes redondeados pequeños */
+    padding: 1.5rem; /* Espaciado interno */
+    box-shadow: var(--shadow-sm); /* Sombra sutil */
+    border: 1px solid var(--border-color); /* Borde gris claro */
+    transition: all 0.3s ease; /* Transición suave para efectos */
 }
 
+/* Estado hover de la tarjeta de comentario */
 .comment-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-2px); /* Elevación sutil */
+    box-shadow: var(--shadow-md); /* Sombra más intensa */
 }
 
+/* Estilo especial para comentarios nuevos */
 .new-comment {
-    border-left: 4px solid var(--primary-color);
+    border-left: 4px solid var(--primary-color); /* Borde izquierdo destacado */
+    /* Gradiente de fondo muy sutil para destacar */
     background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(255, 140, 66, 0.05));
 }
 
+/* === ENCABEZADO DEL COMENTARIO === */
+/* Contenedor superior con información del usuario y fecha */
 .comment-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
+    display: flex; /* Layout flexible */
+    justify-content: space-between; /* Usuario a la izquierda, fecha a la derecha */
+    align-items: center; /* Alineación vertical centrada */
+    margin-bottom: 1rem; /* Espaciado inferior */
 }
 
+/* === INFORMACIÓN DEL USUARIO === */
+/* Contenedor para icono y nombre del usuario */
 .comment-user {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    display: flex; /* Layout flexible */
+    align-items: center; /* Alineación vertical centrada */
+    gap: 0.5rem; /* Espacio entre icono y nombre */
 }
 
+/* Icono del usuario */
 .comment-user i {
-    font-size: 1.5rem;
-    color: var(--primary-color);
+    font-size: 1.5rem; /* Tamaño del icono */
+    color: var(--primary-color); /* Color principal */
 }
 
+/* Nombre del usuario */
 .username {
-    font-weight: 600;
-    color: var(--text-dark);
-    font-size: 1.1rem;
+    font-weight: 600; /* Semi-bold */
+    color: var(--text-dark); /* Color de texto oscuro */
+    font-size: 1.1rem; /* Tamaño ligeramente mayor */
 }
 
+/* Fecha del comentario */
 .comment-date {
-    color: var(--text-light);
-    font-size: 0.9rem;
+    color: var(--text-light); /* Color gris claro */
+    font-size: 0.9rem; /* Tamaño pequeño */
 }
 
+/* === CALIFICACIÓN DEL COMENTARIO === */
+/* Contenedor para las estrellas y texto de calificación */
 .comment-rating {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
+    display: flex; /* Layout flexible */
+    align-items: center; /* Alineación vertical centrada */
+    gap: 0.5rem; /* Espacio entre estrellas y texto */
+    margin-bottom: 1rem; /* Espaciado inferior */
 }
 
+/* Texto que acompaña a la calificación */
 .comment-rating .rating-text {
-    color: var(--text-light);
-    font-size: 0.9rem;
-    font-weight: 500;
+    color: var(--text-light); /* Color gris claro */
+    font-size: 0.9rem; /* Tamaño pequeño */
+    font-weight: 500; /* Peso medio */
 }
 
+/* === TEXTO DEL COMENTARIO === */
+/* Contenido principal del comentario */
 .comment-text p {
-    color: var(--text-dark);
-    line-height: 1.6;
-    margin: 0;
+    color: var(--text-dark); /* Color de texto oscuro */
+    line-height: 1.6; /* Altura de línea para buena legibilidad */
+    margin: 0; /* Sin margen para control total del espaciado */
 }
 
-/* Estado sin comentarios */
+/* === ESTADO SIN COMENTARIOS === */
+/* Mensaje cuando no hay comentarios disponibles */
 .no-comments {
-    text-align: center;
-    padding: 3rem 1rem;
-    color: var(--text-light);
+    text-align: center; /* Contenido centrado */
+    padding: 3rem 1rem; /* Espaciado interno amplio */
+    color: var(--text-light); /* Color de texto gris claro */
 }
 
+/* Icono para el estado sin comentarios */
 .no-comments i {
-    font-size: 3rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
+    font-size: 3rem; /* Icono grande */
+    color: var(--primary-color); /* Color principal */
+    margin-bottom: 1rem; /* Espaciado inferior */
 }
 
-/* ===================== */
-/* FORMULARIO DE CALIFICACIÓN */
-/* ===================== */
+/* ============================================================================
+   FORMULARIO DE CALIFICACIÓN
+   ============================================================================
+   Sistema completo para que los usuarios envíen calificaciones y comentarios,
+   incluyendo sistema de estrellas interactivo y validación visual.
+============================================================================ */
 
+/* === CONTENEDOR DEL FORMULARIO === */
+/* Contenedor principal del formulario de calificación */
 .rating-form-container {
-    background: white;
-    border-radius: var(--radius-sm);
-    padding: 2rem;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border-color);
+    background: white; /* Fondo blanco */
+    border-radius: var(--radius-sm); /* Bordes redondeados pequeños */
+    padding: 2rem; /* Espaciado interno generoso */
+    box-shadow: var(--shadow-sm); /* Sombra sutil */
+    border: 1px solid var(--border-color); /* Borde gris claro */
 }
 
+/* Título del formulario de calificación */
 .rating-form-container h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--text-dark);
-    margin-bottom: 1.5rem;
-    text-align: center;
+    font-size: 1.5rem; /* Tamaño destacado */
+    font-weight: 600; /* Semi-bold */
+    color: var(--text-dark); /* Color de texto oscuro */
+    margin-bottom: 1.5rem; /* Espaciado inferior */
+    text-align: center; /* Centrado horizontal */
 }
 
+/* === ELEMENTOS DEL FORMULARIO === */
+/* Grupo de formulario con espaciado */
 .rating-form .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem; /* Espaciado entre grupos */
 }
 
+/* Etiquetas del formulario */
 .rating-form label {
-    display: block;
-    font-weight: 600;
-    color: var(--text-dark);
-    margin-bottom: 0.5rem;
+    display: block; /* Ocupa toda la línea */
+    font-weight: 600; /* Semi-bold */
+    color: var(--text-dark); /* Color de texto oscuro */
+    margin-bottom: 0.5rem; /* Espaciado debajo de la etiqueta */
 }
 
+/* Controles de formulario (inputs y textarea) */
 .rating-form .form-control {
-    width: 100%;
-    padding: 0.75rem;
-    border: 2px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    resize: vertical;
+    width: 100%; /* Ancho completo */
+    padding: 0.75rem; /* Espaciado interno */
+    border: 2px solid var(--border-color); /* Borde gris claro */
+    border-radius: var(--radius-sm); /* Bordes redondeados */
+    font-size: 1rem; /* Tamaño de fuente estándar */
+    transition: all 0.3s ease; /* Transición suave */
+    resize: vertical; /* Solo permite redimensionar verticalmente (textarea) */
 }
 
+/* Estado focus de los controles */
 .rating-form .form-control:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+    outline: none; /* Remueve outline por defecto */
+    border-color: var(--primary-color); /* Borde cambia a color principal */
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1); /* Sombra de enfoque naranja sutil */
 }
 
-/* Sistema de estrellas */
+/* === SISTEMA DE ESTRELLAS === */
+/* Contenedor horizontal para las estrellas de calificación */
 .star-rating {
-    display: flex;
-    gap: 0.25rem;
-    margin-bottom: 0.5rem;
+    display: flex; /* Layout flexible horizontal */
+    gap: 0.25rem; /* Pequeño espacio entre estrellas */
+    margin-bottom: 0.5rem; /* Espaciado inferior */
 }
 
+/* Estrellas individuales */
 .star-rating i {
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    color: #ddd;
+    font-size: 1.5rem; /* Tamaño de las estrellas */
+    cursor: pointer; /* Indica que son clickeables */
+    transition: all 0.2s ease; /* Transición rápida para efectos */
+    color: #ddd; /* Color gris claro por defecto (estrella vacía) */
 }
 
+/* Efecto hover en las estrellas */
 .star-rating i:hover {
-    transform: scale(1.1);
+    transform: scale(1.1); /* Agranda ligeramente la estrella */
 }
 
+/* Estrellas seleccionadas/activas */
 .star-rating i.fas {
-    color: #ffc107;
+    color: #ffc107; /* Color dorado para estrellas llenas */
 }
 
+/* === DISPLAY DE CALIFICACIÓN === */
+/* Texto que muestra la calificación actual */
 .rating-display {
-    font-size: 0.9rem;
-    color: var(--text-light);
-    font-weight: 500;
+    font-size: 0.9rem; /* Tamaño de fuente pequeño */
+    color: var(--text-light); /* Color gris claro por defecto */
+    font-weight: 500; /* Peso medio */
 }
 
+/* Estado cuando hay una calificación seleccionada */
 .rating-display.selected {
-    color: var(--primary-color);
-    font-weight: 600;
+    color: var(--primary-color); /* Cambia a color principal */
+    font-weight: 600; /* Se vuelve más bold */
 }
 
+/* === BOTÓN DEL FORMULARIO === */
+/* Botón para enviar la calificación */
 .rating-form .btn {
+    /* Gradiente diagonal usando colores principales */
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    border: none;
-    padding: 0.75rem 2rem;
-    border-radius: var(--radius-sm);
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin: 0 auto;
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    padding: 0.75rem 2rem; /* Espaciado interno */
+    border-radius: var(--radius-sm); /* Bordes redondeados */
+    font-weight: 600; /* Semi-bold */
+    font-size: 1rem; /* Tamaño estándar */
+    cursor: pointer; /* Cursor de mano */
+    transition: all 0.3s ease; /* Transición suave */
+    display: flex; /* Layout flexible */
+    align-items: center; /* Alineación vertical centrada */
+    gap: 0.5rem; /* Espacio entre texto e icono */
+    margin: 0 auto; /* Centrado horizontal */
 }
 
+/* Estado hover del botón */
 .rating-form .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-2px); /* Elevación */
+    box-shadow: var(--shadow-md); /* Sombra media */
 }
 
 
-/* Responsive para comentarios */
+/* ============================================================================
+   DISEÑO RESPONSIVE PARA COMENTARIOS
+   ============================================================================
+   Ajustes para tablets y dispositivos de tamaño mediano.
+============================================================================ */
+
+/* === TABLETS Y PANTALLAS MEDIANAS (hasta 768px) === */
 @media (max-width: 768px) {
+    /* Contenedor de calificaciones más compacto */
     .calificaciones {
-        padding: 1.5rem;
-        margin: 1.5rem 0;
+        padding: 1.5rem; /* Padding reducido */
+        margin: 1.5rem 0; /* Margen reducido */
     }
 
+    /* Título de sección más pequeño */
     .section-title {
-        font-size: 1.5rem;
+        font-size: 1.5rem; /* Tamaño reducido */
     }
 
+    /* Tarjetas de comentario más compactas */
     .comment-card {
-        padding: 1rem;
+        padding: 1rem; /* Padding reducido */
     }
 
+    /* Encabezado de comentario en layout vertical */
     .comment-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
+        flex-direction: column; /* Cambia a orientación vertical */
+        align-items: flex-start; /* Alineación a la izquierda */
+        gap: 0.5rem; /* Espacio entre elementos */
     }
 
+    /* Formulario de calificación más compacto */
     .rating-form-container {
-        padding: 1.5rem;
+        padding: 1.5rem; /* Padding reducido */
     }
 }
 
+/* === MÓVILES PEQUEÑOS (hasta 576px) === */
 @media (max-width: 576px) {
+    /* Contenedor de calificaciones muy compacto */
     .calificaciones {
-        padding: 1rem;
-        margin: 1rem 0;
+        padding: 1rem; /* Padding mínimo */
+        margin: 1rem 0; /* Margen mínimo */
     }
 
+    /* Título de sección aún más pequeño */
     .section-title {
-        font-size: 1.25rem;
+        font-size: 1.25rem; /* Tamaño mínimo */
     }
 
+    /* Formulario muy compacto para móviles */
     .rating-form-container {
-        padding: 1rem;
+        padding: 1rem; /* Padding mínimo */
     }
 }

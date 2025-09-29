@@ -1,82 +1,101 @@
-/* ============================
-   CATEGORIES.CSS
-   ============================
-   Objetivo: darle a la página de categorías
-   un estilo similar al de product-info.html.
-   Esto incluye tipografía, tarjetas y 
-   presentación visual más moderna.
-================================ */
+/* ============================================================================
+   CATEGORIES.CSS - ESTILOS PARA LA PÁGINA DE CATEGORÍAS
+   ============================================================================
 
-/* 1. Reset básico para que los márgenes/paddings
-   no interfieran con el diseño */
+   PROPÓSITO:
+   - Proporcionar estilos modernos y cohesivos para la página de categorías
+   - Mantener consistencia visual con otras páginas del sitio
+   - Implementar diseño responsive que se adapte a todos los dispositivos
+   - Crear una experiencia de usuario intuitiva con efectos hover y transiciones
+
+   CARACTERÍSTICAS:
+   - Grid layout flexible y adaptativo
+   - Tarjetas de categoría con efectos visuales
+   - Tipografía optimizada para legibilidad
+   - Esquema de colores coherente con el diseño general
+============================================================================ */
+
+/* === RESET Y CONFIGURACIÓN BASE === */
+/* Reset básico para elementos comunes - elimina márgenes y paddings por defecto */
 body, h1, h2, h3, p, ul, li {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0; /* Elimina márgenes por defecto del navegador */
+  padding: 0; /* Elimina padding por defecto del navegador */
+  box-sizing: border-box; /* Incluye padding y border en el ancho total del elemento */
 }
 
-/* 2. Fuente y color de fondo general */
+/* === ESTILOS GENERALES DEL CUERPO === */
+/* Configuración base del body con tipografía y colores principales */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f6f8;  /* gris claro suave */
-  color: #333; /* texto gris oscuro */
-  line-height: 1.6;
+  font-family: Arial, sans-serif; /* Fuente sans-serif para mayor legibilidad */
+  background-color: #f4f6f8; /* Gris claro suave - color de fondo relajante */
+  color: #333; /* Gris oscuro para el texto - buen contraste y fácil lectura */
+  line-height: 1.6; /* Espaciado entre líneas optimizado para legibilidad */
 }
 
-/* 3. Título principal de la página */
+/* === TÍTULO PRINCIPAL === */
+/* Estilo del título principal de la página de categorías */
 h1 {
-  text-align: center;
-  font-size: 2rem;
-  margin: 20px 0;
-  color: #2c3e50; /* azul grisáceo sobrio */
+  text-align: center; /* Centrado horizontal */
+  font-size: 2rem; /* Tamaño de fuente grande (32px aprox.) */
+  margin: 20px 0; /* Margen vertical de 20px arriba y abajo */
+  color: #2c3e50; /* Azul grisáceo sobrio y profesional */
 }
 
-/* 4. Contenedor de las categorías 
-   → Grid flexible que se adapta a distintos tamaños de pantalla */
+/* === CONTENEDOR PRINCIPAL DE CATEGORÍAS === */
+/* Grid layout responsivo que se adapta automáticamente a diferentes tamaños de pantalla */
 #categories-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-  gap: 20px;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto; /* centra el contenido */
+  display: grid; /* Activa CSS Grid para layout avanzado */
+  /* Grid responsivo: crea columnas que se ajustan automáticamente */
+  /* Cada columna tiene mínimo 250px y máximo la fracción disponible */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px; /* Espacio de 20px entre elementos del grid */
+  padding: 20px; /* Espaciado interno del contenedor */
+  max-width: 1200px; /* Ancho máximo para mantener legibilidad en pantallas grandes */
+  margin: 0 auto; /* Centrado horizontal del contenedor completo */
 }
 
-/* 5. Tarjeta de categoría */
+/* === TARJETA DE CATEGORÍA === */
+/* Estilo base de cada tarjeta individual de categoría */
 .category-card {
-  background: #fff; /* fondo blanco */
-  border-radius: 10px; /* esquinas redondeadas */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* sombra suave */
-  overflow: hidden; /* que la imagen no sobresalga */
+  background: #fff; /* Fondo blanco limpio */
+  border-radius: 10px; /* Esquinas redondeadas para suavizar el diseño */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para dar profundidad */
+  overflow: hidden; /* Oculta contenido que sobresalga de los bordes redondeados */
+  /* Transiciones suaves para efectos hover */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
+  cursor: pointer; /* Indica que el elemento es interactivo */
 }
 
-/* Efecto hover para dar sensación interactiva */
+/* === EFECTO HOVER === */
+/* Animación cuando el usuario pasa el mouse sobre la tarjeta */
 .category-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px); /* Eleva la tarjeta 5px para efecto "flotante" */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Sombra más intensa y extendida */
 }
 
-/* 6. Imagen de la categoría */
+/* === IMAGEN DE LA CATEGORÍA === */
+/* Estilo para las imágenes dentro de cada tarjeta */
 .category-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover; /* la imagen se recorta sin deformarse */
+  width: 100%; /* Ocupa todo el ancho de la tarjeta */
+  height: 180px; /* Altura fija para mantener uniformidad */
+  object-fit: cover; /* Recorta y ajusta la imagen sin deformarla */
 }
 
-/* 7. Contenido textual dentro de la tarjeta */
+/* === CONTENIDO TEXTUAL === */
+/* Contenedor del texto dentro de cada tarjeta */
 .category-info {
-  padding: 15px;
+  padding: 15px; /* Espaciado interno uniforme */
 }
 
+/* Título de la categoría */
 .category-info h2 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-  color: #34495e;
+  font-size: 1.2rem; /* Tamaño de fuente mediano-grande */
+  margin-bottom: 10px; /* Espacio debajo del título */
+  color: #34495e; /* Gris azulado para los títulos */
 }
 
+/* Descripción de la categoría */
 .category-info p {
-  font-size: 0.95rem;
-  color: #666;
+  font-size: 0.95rem; /* Tamaño ligeramente más pequeño que el título */
+  color: #666; /* Gris medio para texto descriptivo */
 }
