@@ -24,41 +24,50 @@
     <!-- Barra de navegación principal -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
       <div class="container">
-        <!-- Botón hamburguesa para dispositivos móviles -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- Menú de navegación colapsible -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav w-100 justify-content-between">
-            <!-- Enlaces de navegación principales -->
-            <li class="nav-item">
-              <a class="nav-link active" href="index.html">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="categories.html">Categorías</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="sell.html">Vender</a>
-            </li>
-            <li class="nav-item"></li>
-            <!-- Área donde se mostrará la información del usuario logueado -->
-            <li class="nav-item">
-              <span id="userNavbar" class="nav-link text-white"></span>
-              <!-- Aquí se inserta dinámicamente el dropdown del usuario -->
-            </li>
-          </ul>
+        <!-- Switch de tema claro/oscuro -->
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider">
+              <span class="icon sun">☀️</span>
+              <span class="icon moon">🌙</span>
+            </div>
+          </label>
         </div>
-      </div>
-    </nav>
+      <div class="container">
+       <!-- Botón hamburguesa para dispositivos móviles -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <!-- Menú de navegación colapsible -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav w-100 justify-content-between">
+        <li class="nav-item">
+          <a class="nav-link active" href="index.html">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="categories.html">Categorías</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="sell.html">Vender</a>
+        </li>
+        <li class="nav-item"></li>
+        <li class="nav-item">
+          <span id="userNavbar" class="nav-link text-white"></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
     <!-- Contenido principal de la página -->
     <main>
       <!-- Espacio para banner o jumbotron (actualmente vacío) -->
@@ -154,5 +163,6 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/index.js"></script>
     <script src="js/init.js"></script>
+    <script src="js/temaClaroOscuro.js"></script>
   </body>
 </html>

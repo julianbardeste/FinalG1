@@ -62,3 +62,100 @@ body {
     height: 100vh !important; /* Altura completa del viewport (forzado con !important) */
   }
 }
+
+/* ============================================================================
+   MODO OSCURO PARA LOGIN
+   ============================================================================ */
+
+/* === FONDO GENERAL MODO OSCURO === */
+body.dark-mode {
+  background-color: #1a1a1a;
+}
+
+body.dark-mode .gradient-form {
+  background-color: #1a1a1a !important;
+}
+
+/* === TARJETA DE LOGIN MODO OSCURO === */
+body.dark-mode .card.rounded-3.text-black {
+  background-color: #2d2d2d;
+  color: #e0e0e0 !important;
+  border: 1px solid #404040;
+}
+
+/* === FORMULARIO MODO OSCURO === */
+body.dark-mode .card-body {
+  background-color: #2d2d2d;
+}
+
+body.dark-mode .card-body h4 {
+  color: #e0e0e0;
+}
+
+body.dark-mode .card-body p {
+  color: #b0b0b0;
+}
+
+/* === INPUTS MODO OSCURO === */
+body.dark-mode .form-control {
+  background-color: #1a1a1a;
+  border-color: #404040;
+  color: #e0e0e0;
+}
+
+body.dark-mode .form-control:focus {
+  background-color: #2d2d2d;
+  border-color: #4CAF50;
+  color: #e0e0e0;
+  box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+}
+
+body.dark-mode .form-control::placeholder {
+  color: #6c757d;
+}
+
+/* === LABELS MODO OSCURO === */
+body.dark-mode .form-label {
+  color: #b0b0b0;
+}
+
+/* === ENLACES MODO OSCURO === */
+body.dark-mode .text-muted {
+  color: #6c757d !important;
+}
+
+body.dark-mode a.text-muted:hover {
+  color: #4CAF50 !important;
+}
+
+/* === BOTONES MODO OSCURO === */
+body.dark-mode #botonIS {
+  background-color: rgb(7, 1, 87) !important;
+  color: #fff;
+}
+
+body.dark-mode #botonIS:hover {
+  background-color: rgb(0, 0, 150) !important;
+}
+
+body.dark-mode .btn-outline-danger {
+  color: #ff6b6b;
+  border-color: #ff6b6b;
+}
+
+body.dark-mode .btn-outline-danger:hover {
+  background-color: #ff6b6b;
+  border-color: #ff6b6b;
+  color: #fff;
+}
+
+/* === SECCIÓN DECORATIVA MODO OSCURO === */
+body.dark-mode .gradient-custom-2 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("https://i.ytimg.com/vi/vLoz6f2ZoY4/maxresdefault.jpg");
+}
+
+/* === TRANSICIONES SUAVES === */
+.card, .card-body, .form-control, .btn {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
