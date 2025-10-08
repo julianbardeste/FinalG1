@@ -936,3 +936,158 @@
         padding: 1rem; /* Padding mínimo */
     }
 }
+
+/* ============================================================================
+   MODO OSCURO PARA INFORMACIÓN DE PRODUCTO
+   ============================================================================ */
+
+/* === ESTILOS GENERALES MODO OSCURO === */
+body.dark-mode {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: #e0e0e0;
+}
+
+/* === CONTENEDOR PRINCIPAL MODO OSCURO === */
+body.dark-mode .product-detail-container {
+    background: rgba(45, 45, 45, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* === TARJETA DE DETALLE MODO OSCURO === */
+body.dark-mode .product-detail-card {
+    background: #2d2d2d;
+    border-color: #404040;
+}
+
+body.dark-mode .product-detail-card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* === INFORMACIÓN DEL PRODUCTO MODO OSCURO === */
+body.dark-mode .product-info {
+    background: rgba(26, 26, 26, 0.9);
+}
+
+body.dark-mode .product-title {
+    color: #e0e0e0;
+}
+
+body.dark-mode .product-category {
+    color: #b0b0b0;
+}
+
+body.dark-mode .product-description {
+    color: #b0b0b0;
+}
+
+/* === SECCIÓN DE CALIFICACIONES MODO OSCURO === */
+body.dark-mode .calificaciones {
+    background: rgba(45, 45, 45, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* === TARJETA DE COMENTARIO MODO OSCURO === */
+body.dark-mode .comment-card {
+    background: #2d2d2d;
+    border-color: #404040;
+}
+
+body.dark-mode .comment-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+body.dark-mode .new-comment {
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 140, 66, 0.1));
+}
+
+/* === CONTENIDO DE COMENTARIOS MODO OSCURO === */
+body.dark-mode .username {
+    color: #e0e0e0;
+}
+
+body.dark-mode .comment-date {
+    color: #6c757d;
+}
+
+body.dark-mode .comment-rating .rating-text {
+    color: #b0b0b0;
+}
+
+body.dark-mode .comment-text p {
+    color: #b0b0b0;
+}
+
+body.dark-mode .no-comments {
+    color: #6c757d;
+}
+
+/* === FORMULARIO DE CALIFICACIÓN MODO OSCURO === */
+body.dark-mode .rating-form-container {
+    background: #2d2d2d;
+    border-color: #404040;
+}
+
+body.dark-mode .rating-form-container h3 {
+    color: #e0e0e0;
+}
+
+body.dark-mode .rating-form label {
+    color: #e0e0e0;
+}
+
+body.dark-mode .rating-form .form-control {
+    background: #1a1a1a;
+    border-color: #404040;
+    color: #e0e0e0;
+}
+
+body.dark-mode .rating-form .form-control:focus {
+    background: #2d2d2d;
+    border-color: var(--primary-color);
+}
+
+body.dark-mode .rating-form .form-control::placeholder {
+    color: #6c757d;
+}
+
+/* === ESTRELLAS MODO OSCURO === */
+body.dark-mode .star-rating i {
+    color: #404040;
+}
+
+body.dark-mode .star-rating i.fas {
+    color: #ffc107;
+}
+
+body.dark-mode .rating-display {
+    color: #b0b0b0;
+}
+
+body.dark-mode .rating-display.selected {
+    color: var(--accent-color);
+}
+
+/* === ESTADO DE ERROR MODO OSCURO === */
+body.dark-mode .error-state {
+    color: #6c757d;
+}
+
+body.dark-mode .error-state h3 {
+    color: #e0e0e0;
+}
+
+/* === PRODUCTOS RELACIONADOS MODO OSCURO === */
+body.dark-mode #related-products .product-card {
+    background: rgba(45, 45, 45, 0.95);
+    border: 1px solid #404040;
+}
+
+body.dark-mode #related-products .product-card:hover {
+    border-color: #505050;
+}
+
+/* === TRANSICIONES SUAVES MODO OSCURO === */
+.product-detail-container, .product-detail-card, .product-info,
+.calificaciones, .comment-card, .rating-form-container, .rating-form .form-control {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

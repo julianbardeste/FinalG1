@@ -31,6 +31,15 @@
   <body>
     <!-- Barra de navegación principal con fondo oscuro y responsiva -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+      <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+          <input type="checkbox" id="checkbox" />
+          <div class="slider">
+            <span class="icon sun">☀️</span>
+            <span class="icon moon">🌙</span>
+          </div>
+        </label>
+      </div>
       <!-- Contenedor principal de la navegación -->
       <div class="container">
         <!-- Botón hamburguesa para dispositivos móviles -->
@@ -227,6 +236,7 @@
     <script src="js/init.js"></script>
     <!-- Script específico para la funcionalidad de categorías -->
     <script src="js/categories.js"></script>
+    <script src="js/temaClaroOscuro.js"></script>
   <!-- Cierre del elemento body -->
   </body>
 <!-- Cierre del elemento HTML -->
