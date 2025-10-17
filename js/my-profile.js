@@ -1,39 +1,39 @@
 /* =======================================
    PERFIL DE USUARIO - my-profile.js
 
-   Este archivo está destinado a manejar toda la funcionalidad
-   de la página de perfil de usuario del sitio eMercado.
+   Este archivo esta destinado a manejar toda la funcionalidad
+   de la pagina de perfil de usuario del sitio eMercado.
 
    ESTADO ACTUAL: En desarrollo
 
    FUNCIONALIDADES PLANIFICADAS:
-   - Mostrar información del usuario logueado
+   - Mostrar informacion del usuario logueado
    - Editar datos personales (nombre, apellido, email)
-   - Cambiar contraseña de la cuenta
+   - Cambiar password de la cuenta
    - Subir y cambiar foto de perfil
    - Gestionar preferencias de la cuenta
    - Mostrar historial de compras
-   - Gestionar direcciones de envío
-   - Configurar métodos de pago
+   - Gestionar direcciones de envio
+   - Configurar metodos de pago
 
    ELEMENTOS DEL DOM ESPERADOS:
    - Formulario de datos personales
    - Campo de subida de imagen de perfil
-   - Sección de historial de compras
-   - Formulario de cambio de contraseña
+   - Seccion de historial de compras
+   - Formulario de cambio de password
    - Lista de direcciones guardadas
-   - Configuración de notificaciones
+   - Configuracion de notificaciones
 
    ======================================= */
 
 // Al cargar el documento, inicializar la funcionalidad del perfil
 document.addEventListener("DOMContentLoaded", function() {
-    // TODO: Implementar inicialización del perfil de usuario
+    // TODO: Implementar inicializaciï¿½n del perfil de usuario
     console.log("Perfil de usuario cargado - Funcionalidad en desarrollo");
 
     // TODO: Cargar datos del usuario desde sessionStorage/localStorage
-    // TODO: Poblar formularios con información existente
-    // TODO: Configurar validación de formularios
+    // TODO: Poblar formularios con informaciï¿½n existente
+    // TODO: Configurar validaciï¿½n de formularios
     // TODO: Configurar subida de imagen de perfil
     // TODO: Cargar historial de compras del usuario
 });
@@ -41,20 +41,126 @@ document.addEventListener("DOMContentLoaded", function() {
 /* =======================================
    FUNCIONES PLANIFICADAS:
 
-   - loadUserData(): Cargar información del usuario logueado
+   - loadUserData(): Cargar informaciï¿½n del usuario logueado
    - populateProfileForm(): Llenar formulario con datos existentes
    - validateProfileForm(): Validar datos del formulario
-   - updateUserData(): Actualizar información del usuario
+   - updateUserData(): Actualizar informaciï¿½n del usuario
    - uploadProfileImage(): Subir nueva imagen de perfil
-   - changePassword(): Cambiar contraseña del usuario
+   - changePassword(): Cambiar contraseï¿½a del usuario
    - loadPurchaseHistory(): Cargar historial de compras
-   - addShippingAddress(): Agregar nueva dirección de envío
+   - addShippingAddress(): Agregar nueva direcciï¿½n de envï¿½o
    - updateUserPreferences(): Actualizar preferencias del usuario
 
    VALIDACIONES REQUERIDAS:
-   - Email válido
-   - Contraseña con requisitos mínimos de seguridad
+   - Email vï¿½lido
+   - Contraseï¿½a con requisitos mï¿½nimos de seguridad
    - Campos obligatorios completados
-   - Formato de imagen válido para foto de perfil
+   - Formato de imagen vï¿½lido para foto de perfil
 
    ======================================= */
+
+   // Elementos del DOM
+    const profileForm = document.getElementById('profileForm'); // Formulario de perfil
+    const imageUpload = document.getElementById('imageUpload'); // Input de subida de imagen
+    const profileImage = document.getElementById('profileImage');   // Imagen de perfil
+    const successMessage = document.getElementById('successMessage'); // Mensaje de exito
+
+    // Cargar datos guardados al iniciar
+    document.addEventListener('DOMContentLoaded', function() {
+      loadProfileData();
+    });
+
+    // Cargar datos del localStorage
+    function loadProfileData() {
+      const savedData = {
+        nombre: localStorage.getItem('nombre') || '',
+        apellido: localStorage.getItem('apellido') || '',
+        email: localStorage.getItem('email') || '',
+        telefono: localStorage.getItem('telefono') || '',
+        profileImage: localStorage.getItem('profileImage') || ''
+      };
+
+      document.getElementById('nombre').value = savedData.nombre;
+      document.getElementById('apellido').value = savedData.apellido;
+      document.getElementById('email').value = savedData.email;
+      document.getElementById('telefono').value = savedData.telefono;
+
+      if (savedData.profileImage) {
+        profileImage.src = savedData.profileImage;
+        profileImage.style.fontSize = '0';
+      } else {
+        profileImage.src = '';
+        profileImage.textContent = 'ðŸ‘¤';
+        profileImage.style.fontSize = '3rem';
+      }
+    }
+
+    // Manejar el envÃ­o del formulario
+    profileForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const formData = {
+        nombre: document.getElementById('nombre').value.trim(),
+        apellido: document.getElementById('apellido').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        telefono: document.getElementById('telefono').value.trim()
+      };
+
+      // ValidaciÃ³n bÃ¡sica
+      if (!formData.nombre || !formData.apellido || !formData.email) {
+        alert('Por favor completa todos los campos obligatorios');
+        return;
+      }
+
+      // Guardar en localStorage
+      localStorage.setItem('nombre', formData.nombre);
+      localStorage.setItem('apellido', formData.apellido);
+      localStorage.setItem('email', formData.email);
+      localStorage.setItem('telefono', formData.telefono);
+
+      // Mostrar mensaje de Ã©xito
+      showSuccessMessage();
+    });
+
+    // Manejar la carga de imagen
+    imageUpload.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      
+      if (file) {
+        // Validar tipo de archivo
+        if (!file.type.startsWith('image/')) {
+          alert('Por favor selecciona un archivo de imagen vÃ¡lido');
+          return;
+        }
+
+        // Validar tamaÃ±o (mÃ¡ximo 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+          alert('La imagen es demasiado grande. MÃ¡ximo 5MB');
+          return;
+        }
+
+        const reader = new FileReader();
+        
+        reader.onload = function(event) {
+          const imageData = event.target.result;
+          profileImage.src = imageData;
+          profileImage.style.fontSize = '0';
+          profileImage.textContent = '';
+          
+          // Guardar en localStorage
+          localStorage.setItem('profileImage', imageData);
+          
+          showSuccessMessage();
+        };
+        
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Mostrar mensaje de Ã©xito
+    function showSuccessMessage() {
+      successMessage.classList.add('show');
+      setTimeout(() => {
+        successMessage.classList.remove('show');
+      }, 3000);
+    }

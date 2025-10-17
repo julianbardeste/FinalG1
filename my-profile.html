@@ -17,70 +17,90 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <!-- Estilos generales del sitio -->
   <link href="css/styles.css" rel="stylesheet">
-  <!-- Estilos CSS internos para elementos específicos de la página -->
-  <style>
-    /* Estilos para imágenes placeholder con texto centrado y sin selección */
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    /* Estilos responsivos para pantallas medianas y grandes */
-    @media (min-width: 768px) {
-      /* Placeholder con texto más grande para pantallas grandes */
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/my-profile.css">
 </head>
 
 <!-- Inicio del contenido del cuerpo de la página -->
 <body>
   <!-- Barra de navegación principal con fondo oscuro y responsiva -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <!-- Contenedor principal de la navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+      <div class="container">
+        <!-- Switch de tema claro/oscuro -->
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider">
+              <span class="icon sun">☀️</span>
+              <span class="icon moon">🌙</span>
+            </div>
+          </label>
+        </div>
     <div class="container">
-      <!-- Botón hamburguesa para dispositivos móviles -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <!-- Contenido colapsable de la navegación -->
       <div class="collapse navbar-collapse" id="navbarNav">
-        <!-- Lista principal de navegación -->
         <ul class="navbar-nav w-100 justify-content-between">
-          <!-- Enlace a la página de inicio -->
           <li class="nav-item">
             <a class="nav-link" href="index.html">Inicio</a>
           </li>
-          <!-- Enlace a la página de categorías -->
           <li class="nav-item">
             <a class="nav-link" href="categories.html">Categorías</a>
           </li>
-          <!-- Enlace a la página de venta -->
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <!-- Elemento vacío para espaciado -->
           <li class="nav-item">
+            <a class="nav-link active" href="#">Mi Perfil</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  <!-- Contenido principal de la página de perfil del usuario -->
+
   <main>
-    <!-- Contenedor principal para el contenido -->
-    <div class="container">
-      <!-- Alerta informativa sobre el estado de desarrollo de la funcionalidad -->
-      <div class="alert alert-danger text-center" role="alert">
-        <!-- Título de la alerta indicando que la funcionalidad está en desarrollo -->
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <div class="profile-container"> <!-- Contenedor principal del perfil de usuario -->
+      <!-- Mensaje de éxito al actualizar el perfil -->
+      <div class="success-message" id="successMessage">
+        ✓ Perfil actualizado correctamente
+      </div>
+
+      <div class="profile-card"> <!-- Tarjeta que contiene el formulario de perfil -->
+        <div class="profile-header">
+          <h2>Mi Perfil</h2>
+          <div class="profile-image-container">
+            <img id="profileImage" class="profile-image" src="" alt="Foto de Perfil"> <!-- Imagen de perfil del usuario -->
+          </div>
+          <div class="upload-btn-wrapper"> <!-- Botón para subir/cambiar foto de perfil -->
+            <button class="upload-btn">📷 Cambiar foto</button> 
+            <input type="file" id="imageUpload" accept="image/*"> <!-- Input oculto para seleccionar archivo de imagen -->
+          </div>
+        </div>
+
+        <form id="profileForm"> <!-- Formulario para editar datos personales -->
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="nombre" class="form-label">Nombre <span class="required">*</span></label>
+              <input type="text" class="form-control" id="nombre" required placeholder="Ingresa tu nombre">
+            </div>
+            <div class="col-md-6">
+              <label for="apellido" class="form-label">Apellido <span class="required">*</span></label>
+              <input type="text" class="form-control" id="apellido" required placeholder="Ingresa tu apellido">
+            </div>
+          </div>
+
+          <div class="mb-3"> <!-- Campo para el email -->
+            <label for="email" class="form-label">Email <span class="required">*</span></label>
+            <input type="email" class="form-control" id="email" required placeholder="correo@ejemplo.com">
+          </div>
+
+          <div class="mb-3"> <!-- Campo para el teléfono -->
+            <label for="telefono" class="form-label">Teléfono de Contacto</label> 
+            <input type="tel" class="form-control" id="telefono" placeholder="+598 99 123 456">
+          </div>
+
+          <button type="submit" class="btn-save">💾 Guardar Cambios</button> <!-- Botón para guardar los cambios -->
+        </form>
       </div>
     </div>
   </main>
@@ -104,6 +124,7 @@
   <script src="js/init.js"></script>
   <!-- Script específico para la funcionalidad de perfil de usuario -->
   <script src="js/my-profile.js"></script>
+  <script src="js/temaClaroOscuro.js"></script>
 <!-- Cierre del elemento body -->
 </body>
 
