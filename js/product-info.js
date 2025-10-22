@@ -428,13 +428,44 @@ function renderProduct(prod) {
   renderRelatedProducts(prod.relatedProducts);
 
   // Configurar eventos de los botones de acción
-  const btnAgregar = document.getElementById("agregarCarrito");
-  if (btnAgregar) {
-    btnAgregar.addEventListener("click", () => {
-      // Funcionalidad para agregar al carrito (simulación)
-      alert("Producto agregado al carrito (simulado).");
-    });
-  }
+const btnAgregar = document.getElementById("agregarCarrito");
+if (btnAgregar) {
+  btnAgregar.addEventListener("click", () => {
+    // Obtener el carrito actual o crear uno nuevo
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Buscar si el producto ya está en el carrito
+    const existing = cart.find((item) => item.id === prod.id);
+
+    if (existing) {
+      // Si ya existe, aumentar la cantidad y recalcular subtotal
+      existing.quantity += 1;
+      existing.subtotal = existing.cost * existing.quantity;
+    } else {
+      // Si es nuevo, agregarlo con subtotal incluido
+      const newItem = {
+        id: prod.id,
+        name: prod.name,
+        cost: prod.cost,
+        currency: prod.currency,
+        image:
+          Array.isArray(prod.images) && prod.images.length > 0
+            ? prod.images[0]
+            : "img/no-image.png",
+        quantity: 1,
+        subtotal: prod.cost, // 👈 ESTO es lo importante
+      };
+      cart.push(newItem);
+    }
+
+    // Guardar carrito actualizado
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert("✅ Producto agregado al carrito");
+  });
+}
+
+
 }
 
 /* ==========================================

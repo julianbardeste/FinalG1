@@ -1,0 +1,33 @@
+        .cart-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+        
+        .cart-item img {
+            max-width: 150px;
+            border-radius: 8px;
+        }
+        
+        .cart-summary {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .quantity-input {
+            width: 80px;
+        }
+        
+        .remove-btn {
+            cursor: pointer;
+            color: #d37721;
+        }
+        
+        .remove-btn:hover {
+            color: #d37721;
+        }
