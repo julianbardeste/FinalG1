@@ -957,6 +957,8 @@ function addNewComment(comment, rating) {
     if (badge) badge.textContent = cartCount;
   });
 
+  localStorage.removeItem("cartCount");
+
 
 // === FIN DEL ARCHIVO ===
 // Este archivo maneja toda la funcionalidad de la página de detalle de producto:
