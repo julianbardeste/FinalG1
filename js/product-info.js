@@ -412,9 +412,6 @@ function renderProduct(prod) {
               <button id="agregarCarrito" class="product-btn product-btn-primary btn btn-primary" onclick="addToCart()">
                 <i class="fas fa-shopping-cart me-2"></i>Agregar al carrito
               </button>
-              <button id="comprar" class="product-btn product-btn-success btn btn-success">
-                <i class="fas fa-credit-card me-2"></i>Comprar ahora
-              </button>
             </div>
           </div>
         </div>
