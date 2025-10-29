@@ -408,7 +408,7 @@ function renderProduct(prod) {
 
             <!-- Botones de acción -->
             <div class="buttons-container d-flex gap-2">
-              <button id="agregarCarrito" class="product-btn product-btn-primary btn btn-primary">
+              <button id="agregarCarrito" class="product-btn product-btn-primary btn btn-primary" onclick="addToCart()">
                 <i class="fas fa-shopping-cart me-2"></i>Agregar al carrito
               </button>
               <button id="comprar" class="product-btn product-btn-success btn btn-success">
@@ -935,6 +935,28 @@ function addNewComment(comment, rating) {
   // Mostrar confirmación al usuario
   alert("¡Tu calificación ha sido agregada exitosamente!");
 }
+
+  let count = 0;
+
+  function addToCart() {
+    let count = parseInt(localStorage.getItem("cartCount")) || 0;
+    count++;
+    localStorage.setItem("cartCount", count);
+
+    const badge = document.getElementById("cart-count");
+    if (badge) badge.textContent = count;
+  }
+
+    document.addEventListener("DOMContentLoaded", () => {
+    // Leer el valor guardado
+    const savedCount = localStorage.getItem("cartCount");
+    const cartCount = savedCount ? parseInt(savedCount) : 0;
+    
+    // Mostrarlo en el badge (si existe el elemento)
+    const badge = document.getElementById("cart-count");
+    if (badge) badge.textContent = cartCount;
+  });
+
 
 // === FIN DEL ARCHIVO ===
 // Este archivo maneja toda la funcionalidad de la página de detalle de producto:
