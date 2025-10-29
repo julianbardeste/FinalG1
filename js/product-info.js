@@ -9,8 +9,8 @@
    =========================== */
 
 // Referencias a elementos del DOM para la búsqueda
-const navInput = document.getElementById("navSearchInput");        // Input de búsqueda en el navbar
-const suggestions = document.getElementById("searchSuggestions");  // Contenedor de sugerencias
+const navInput = document.getElementById("navSearchInput"); // Input de búsqueda en el navbar
+const suggestions = document.getElementById("searchSuggestions"); // Contenedor de sugerencias
 
 // Variable global para almacenar todos los productos cargados
 let allProducts = null;
@@ -37,10 +37,11 @@ async function loadAllProducts() {
     const cats = await fetch(CATEGORIES_URL).then((r) => r.json());
 
     // 2) Por cada categoría, solicitar su JSON de productos de forma asíncrona
-    const proms = cats.map((c) =>
-      fetch(PRODUCTS_URL + c.id + EXT_TYPE)
-        .then((r) => r.json())
-        .catch(() => null)  // Ignorar errores de categorías individuales
+    const proms = cats.map(
+      (c) =>
+        fetch(PRODUCTS_URL + c.id + EXT_TYPE)
+          .then((r) => r.json())
+          .catch(() => null) // Ignorar errores de categorías individuales
     );
 
     // 3) Esperar a que se resuelvan todas las promesas
@@ -63,7 +64,7 @@ async function loadAllProducts() {
     sessionStorage.setItem("allProductsCache", JSON.stringify(allProducts));
   } catch (e) {
     console.error("Error cargando productos (loadAllProducts):", e);
-    allProducts = [];  // Array vacío en caso de error
+    allProducts = []; // Array vacío en caso de error
   }
 }
 
@@ -132,8 +133,8 @@ function showSuggestions(items) {
 
     // Configurar evento de click para navegar al producto
     li.addEventListener("click", () => {
-      localStorage.setItem("productID", p.id);  // Guardar ID del producto
-      window.location.href = "product-info.html";  // Navegar a la página de detalle
+      localStorage.setItem("productID", p.id); // Guardar ID del producto
+      window.location.href = "product-info.html"; // Navegar a la página de detalle
     });
 
     // Agregar el elemento de sugerencia al contenedor
@@ -176,10 +177,10 @@ document.addEventListener("click", (e) => {
   if (
     navInput &&
     suggestions &&
-    !navInput.contains(e.target) &&        // Click no está en el input
-    !suggestions.contains(e.target)       // Click no está en las sugerencias
+    !navInput.contains(e.target) && // Click no está en el input
+    !suggestions.contains(e.target) // Click no está en las sugerencias
   ) {
-    suggestions.style.display = "none";   // Ocultar las sugerencias
+    suggestions.style.display = "none"; // Ocultar las sugerencias
   }
 });
 
@@ -428,44 +429,45 @@ function renderProduct(prod) {
   renderRelatedProducts(prod.relatedProducts);
 
   // Configurar eventos de los botones de acción
-const btnAgregar = document.getElementById("agregarCarrito");
-if (btnAgregar) {
-  btnAgregar.addEventListener("click", () => {
-    // Obtener el carrito actual o crear uno nuevo
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const btnAgregar = document.getElementById("agregarCarrito");
+  if (btnAgregar) {
+    btnAgregar.addEventListener("click", () => {
+      // Obtener el carrito actual o crear uno nuevo
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    // Buscar si el producto ya está en el carrito
-    const existing = cart.find((item) => item.id === prod.id);
+      // Buscar si el producto ya está en el carrito
+      const existing = cart.find((item) => item.id === prod.id);
 
-    if (existing) {
-      // Si ya existe, aumentar la cantidad y recalcular subtotal
-      existing.quantity += 1;
-      existing.subtotal = existing.cost * existing.quantity;
-    } else {
-      // Si es nuevo, agregarlo con subtotal incluido
-      const newItem = {
-        id: prod.id,
-        name: prod.name,
-        cost: prod.cost,
-        currency: prod.currency,
-        image:
-          Array.isArray(prod.images) && prod.images.length > 0
-            ? prod.images[0]
-            : "img/no-image.png",
-        quantity: 1,
-        subtotal: prod.cost, // 👈 ESTO es lo importante
-      };
-      cart.push(newItem);
-    }
+      if (existing) {
+        // Si ya existe, aumentar la cantidad y recalcular subtotal
+        existing.quantity += 1;
+        existing.subtotal = existing.cost * existing.quantity;
+      } else {
+        // Si es nuevo, agregarlo con subtotal incluido
+        const newItem = {
+          id: prod.id,
+          name: prod.name,
+          cost: prod.cost,
+          currency: prod.currency,
+          image:
+            Array.isArray(prod.images) && prod.images.length > 0
+              ? prod.images[0]
+              : "img/no-image.png",
+          quantity: 1,
+          subtotal: prod.cost, // 👈 ESTO es lo importante
+        };
+        cart.push(newItem);
+      }
 
-    // Guardar carrito actualizado
-    localStorage.setItem("cart", JSON.stringify(cart));
+      // Guardar carrito actualizado
+      localStorage.setItem("cart", JSON.stringify(cart));
 
-    alert("✅ Producto agregado al carrito");
-  });
-}
+      // Actualizar el badge inmediatamente
+      updateCartBadge();
 
-
+      alert("✅ Producto agregado al carrito");
+    });
+  }
 }
 
 /* ==========================================
@@ -583,22 +585,22 @@ function setupThumbnailsCarousel() {
 
   // Crear instancia de Bootstrap Carousel con configuración personalizada
   const bootstrapCarousel = new bootstrap.Carousel(carousel, {
-    interval: 5000,  // Cambio automático cada 5 segundos
-    wrap: true,      // Permitir navegación cíclica
+    interval: 5000, // Cambio automático cada 5 segundos
+    wrap: true, // Permitir navegación cíclica
   });
 
   // Configurar eventos de click en las miniaturas
   thumbnails.forEach((thumbnail, index) => {
     thumbnail.addEventListener("click", () => {
-      bootstrapCarousel.to(index);        // Navegar al slide correspondiente
-      updateActiveThumbnail(index);       // Actualizar estado visual de miniaturas
+      bootstrapCarousel.to(index); // Navegar al slide correspondiente
+      updateActiveThumbnail(index); // Actualizar estado visual de miniaturas
     });
   });
 
   // Sincronizar miniaturas cuando el carrusel cambia por otros medios
   // (botones de navegación, gestos táctiles, cambio automático)
   carousel.addEventListener("slide.bs.carousel", (event) => {
-    updateActiveThumbnail(event.to);  // Actualizar miniatura activa
+    updateActiveThumbnail(event.to); // Actualizar miniatura activa
   });
 }
 
@@ -610,9 +612,9 @@ function updateActiveThumbnail(activeIndex) {
   // Actualizar clases CSS para resaltar la miniatura activa
   thumbnails.forEach((thumbnail, index) => {
     if (index === activeIndex) {
-      thumbnail.classList.add("active");     // Marcar como activa
+      thumbnail.classList.add("active"); // Marcar como activa
     } else {
-      thumbnail.classList.remove("active");  // Remover marca de las demás
+      thumbnail.classList.remove("active"); // Remover marca de las demás
     }
   });
 }
@@ -625,11 +627,11 @@ function escapeHtml(str) {
 
   // Escapar caracteres especiales de HTML
   return String(str)
-    .replace(/&/g, "&amp;")    // Ampersand (debe ser primero)
-    .replace(/</g, "&lt;")     // Menor que
-    .replace(/>/g, "&gt;")     // Mayor que
-    .replace(/"/g, "&quot;")   // Comillas dobles
-    .replace(/'/g, "&#039;");  // Comillas simples
+    .replace(/&/g, "&amp;") // Ampersand (debe ser primero)
+    .replace(/</g, "&lt;") // Menor que
+    .replace(/>/g, "&gt;") // Mayor que
+    .replace(/"/g, "&quot;") // Comillas dobles
+    .replace(/'/g, "&#039;"); // Comillas simples
 }
 
 // Función para formatear números con separadores de miles
@@ -815,7 +817,7 @@ function setupRatingForm() {
 
   // Configurar eventos interactivos para cada estrella
   stars.forEach((star, index) => {
-    const rating = index + 1;  // Convertir índice a calificación (1-5)
+    const rating = index + 1; // Convertir índice a calificación (1-5)
 
     // Efecto hover: resaltar estrellas al pasar el mouse
     star.addEventListener("mouseenter", () => {
@@ -854,7 +856,7 @@ function setupRatingForm() {
 
   // Configurar manejo del envío del formulario
   ratingForm.addEventListener("submit", (e) => {
-    e.preventDefault();  // Prevenir envío estándar del formulario
+    e.preventDefault(); // Prevenir envío estándar del formulario
 
     // Obtener y validar el texto del comentario
     const comment = document.getElementById("user-comment").value.trim();
@@ -883,7 +885,7 @@ function addNewComment(comment, rating) {
   const now = new Date();
 
   // Generar elementos visuales para el nuevo comentario
-  const stars = generateStars(rating);  // Estrellas según calificación
+  const stars = generateStars(rating); // Estrellas según calificación
   const date = now.toLocaleDateString("es-ES", {
     year: "numeric",
     month: "long",
@@ -936,29 +938,29 @@ function addNewComment(comment, rating) {
   alert("¡Tu calificación ha sido agregada exitosamente!");
 }
 
-  let count = 0;
+let count = 0;
 
-  function addToCart() {
-    let count = parseInt(localStorage.getItem("cartCount")) || 0;
-    count++;
-    localStorage.setItem("cartCount", count);
+// Función para actualizar el badge del carrito
+function updateCartBadge() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
 
-    const badge = document.getElementById("cart-count");
-    if (badge) badge.textContent = count;
-  }
+  localStorage.setItem("cartCount", totalItems);
 
-    document.addEventListener("DOMContentLoaded", () => {
-    // Leer el valor guardado
-    const savedCount = localStorage.getItem("cartCount");
-    const cartCount = savedCount ? parseInt(savedCount) : 0;
-    
-    // Mostrarlo en el badge (si existe el elemento)
-    const badge = document.getElementById("cart-count");
-    if (badge) badge.textContent = cartCount;
-  });
+  const badge = document.getElementById("cart-count");
+  if (badge) badge.textContent = totalItems;
+}
 
-  localStorage.removeItem("cartCount");
+document.addEventListener("DOMContentLoaded", () => {
+  // Actualizar el badge al cargar la página
+  updateCartBadge();
+});
 
+// --- ELIMINAR DEL CARRITO ---
+function removeFromCart() {
+  // Actualizar el badge
+  updateCartBadge();
+}
 
 // === FIN DEL ARCHIVO ===
 // Este archivo maneja toda la funcionalidad de la página de detalle de producto:

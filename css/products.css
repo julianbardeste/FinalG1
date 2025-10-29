@@ -10,17 +10,17 @@
 /* === VARIABLES DEL SISTEMA DE DISEÑO === */
 :root {
   /* PALETA DE COLORES PRINCIPAL */
-  --primary-color: #ff6b35;    /* Naranja principal - color de marca */
-  --secondary-color: #f7931e;  /* Naranja secundario - para acentos */
-  --accent-color: #ffb347;     /* Naranja claro - para destacados */
+  --primary-color: #ff6b35; /* Naranja principal - color de marca */
+  --secondary-color: #f7931e; /* Naranja secundario - para acentos */
+  --accent-color: #ffb347; /* Naranja claro - para destacados */
 
   /* COLORES DE TEXTO */
-  --text-dark: #2d3748;        /* Gris oscuro - texto principal */
-  --text-light: #718096;       /* Gris claro - texto secundario */
+  --text-dark: #2d3748; /* Gris oscuro - texto principal */
+  --text-light: #718096; /* Gris claro - texto secundario */
 
   /* COLORES DE INTERFAZ */
-  --border-color: #e2e8f0;     /* Gris muy claro - bordes y divisores */
-  --bg-light: #f7fafc;         /* Gris casi blanco - fondos secundarios */
+  --border-color: #e2e8f0; /* Gris muy claro - bordes y divisores */
+  --bg-light: #f7fafc; /* Gris casi blanco - fondos secundarios */
 
   /* SISTEMA DE SOMBRAS - Para profundidad visual */
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -28,8 +28,8 @@
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
 
   /* SISTEMA DE BORDER-RADIUS */
-  --radius: 16px;       /* Border radius grande - para elementos principales */
-  --radius-sm: 8px;     /* Border radius pequeño - para elementos secundarios */
+  --radius: 16px; /* Border radius grande - para elementos principales */
+  --radius-sm: 8px; /* Border radius pequeño - para elementos secundarios */
 }
 
 /* === CONFIGURACIÓN GLOBAL === */
@@ -64,7 +64,9 @@ body {
 
 /* Estado hover de los enlaces de navegación */
 .navbar-nav .nav-link:hover {
-  color: var(--primary-color) !important; /* Cambia al color principal de marca */
+  color: var(
+    --primary-color
+  ) !important; /* Cambia al color principal de marca */
 }
 
 /* Marca/logo de la navegación */
@@ -77,7 +79,9 @@ body {
 /* Contenedor de filtros con efecto glassmorphism */
 .filters-section {
   background: rgba(255, 255, 255, 0.95); /* Fondo blanco casi opaco */
-  backdrop-filter: blur(20px); /* Efecto de desenfoque del fondo - glassmorphism */
+  backdrop-filter: blur(
+    20px
+  ); /* Efecto de desenfoque del fondo - glassmorphism */
   border-radius: var(--radius); /* Bordes redondeados usando variable */
   padding: 2rem; /* Espaciado interno generoso */
   margin: 2rem 0; /* Margen vertical */
@@ -222,8 +226,8 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.2), /* Blanco semi-transparente en el centro */
-    transparent
+    rgba(255, 255, 255, 0.2),
+    /* Blanco semi-transparente en el centro */ transparent
   );
   transition: left 0.5s; /* Transición para el movimiento */
 }
@@ -401,8 +405,8 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.2), /* Brillo blanco semi-transparente */
-    transparent
+    rgba(255, 255, 255, 0.2),
+    /* Brillo blanco semi-transparente */ transparent
   );
   transition: left 0.5s; /* Transición del movimiento */
 }
@@ -450,6 +454,8 @@ body {
   padding: 1.5rem; /* Espaciado interno */
   margin-bottom: 2rem; /* Margen inferior */
   box-shadow: var(--shadow-md); /* Sombra media */
+  position: relative; /* Necesario para que z-index funcione */
+  z-index: 10; /* Aumenta este valor según lo que lo esté tapando */
 }
 
 /* Contenedor del input de búsqueda */
@@ -534,7 +540,10 @@ body {
 
   /* Grid de productos optimizado para tablets */
   .products-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Columnas más estrechas */
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(280px, 1fr)
+    ); /* Columnas más estrechas */
     gap: 1.5rem; /* Gap reducido */
     padding: 1rem 0; /* Padding vertical reducido */
   }
@@ -620,7 +629,10 @@ body {
 /* Versión alternativa del grid con espaciado diferente */
 #products-container {
   display: grid; /* Layout de grid */
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); /* Columnas más estrechas */
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(260px, 1fr)
+  ); /* Columnas más estrechas */
   gap: 1.5rem; /* Gap reducido */
   margin-top: 1.5rem; /* Margen superior */
   align-items: stretch; /* Todas las tarjetas tienen la misma altura */
@@ -631,7 +643,12 @@ body {
 .product-card {
   border-radius: var(--radius); /* Bordes redondeados grandes */
   overflow: hidden; /* Oculta contenido que sobresalga */
-  background: rgba(255, 255, 255, 0.96); /* Fondo blanco casi completamente opaco */
+  background: rgba(
+    255,
+    255,
+    255,
+    0.96
+  ); /* Fondo blanco casi completamente opaco */
   box-shadow: var(--shadow-md); /* Sombra media */
   transition: transform 0.25s ease, box-shadow 0.25s ease; /* Transiciones más rápidas */
   cursor: pointer; /* Indica interactividad */
@@ -679,9 +696,6 @@ body {
     var(--primary-color),
     var(--secondary-color)
   );
-  /* Aplicación del gradiente al texto */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 /* === DESCRIPCIÓN DEL PRODUCTO === */
@@ -875,7 +889,15 @@ body.dark-mode .empty-state p {
 }
 
 /* === TRANSICIONES SUAVES PARA MODO OSCURO === */
-body, .filters-section, .filter-group, .product-card, .form-control,
-.search-section, #searchSuggestions, .suggestion-item, .empty-state {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+body,
+.filters-section,
+.filter-group,
+.product-card,
+.form-control,
+.search-section,
+#searchSuggestions,
+.suggestion-item,
+.empty-state {
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
 }
