@@ -450,6 +450,8 @@ body {
   padding: 1.5rem; /* Espaciado interno */
   margin-bottom: 2rem; /* Margen inferior */
   box-shadow: var(--shadow-md); /* Sombra media */
+  position: relative; /* Necesario para que z-index funcione */
+  z-index: 10; /* Aumenta este valor según lo que lo esté tapando */
 }
 
 /* Contenedor del input de búsqueda */
