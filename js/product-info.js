@@ -407,10 +407,13 @@ function renderProduct(prod) {
               </div>
             </div>
 
-            <!-- Botones de acción -->
+             <!-- Botones de acción -->
             <div class="buttons-container d-flex gap-2">
               <button id="agregarCarrito" class="product-btn product-btn-primary btn btn-primary" onclick="addToCart()">
                 <i class="fas fa-shopping-cart me-2"></i>Agregar al carrito
+              </button>
+              <button id="comprar" class="product-btn product-btn-success btn btn-success">
+                <i class="fas fa-credit-card me-2"></i>Comprar ahora
               </button>
             </div>
           </div>
@@ -463,6 +466,48 @@ function renderProduct(prod) {
       updateCartBadge();
 
       alert("✅ Producto agregado al carrito");
+    });
+  }
+
+  // Configurar botón "Comprar ahora"
+  const btnComprar = document.getElementById("comprar");
+  if (btnComprar) {
+    btnComprar.addEventListener("click", () => {
+      // Obtener el carrito actual o crear uno nuevo
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      // Buscar si el producto ya está en el carrito
+      const existing = cart.find((item) => item.id === prod.id);
+
+      if (existing) {
+        // Si ya existe, aumentar la cantidad y recalcular subtotal
+        existing.quantity += 1;
+        existing.subtotal = existing.cost * existing.quantity;
+      } else {
+        // Si es nuevo, agregarlo con subtotal incluido
+        const newItem = {
+          id: prod.id,
+          name: prod.name,
+          cost: prod.cost,
+          currency: prod.currency,
+          image:
+            Array.isArray(prod.images) && prod.images.length > 0
+              ? prod.images[0]
+              : "img/no-image.png",
+          quantity: 1,
+          subtotal: prod.cost,
+        };
+        cart.push(newItem);
+      }
+
+      // Guardar carrito actualizado
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      // Actualizar el badge inmediatamente
+      updateCartBadge();
+
+      // Redirigir al carrito
+      window.location.href = "cart.html";
     });
   }
 }
