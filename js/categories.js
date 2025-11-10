@@ -199,23 +199,34 @@ let allProducts = null;
 async function loadAllProducts() {
   const cached = sessionStorage.getItem("allProductsCache");
   // Si ya está en caché, usar los datos guardados
-  if (cached) { allProducts = JSON.parse(cached); return; }
+  if (cached) {
+    allProducts = JSON.parse(cached);
+    return;
+  }
 
   try {
     // Obtener todas las categorías
-    const cats = await fetch(CATEGORIES_URL).then(r => r.json());
+    const cats = await fetch(CATEGORIES_URL).then((r) => r.json());
     // Crear promesas para obtener productos de cada categoría
-    const proms = cats.map(c => fetch(PRODUCTS_URL + c.id + EXT_TYPE).then(r => r.json()).catch(()=>null));
+    const proms = cats.map((c) =>
+      fetch(PRODUCTS_URL + c.id + EXT_TYPE)
+        .then((r) => r.json())
+        .catch(() => null)
+    );
     // Esperar a que se resuelvan todas las promesas
     const lists = await Promise.all(proms);
 
     // Fusionar todos los productos en un solo array
     const merged = [];
-    lists.forEach(l => { if (l && l.products) merged.push(...l.products); });
+    lists.forEach((l) => {
+      if (l && l.products) merged.push(...l.products);
+    });
 
     // Eliminar productos duplicados usando un mapa por ID
     const map = {};
-    merged.forEach(p => { map[p.id] = p; });
+    merged.forEach((p) => {
+      map[p.id] = p;
+    });
     allProducts = Object.values(map);
 
     // Guardar en caché para futuras búsquedas
@@ -230,10 +241,13 @@ async function loadAllProducts() {
 function showSuggestions(items) {
   suggestions.innerHTML = "";
   // Si no hay resultados, ocultar las sugerencias
-  if (!items.length) { suggestions.style.display = "none"; return; }
+  if (!items.length) {
+    suggestions.style.display = "none";
+    return;
+  }
 
   // Crear elemento HTML para cada producto encontrado
-  items.forEach(p => {
+  items.forEach((p) => {
     const li = document.createElement("li");
     li.className = "list-group-item d-flex align-items-center";
 
@@ -246,7 +260,9 @@ function showSuggestions(items) {
     img.alt = p.name || "producto";
     img.width = 44;
     img.height = 44;
-    img.onerror = () => { img.src = "img/no-image.png"; };
+    img.onerror = () => {
+      img.src = "img/no-image.png";
+    };
 
     // Crear contenedor de texto
     const textWrap = document.createElement("div");
@@ -261,9 +277,10 @@ function showSuggestions(items) {
     const sub = document.createElement("div");
     sub.className = "suggest-sub";
     if (p.cost !== undefined) {
-      sub.textContent = `${p.currency || ''} ${p.cost}`;
+      sub.textContent = `${p.currency || ""} ${p.cost}`;
     } else if (p.description) {
-      sub.textContent = p.description.slice(0, 60) + (p.description.length > 60 ? "…" : "");
+      sub.textContent =
+        p.description.slice(0, 60) + (p.description.length > 60 ? "…" : "");
     }
 
     // Ensamblar elementos
@@ -284,25 +301,29 @@ function showSuggestions(items) {
   suggestions.style.display = "block";
 }
 
-
 // Event listener para búsqueda en tiempo real
-navInput && navInput.addEventListener("input", async () => {
-  const q = navInput.value.trim().toLowerCase();
-  // Si no hay texto, ocultar sugerencias
-  if (!q) { suggestions.style.display = "none"; return; }
+navInput &&
+  navInput.addEventListener("input", async () => {
+    const q = navInput.value.trim().toLowerCase();
+    // Si no hay texto, ocultar sugerencias
+    if (!q) {
+      suggestions.style.display = "none";
+      return;
+    }
 
-  // Cargar productos si aún no están cargados
-  if (!allProducts) await loadAllProducts();
+    // Cargar productos si aún no están cargados
+    if (!allProducts) await loadAllProducts();
 
-  // Buscar coincidencias en nombre y descripción
-  const matches = allProducts.filter(p =>
-    (p.name && p.name.toLowerCase().includes(q)) ||
-    (p.description && p.description.toLowerCase().includes(q))
-  );
+    // Buscar coincidencias en nombre y descripción
+    const matches = allProducts.filter(
+      (p) =>
+        (p.name && p.name.toLowerCase().includes(q)) ||
+        (p.description && p.description.toLowerCase().includes(q))
+    );
 
-  // Mostrar hasta 6 sugerencias
-  showSuggestions(matches.slice(0, 6));
-});
+    // Mostrar hasta 6 sugerencias
+    showSuggestions(matches.slice(0, 6));
+  });
 
 // Event listener para ocultar sugerencias al hacer clic fuera
 document.addEventListener("click", (e) => {

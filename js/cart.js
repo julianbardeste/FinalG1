@@ -64,7 +64,13 @@ function loadCart() {
             <h5>${item.name}</h5>
             <p class="text-muted mb-0">
               Precio unitario: ${item.currency} ${item.cost}
-              ${item.currency !== "USD" ? `<br><small class="text-secondary">(≈ USD ${priceInUSD.toFixed(2)})</small>` : ""}
+              ${
+                item.currency !== "USD"
+                  ? `<br><small class="text-secondary">(≈ USD ${priceInUSD.toFixed(
+                      2
+                    )})</small>`
+                  : ""
+              }
             </p>
           </div>
           <div class="col-md-2">
@@ -82,7 +88,13 @@ function loadCart() {
             <p class="text-primary fs-5" id="subtotal-${index}">
               USD ${subtotalInUSD.toFixed(2)}
             </p>
-            ${item.currency !== "USD" ? `<small class="text-muted">(${item.currency} ${item.subtotal.toFixed(2)})</small>` : ""}
+            ${
+              item.currency !== "USD"
+                ? `<small class="text-muted">(${
+                    item.currency
+                  } ${item.subtotal.toFixed(2)})</small>`
+                : ""
+            }
           </div>
           <div class="col-md-1 text-end">
             <i class="fas fa-trash remove-btn" onclick="removeItem(${index})" title="Eliminar"></i>
@@ -117,7 +129,9 @@ function updateQuantity(index, newQuantity) {
   if (cart[index].currency !== "USD") {
     subtotalElement.innerHTML = `
       USD ${subtotalInUSD.toFixed(2)}
-      <br><small class="text-muted">(${cart[index].currency} ${cart[index].subtotal.toFixed(2)})</small>
+      <br><small class="text-muted">(${cart[index].currency} ${cart[
+      index
+    ].subtotal.toFixed(2)})</small>
     `;
   } else {
     subtotalElement.textContent = `USD ${subtotalInUSD.toFixed(2)}`;
@@ -150,11 +164,13 @@ function updateCartSummary() {
     totalUSD += priceInUSD * item.quantity;
   });
 
-  document.getElementById("cart-subtotal").textContent =
-    `USD ${totalUSD.toFixed(2)}`;
+  document.getElementById(
+    "cart-subtotal"
+  ).textContent = `USD ${totalUSD.toFixed(2)}`;
   document.getElementById("cart-shipping").textContent = `USD 0.00`;
-  document.getElementById("cart-total").textContent =
-    `USD ${totalUSD.toFixed(2)}`;
+  document.getElementById("cart-total").textContent = `USD ${totalUSD.toFixed(
+    2
+  )}`;
 }
 
 // Badge del carrito
@@ -199,12 +215,15 @@ function calculateShipping() {
 function updateCartSummaryWithShipping() {
   const costs = calculateShipping();
 
-  document.getElementById("cart-subtotal").textContent =
-    `USD ${costs.subtotal.toFixed(2)}`;
-  document.getElementById("cart-shipping").textContent =
-    `USD ${costs.shippingCost.toFixed(2)}`;
-  document.getElementById("cart-total").textContent =
-    `USD ${costs.total.toFixed(2)}`;
+  document.getElementById(
+    "cart-subtotal"
+  ).textContent = `USD ${costs.subtotal.toFixed(2)}`;
+  document.getElementById(
+    "cart-shipping"
+  ).textContent = `USD ${costs.shippingCost.toFixed(2)}`;
+  document.getElementById(
+    "cart-total"
+  ).textContent = `USD ${costs.total.toFixed(2)}`;
 }
 
 // Abrir modal de checkout
@@ -269,7 +288,7 @@ function validateCurrentTab() {
 
   if (activeTabId === "#payment-section") {
     const paymentMethod = document.querySelector(
-      'input[name="paymentMethod"]:checked',
+      'input[name="paymentMethod"]:checked'
     ).value;
 
     if (paymentMethod === "creditCard") {
@@ -316,8 +335,9 @@ function updateSummary() {
   document.getElementById("summary-shipping-type").textContent =
     checkoutData.shippingTypeName;
   const address = checkoutData.address;
-  document.getElementById("summary-address").textContent =
-    `${address.calle} ${address.numero} esq. ${address.esquina}, ${address.localidad}, ${address.departamento}`;
+  document.getElementById(
+    "summary-address"
+  ).textContent = `${address.calle} ${address.numero} esq. ${address.esquina}, ${address.localidad}, ${address.departamento}`;
 
   // Resumen de pago
   const paymentMethodText =
@@ -328,20 +348,24 @@ function updateSummary() {
     paymentMethodText;
 
   // Costos
-  document.getElementById("summary-subtotal").textContent =
-    `USD ${costs.subtotal.toFixed(2)}`;
-  document.getElementById("summary-shipping-percent").textContent =
-    `${(checkoutData.shippingType * 100).toFixed(0)}%`;
-  document.getElementById("summary-shipping-cost").textContent =
-    `USD ${costs.shippingCost.toFixed(2)}`;
-  document.getElementById("summary-total").textContent =
-    `USD ${costs.total.toFixed(2)}`;
+  document.getElementById(
+    "summary-subtotal"
+  ).textContent = `USD ${costs.subtotal.toFixed(2)}`;
+  document.getElementById("summary-shipping-percent").textContent = `${(
+    checkoutData.shippingType * 100
+  ).toFixed(0)}%`;
+  document.getElementById(
+    "summary-shipping-cost"
+  ).textContent = `USD ${costs.shippingCost.toFixed(2)}`;
+  document.getElementById(
+    "summary-total"
+  ).textContent = `USD ${costs.total.toFixed(2)}`;
 }
 
 // Finalizar compra
 function finalizePurchase() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const costs = calculateShipping();
+  const cart = JSON.parse(localStorage.getItem("cart")) || []; // Carrito actual
+  const costs = calculateShipping(); // Costos calculados
 
   // Crear objeto con todos los datos de la compra
   const purchaseData = {
@@ -370,7 +394,9 @@ function finalizePurchase() {
 
   // Mostrar mensaje de éxito
   alert(
-    `¡Compra finalizada con éxito!\n\nTotal: USD ${costs.total.toFixed(2)}\n\nRecibirás un email de confirmación en breve.`,
+    `¡Compra finalizada con éxito!\n\nTotal: USD ${costs.total.toFixed(
+      2
+    )}\n\nRecibirás un email de confirmación en breve.`
   );
 
   // Limpiar carrito
@@ -378,7 +404,7 @@ function finalizePurchase() {
 
   // Cerrar modal
   const modal = bootstrap.Modal.getInstance(
-    document.getElementById("checkoutModal"),
+    document.getElementById("checkoutModal")
   );
   modal.hide();
 
@@ -392,7 +418,7 @@ function finalizePurchase() {
 // Event listeners para el tipo de envío
 function setupShippingListeners() {
   const shippingRadios = document.querySelectorAll(
-    'input[name="shippingType"]',
+    'input[name="shippingType"]'
   );
   shippingRadios.forEach((radio) => {
     radio.addEventListener("change", function () {
@@ -414,7 +440,7 @@ function setupShippingListeners() {
 // Event listeners para el método de pago
 function setupPaymentListeners() {
   const paymentRadios = document.querySelectorAll(
-    'input[name="paymentMethod"]',
+    'input[name="paymentMethod"]'
   );
   paymentRadios.forEach((radio) => {
     radio.addEventListener("change", function () {
