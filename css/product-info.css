@@ -1099,7 +1099,7 @@ body.dark-mode #related-products .product-card:hover {
 
 .cart-badge {
   position: absolute;
-  top: -8px;
+  top: -3px;
   right: -10px;
   background-color: red;
   color: white;
