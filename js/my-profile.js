@@ -27,15 +27,15 @@
    ======================================= */
 
 // Al cargar el documento, inicializar la funcionalidad del perfil
-document.addEventListener("DOMContentLoaded", function() {
-    // TODO: Implementar inicializaci�n del perfil de usuario
-    console.log("Perfil de usuario cargado - Funcionalidad en desarrollo");
+document.addEventListener("DOMContentLoaded", function () {
+  // TODO: Implementar inicializaci�n del perfil de usuario
+  console.log("Perfil de usuario cargado - Funcionalidad en desarrollo");
 
-    // TODO: Cargar datos del usuario desde sessionStorage/localStorage
-    // TODO: Poblar formularios con informaci�n existente
-    // TODO: Configurar validaci�n de formularios
-    // TODO: Configurar subida de imagen de perfil
-    // TODO: Cargar historial de compras del usuario
+  // TODO: Cargar datos del usuario desde sessionStorage/localStorage
+  // TODO: Poblar formularios con informaci�n existente
+  // TODO: Configurar validaci�n de formularios
+  // TODO: Configurar subida de imagen de perfil
+  // TODO: Cargar historial de compras del usuario
 });
 
 /* =======================================
@@ -59,108 +59,108 @@ document.addEventListener("DOMContentLoaded", function() {
 
    ======================================= */
 
-   // Elementos del DOM
-    const profileForm = document.getElementById('profileForm'); // Formulario de perfil
-    const imageUpload = document.getElementById('imageUpload'); // Input de subida de imagen
-    const profileImage = document.getElementById('profileImage');   // Imagen de perfil
-    const successMessage = document.getElementById('successMessage'); // Mensaje de exito
+// Elementos del DOM
+const profileForm = document.getElementById("profileForm"); // Formulario de perfil
+const imageUpload = document.getElementById("imageUpload"); // Input de subida de imagen
+const profileImage = document.getElementById("profileImage"); // Imagen de perfil
+const successMessage = document.getElementById("successMessage"); // Mensaje de exito
 
-    // Cargar datos guardados al iniciar
-    document.addEventListener('DOMContentLoaded', function() {
-      loadProfileData();
-    });
+// Cargar datos guardados al iniciar
+document.addEventListener("DOMContentLoaded", function () {
+  loadProfileData();
+});
 
-    // Cargar datos del localStorage
-    function loadProfileData() {
-      const savedData = {
-        nombre: localStorage.getItem('nombre') || '',
-        apellido: localStorage.getItem('apellido') || '',
-        email: localStorage.getItem('email') || '',
-        telefono: localStorage.getItem('telefono') || '',
-        profileImage: localStorage.getItem('profileImage') || ''
-      };
+// Cargar datos del localStorage
+function loadProfileData() {
+  const savedData = {
+    nombre: localStorage.getItem("nombre") || "",
+    apellido: localStorage.getItem("apellido") || "",
+    email: localStorage.getItem("email") || "",
+    telefono: localStorage.getItem("telefono") || "",
+    profileImage: localStorage.getItem("profileImage") || "",
+  };
 
-      document.getElementById('nombre').value = savedData.nombre;
-      document.getElementById('apellido').value = savedData.apellido;
-      document.getElementById('email').value = savedData.email;
-      document.getElementById('telefono').value = savedData.telefono;
+  document.getElementById("nombre").value = savedData.nombre;
+  document.getElementById("apellido").value = savedData.apellido;
+  document.getElementById("email").value = savedData.email;
+  document.getElementById("telefono").value = savedData.telefono;
 
-      if (savedData.profileImage) {
-        profileImage.src = savedData.profileImage;
-        profileImage.style.fontSize = '0';
-      } else {
-        profileImage.src = '';
-        profileImage.textContent = '👤';
-        profileImage.style.fontSize = '3rem';
-      }
+  if (savedData.profileImage) {
+    profileImage.src = savedData.profileImage;
+    profileImage.style.fontSize = "0";
+  } else {
+    profileImage.src = "";
+    profileImage.textContent = "👤";
+    profileImage.style.fontSize = "3rem";
+  }
+}
+
+// Manejar el envío del formulario
+profileForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const formData = {
+    nombre: document.getElementById("nombre").value.trim(),
+    apellido: document.getElementById("apellido").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    telefono: document.getElementById("telefono").value.trim(),
+  };
+
+  // Validación básica
+  if (!formData.nombre || !formData.apellido || !formData.email) {
+    alert("Por favor completa todos los campos obligatorios");
+    return;
+  }
+
+  // Guardar en localStorage
+  localStorage.setItem("nombre", formData.nombre);
+  localStorage.setItem("apellido", formData.apellido);
+  localStorage.setItem("email", formData.email);
+  localStorage.setItem("telefono", formData.telefono);
+
+  // Mostrar mensaje de éxito
+  showSuccessMessage();
+});
+
+// Manejar la carga de imagen
+imageUpload.addEventListener("change", function (e) {
+  const file = e.target.files[0];
+
+  if (file) {
+    // Validar tipo de archivo
+    if (!file.type.startsWith("image/")) {
+      alert("Por favor selecciona un archivo de imagen válido");
+      return;
     }
 
-    // Manejar el envío del formulario
-    profileForm.addEventListener('submit', function(e) {
-      e.preventDefault();
+    // Validar tamaño (máximo 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert("La imagen es demasiado grande. Máximo 5MB");
+      return;
+    }
 
-      const formData = {
-        nombre: document.getElementById('nombre').value.trim(),
-        apellido: document.getElementById('apellido').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        telefono: document.getElementById('telefono').value.trim()
-      };
+    const reader = new FileReader();
 
-      // Validación básica
-      if (!formData.nombre || !formData.apellido || !formData.email) {
-        alert('Por favor completa todos los campos obligatorios');
-        return;
-      }
+    reader.onload = function (event) {
+      const imageData = event.target.result;
+      profileImage.src = imageData;
+      profileImage.style.fontSize = "0";
+      profileImage.textContent = "";
 
       // Guardar en localStorage
-      localStorage.setItem('nombre', formData.nombre);
-      localStorage.setItem('apellido', formData.apellido);
-      localStorage.setItem('email', formData.email);
-      localStorage.setItem('telefono', formData.telefono);
+      localStorage.setItem("profileImage", imageData);
 
-      // Mostrar mensaje de éxito
       showSuccessMessage();
-    });
+    };
 
-    // Manejar la carga de imagen
-    imageUpload.addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      
-      if (file) {
-        // Validar tipo de archivo
-        if (!file.type.startsWith('image/')) {
-          alert('Por favor selecciona un archivo de imagen válido');
-          return;
-        }
+    reader.readAsDataURL(file);
+  }
+});
 
-        // Validar tamaño (máximo 5MB)
-        if (file.size > 5 * 1024 * 1024) {
-          alert('La imagen es demasiado grande. Máximo 5MB');
-          return;
-        }
-
-        const reader = new FileReader();
-        
-        reader.onload = function(event) {
-          const imageData = event.target.result;
-          profileImage.src = imageData;
-          profileImage.style.fontSize = '0';
-          profileImage.textContent = '';
-          
-          // Guardar en localStorage
-          localStorage.setItem('profileImage', imageData);
-          
-          showSuccessMessage();
-        };
-        
-        reader.readAsDataURL(file);
-      }
-    });
-
-    // Mostrar mensaje de éxito
-    function showSuccessMessage() {
-      successMessage.classList.add('show');
-      setTimeout(() => {
-        successMessage.classList.remove('show');
-      }, 3000);
-    }
+// Mostrar mensaje de éxito
+function showSuccessMessage() {
+  successMessage.classList.add("show");
+  setTimeout(() => {
+    successMessage.classList.remove("show");
+  }, 3000);
+}
