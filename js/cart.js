@@ -171,6 +171,9 @@ function updateCartSummary() {
   document.getElementById("cart-total").textContent = `USD ${totalUSD.toFixed(
     2
   )}`;
+
+  // Actualizar también el modal de resumen si está visible
+  updateModalSummaryIfOpen();
 }
 
 // Badge del carrito
@@ -224,6 +227,22 @@ function updateCartSummaryWithShipping() {
   document.getElementById(
     "cart-total"
   ).textContent = `USD ${costs.total.toFixed(2)}`;
+
+  // Actualizar también el modal de resumen si está visible
+  updateModalSummaryIfOpen();
+}
+
+// Función para actualizar el modal de resumen si está abierto
+function updateModalSummaryIfOpen() {
+  // Verificar si el modal está abierto
+  const modal = document.getElementById("checkoutModal");
+  if (modal && modal.classList.contains("show")) {
+    // Verificar si la pestaña de resumen está activa o actualizar de todos modos
+    const summaryTab = document.getElementById("summary-section");
+    if (summaryTab) {
+      updateSummary();
+    }
+  }
 }
 
 // Abrir modal de checkout
