@@ -3,7 +3,8 @@
     "allow": [
       "Bash(node:*)",
       "Bash(npx http-server:*)",
-      "Bash(npx prettier:*)"
+      "Bash(npx prettier:*)",
+      "Bash(npm install:*)"
     ],
     "deny": [],
     "ask": []

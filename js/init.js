@@ -25,12 +25,31 @@ let hideSpinner = function () {
 let getJSONData = function (url) {
   let result = {};
   showSpinner(); // Mostrar spinner mientras carga
-  return fetch(url)
+
+  // Obtener el token del sessionStorage
+  const token = sessionStorage.getItem("token");
+
+  // Configurar headers con el token JWT
+  const headers = {
+    "Content-Type": "application/json"
+  };
+
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
+  return fetch(url, { headers })
     .then((response) => {
       // Verificar si la respuesta es exitosa
       if (response.ok) {
         return response.json();
       } else {
+        // Si el token es inválido o expiró, redirigir al login
+        if (response.status === 401 || response.status === 403) {
+          alert("Tu sesión ha expirado. Por favor, inicia sesión nuevamente.");
+          sessionStorage.clear();
+          window.location.href = "login.html";
+        }
         throw Error(response.statusText);
       }
     })
