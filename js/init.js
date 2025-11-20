@@ -1,13 +1,13 @@
 // URLs de la API del e-mercado para obtener datos de diferentes secciones
-const CATEGORIES_URL = "https://japceibal.github.io/emercado-api/cats/cat.json";
+const CATEGORIES_URL = "http://localhost:3000/json/cats/cat.json";
 const PUBLISH_PRODUCT_URL =
-  "https://japceibal.github.io/emercado-api/sell/publish.json";
-const PRODUCTS_URL = "https://japceibal.github.io/emercado-api/cats_products/";
-const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/";
+"http://localhost:3000/json/sell/publish.json";
+const PRODUCTS_URL = id => `http://localhost:3000/json/cats_products/${id}.json`;
+const PRODUCT_INFO_URL = "http://localhost:3000/json/products/";
 const PRODUCT_INFO_COMMENTS_URL =
-  "https://japceibal.github.io/emercado-api/products_comments/";
-const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
-const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
+"http://localhost:3000/json/products_comments/";
+const CART_INFO_URL = "http://localhost:3000/json/cart/buy.json";
+const CART_BUY_URL = "http://localhost:3000/json/cart/buy.json";
 // Extensión de archivo para las APIs
 const EXT_TYPE = ".json";
 
