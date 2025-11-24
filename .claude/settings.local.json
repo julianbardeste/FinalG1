@@ -9,7 +9,9 @@
       "Bash(curl:*)",
       "Bash(temp_token.json)",
       "Bash(netstat:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)",
+      "Bash(powershell -Command \"Stop-Process -Id 12588 -Force\")"
     ],
     "deny": [],
     "ask": []
