@@ -4,7 +4,12 @@
       "Bash(node:*)",
       "Bash(npx http-server:*)",
       "Bash(npx prettier:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(nul)",
+      "Bash(curl:*)",
+      "Bash(temp_token.json)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)"
     ],
     "deny": [],
     "ask": []
