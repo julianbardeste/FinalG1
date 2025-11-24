@@ -1,0 +1,1 @@
+{"success":true,"message":"Login exitoso","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsIm5hbWUiOiJBZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzY0MDAyMzUwLCJleHAiOjE3NjQwODg3NTB9.55xWbP2Bqmt5gxSbfmNzMMLPEBC_ERrCTO8zcRbHGDo","user":{"id":1,"email":"admin@example.com","name":"Administrador"}}
