@@ -382,7 +382,7 @@ function updateSummary() {
 }
 
 // Finalizar compra
-function finalizePurchase() {
+async function finalizePurchase() {
   const cart = JSON.parse(localStorage.getItem("cart")) || []; // Carrito actual
   const costs = calculateShipping(); // Costos calculados
 
@@ -410,6 +410,8 @@ function finalizePurchase() {
   };
 
   console.log("Compra finalizada:", purchaseData);
+  // NUEVO: Guardar en base de datos
+  await guardarCarrito();
 
   // Mostrar mensaje de éxito
   alert(
@@ -429,9 +431,6 @@ function finalizePurchase() {
 
   // Recargar página
   loadCart();
-
-  // Opcional: redirigir a página de confirmación
-  // window.location.href = 'confirmation.html';
 }
 
 // Event listeners para el tipo de envío
@@ -543,3 +542,97 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+// =============================================
+// GUARDAR CARRITO EN BASE DE DATOS
+// =============================================
+
+async function guardarCarrito() {
+    console.log('Guardando carrito en base de datos...');
+
+    try {
+        // 1. Verificar sesion
+        const token = sessionStorage.getItem('token');
+        if (!token) {
+            alert('Debes iniciar sesion primero');
+            window.location.href = 'login.html';
+            return;
+        }
+
+        // 2. Obtener items del carrito (tu cart.js usa 'cart')
+        const cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
+        
+        if (cartItems.length === 0) {
+            alert('El carrito esta vacio');
+            return;
+        }
+
+        // 3. Obtener info de envio del objeto checkoutData
+        if (!checkoutData.address.calle || !checkoutData.address.numero) {
+            alert('Por favor completa la direccion de envio primero');
+            return;
+        }
+
+        const costs = calculateShipping();
+
+        const shippingInfo = {
+            street: checkoutData.address.calle,
+            number: checkoutData.address.numero,
+            corner: checkoutData.address.esquina || '',
+            department: checkoutData.address.departamento,
+            locality: checkoutData.address.localidad,
+            shippingCost: costs.shippingCost,
+            shippingType: checkoutData.shippingTypeName
+        };
+
+        // 4. Preparar datos - AJUSTADO A TU ESTRUCTURA
+        const datos = {
+            items: cartItems.map(item => ({
+                id: item.id,
+                name: item.name,
+                image: item.image,
+                count: item.quantity,           // Tu cart.js usa 'quantity'
+                unitCost: item.cost,            // Tu cart.js usa 'cost'
+                currency: item.currency,
+                subtotal: item.subtotal
+            })),
+            shippingInfo: shippingInfo
+        };
+
+        console.log('Enviando al servidor:', datos);
+
+        // 5. Enviar al backend
+        const response = await fetch('http://localhost:3000/api/cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify(datos)
+        });
+
+        // 6. Procesar respuesta
+        const resultado = await response.json();
+
+        if (resultado.success) {
+            console.log('Carrito guardado exitosamente en BD!');
+            alert('Compra finalizada y guardada!\n\nID de compra: ' + resultado.data.cartId + '\nTotal: USD ' + resultado.data.total + '\nProductos: ' + resultado.data.items);
+            
+            // Limpiar carrito
+            localStorage.setItem('cart', JSON.stringify([]));
+            
+            // Cerrar modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('checkoutModal'));
+            if (modal) modal.hide();
+            
+            // Recargar carrito
+            loadCart();
+        } else {
+            alert('Error al guardar: ' + resultado.message);
+        }
+
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error al conectar con el servidor. Asegurate de que el backend este corriendo.');
+    }
+}
