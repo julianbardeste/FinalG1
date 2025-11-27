@@ -8,7 +8,7 @@ const mysql = require('mysql2/promise');
 const dbConfig = {
     host: 'localhost',
     user: 'root',
-    password: 'Ibiripitanga03',           // Coloca tu contraseña
+    password: '',           // Coloca tu contraseña
     database: 'ecommerce'
 };
 
