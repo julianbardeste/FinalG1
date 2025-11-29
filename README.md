@@ -2,8 +2,7 @@
 
 Instructivo para ejecutar el ecommerce
 
-    1- Descargar los archivos del backend desde este repositorio público:
-        https://github.com/enzulian/back_end 
+    1-Ingresar a la carpeta back_end del repositorio
     2- Ejecutar el archivo start.bat
     3- Ejecutar el frontend
     4- Hacer login con los datos:
